@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/gettingStartedTop"
+    tools:context=".ui.auth.gettingStarted.GettingStartedFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintDimensionRatio="1:1"
+        android:src="@drawable/getting_started_illustration"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/auth_bottom_bg"
+        android:orientation="vertical"
+        android:padding="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <TextView
+            style="@style/gettingStartedHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:includeFontPadding="false"
+            android:text="Welcome to"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline4" />
+
+        <TextView
+            style="@style/gettingStartedHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:includeFontPadding="false"
+            android:text="Taskify"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline4"
+            android:textColor="?attr/colorSecondary" />
+
+
+        <TextView
+            style="@style/grayText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:includeFontPadding="false"
+            android:text="@string/gettingStarted_body"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body2" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/getting_started_button_layout">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/signInBtn"
+                style="@style/button_layout_getting_started"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Sign in"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/signUpBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="16dp"
+                android:text="Sign up"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

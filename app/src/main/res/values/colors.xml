@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#ffffff</color>
+    <color name="gray2">#f1f1f1</color>
+    <color name="gray3">#AAAAAA</color>
+    <color name="gray4">#9a9a9a</color>
+    <color name="gray5">#6A6A6A</color>
+    <color name="black">#000000</color>
+
+    <!--    lightTheme-->
+
+    <color name="lt_deepblue">#011638</color>
+    <color name="lt_darkpblue">#4741a6</color>
+    <color name="lt_blue">#9bbbfc</color>
+    <color name="lt_lightblue">#d9eff7</color>
+    <color name="lt_yellow">#f9ce69</color>
+
+    <!--    darkTheme-->
+
+    <color name="dt_deepblue">#292546</color>
+    <color name="dt_darkpblue">#312c51</color>
+    <color name="dt_blue">#48426d</color>
+    <color name="dt_pink">#f1aa9b</color>
+    <color name="dt_yellow">#f0c38e</color>
+    <color name="dt_gray">#ececed</color>
+
+
+    <color name="authTextFieldIconTint">#6a6a6a</color>
+    <color name="authButtonColor">#4741a6</color>
+    <color name="authBottomBgColor">#ffffff</color>
+    <color name="dividerColor">#AAAAAA</color>
+
+
+</resources>

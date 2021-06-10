@@ -1,0 +1,71 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+
+    <style name="Theme.Taskify.NoStatusBarTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="Theme.Taskify" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/lt_darkpblue</item>
+        <item name="colorPrimaryVariant">@color/lt_lightblue</item>
+        <item name="colorOnSurface">@color/lt_deepblue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSurface">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/lt_yellow</item>
+        <item name="colorOnSecondary">@color/lt_deepblue</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="grayText">
+        <item name="android:textColor">@color/gray4</item>
+    </style>
+
+    <style name="button_layout_getting_started">
+        <item name="android:background">@drawable/filled_round_button</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAppearance">@style/TextAppearance.MdcTypographyStyles.Button</item>
+    </style>
+
+    <style name="authTextField">
+        <item name="android:padding">16dp</item>
+        <item name="android:background">@drawable/auth_text_bg</item>
+        <item name="android:drawablePadding">16dp</item>
+        <item name="android:drawableTint">?attr/colorPrimary</item>
+    </style>
+
+    <style name="AppBar">
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="gettingStartedTop">
+        <item name="android:background">@color/lt_darkpblue</item>
+    </style>
+
+    <style name="authTextBox">
+        <item name="android:background">@drawable/auth_text_bg</item>
+        <item name="android:textAppearance">@style/TextAppearance.MdcTypographyStyles.Body1</item>
+        <item name="android:drawablePadding">16dp</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="authButton">
+        <item name="android:background">@drawable/custom_button_bg</item>
+        <item name="android:textAppearance">@style/TextAppearance.MdcTypographyStyles.Button</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="auth_top">
+        <item name="android:background">@color/lt_blue</item>
+    </style>
+
+    <style name="gettingStartedHeading">
+        <item name="android:textColor">@color/lt_darkpblue</item>
+    </style>
+
+
+</resources>

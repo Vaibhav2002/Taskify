@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Taskify</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="gettingStarted_body">Manage all your day to day tasks
+and track your productivity </string>
+    <string name="sign_in_subhead">Sign in using the email and password you entered during registration</string>
+    <string name="sign_in_head">Let\'s sign you in</string>
+    <string name="signInSocial">Sign in with your social account</string>
+</resources>

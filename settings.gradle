@@ -1,0 +1,2 @@
+rootProject.name = "Taskify"
+include ':app'

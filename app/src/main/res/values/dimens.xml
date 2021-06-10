@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="auth_bg_corner_radius">30dp</dimen>
+    <dimen name="loadingAnimSize">120dp</dimen>
+</resources>
