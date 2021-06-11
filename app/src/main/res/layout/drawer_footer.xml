@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signOutBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/secondary_outlined_button"
+        android:text="Sign out"
+        android:paddingHorizontal="32dp"
+        android:textColor="?attr/colorSecondary"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button" />
+
+</LinearLayout>

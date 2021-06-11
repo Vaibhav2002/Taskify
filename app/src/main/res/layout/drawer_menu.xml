@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:padding="16dp"
+    android:orientation="vertical"
+    android:background="@color/drawerColor"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/homeItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        android:textColor="@color/colorOnPrimary"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
+        android:drawableStart="@drawable/home"
+        android:drawablePadding="16dp"
+        android:includeFontPadding="false"
+        android:layout_marginBottom="32dp"
+        android:gravity="center_vertical"
+        app:drawableTint="@color/colorOnPrimary" />
+
+    <TextView
+        android:id="@+id/statsItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Statistics"
+        android:textColor="@color/colorOnPrimary"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
+        android:drawableStart="@drawable/stats"
+        android:drawablePadding="16dp"
+        android:includeFontPadding="false"
+        app:drawableTint="@color/colorOnPrimary"
+        android:layout_marginBottom="32dp"
+        android:gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/profileItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:textColor="@color/colorOnPrimary"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
+        android:drawableStart="@drawable/profile"
+        android:drawablePadding="16dp"
+        android:includeFontPadding="false"
+        app:drawableTint="@color/colorOnPrimary"
+        android:layout_marginBottom="32dp"
+        android:gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/aboutItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About"
+        android:textColor="@color/colorOnPrimary"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
+        android:drawableStart="@drawable/info"
+        android:drawablePadding="16dp"
+        android:includeFontPadding="false"
+        app:drawableTint="@color/colorOnPrimary"
+        android:gravity="center_vertical"/>
+
+</LinearLayout>

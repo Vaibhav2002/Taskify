@@ -31,5 +31,15 @@
 
     <color name="dividerColor">#ececed</color>
 
+    <color name="colorOnPrimary">#f0c38e</color>
+    <color name="colorOnPrimaryVariant">#ececed</color>
+
+    <color name="drawerColor">#292546</color>
+
+
+    <color name="runningTaskColor">#f0c38e</color>
+    <color name="colorOnRunningTask">#312c51</color>
+    <color name="colorOnRunningTaskType">#ececed</color>
+
 
 </resources>

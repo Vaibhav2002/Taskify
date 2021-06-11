@@ -1,11 +1,8 @@
 package com.vaibhav.taskify.ui.auth.register
 
 import android.content.Intent
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.vaibhav.taskify.data.models.entity.UserEntity
 import com.vaibhav.taskify.data.repo.AuthRepo
 import com.vaibhav.taskify.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,6 +26,7 @@ class RegisterViewModel @Inject constructor(private val authRepo: AuthRepo) : Vi
 
     private val _registerState = MutableStateFlow<Resource<Unit>>(Resource.Empty())
     val registerState: StateFlow<Resource<Unit>> = _registerState
+
 
     fun onEmailTextChange(email: String) {
         _email.value = email
@@ -63,6 +61,7 @@ class RegisterViewModel @Inject constructor(private val authRepo: AuthRepo) : Vi
 
     fun onGoogleRegisterPressed(data: Intent) = viewModelScope.launch {
         _registerState.emit(Resource.Loading())
-        _registerState.emit(authRepo.registerUsingUsingGoogle(data))
+        _registerState.emit(authRepo.registerUsingGoogle(data))
     }
+
 }

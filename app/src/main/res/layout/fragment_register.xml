@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/poppins_medium"
-            android:text="@string/sign_in_head"
+            android:text="@string/let_s_create_your_account"
             android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5" />
 
         <TextView
@@ -48,7 +48,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins_medium"
-            android:text="@string/sign_in_subhead"
+            android:text="@string/registerSubHead"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption" />
 
@@ -129,29 +129,14 @@
             android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption" />
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/googleButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="24dp">
-
-            <ImageButton
-                android:id="@+id/googleButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/google" />
-
-            <ImageButton
-                android:id="@+id/facebookButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/facebook" />
-
-
-        </LinearLayout>
+            android:paddingHorizontal="32dp"
+            android:layout_marginTop="24dp"
+            style="@style/googleLoginButton"
+            android:text="Sign up with Google" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -167,7 +152,7 @@
                 android:text="Already have an account?" />
 
             <TextView
-                android:id="@+id/go_to_register"
+                android:id="@+id/go_to_login"
                 style="@style/TextAppearance.MdcTypographyStyles.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

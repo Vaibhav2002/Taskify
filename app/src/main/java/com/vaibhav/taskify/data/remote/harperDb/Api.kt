@@ -20,7 +20,7 @@ interface Api {
     suspend fun getUserInfo(
         @Body sqlModel: SQLModel,
         @Header("Authorization") header: String = BASIC_AUTH
-    ): Response<List<User>>
+    ): Response<List<UserDTO>>
 
     //tasks
     @POST("/")
@@ -33,7 +33,7 @@ interface Api {
     suspend fun getAllTasksOfUser(
         @Body task: SQLModel,
         @Header("Authorization") header: String = BASIC_AUTH
-    ): Response<List<Task>>
+    ): Response<List<TaskDTO>>
 
     @POST("/")
     suspend fun updateTask(

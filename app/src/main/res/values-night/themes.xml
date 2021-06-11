@@ -20,6 +20,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="appBar">
+        <item name="android:background">?attr/colorSurface</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
     <style name="button_layout_getting_started">
         <item name="android:background">@drawable/filled_round_button</item>
         <item name="android:textColor">?attr/colorOnSecondary</item>
@@ -44,6 +49,11 @@
         <item name="android:textColor">@color/dt_darkpblue</item>
     </style>
 
+    <style name="googleLoginButton">
+        <item name="android:background">@drawable/getting_started_button_layout</item>
+        <item name="android:textAppearance">@style/TextAppearance.MdcTypographyStyles.Button</item>
+        <item name="android:drawableStart">@drawable/google</item>
+    </style>
     <style name="authTextBox">
         <item name="android:background">@drawable/auth_text_bg</item>
         <item name="android:textAppearance">@style/TextAppearance.MdcTypographyStyles.Body1</item>
@@ -60,10 +70,6 @@
         <item name="android:background">@drawable/auth_text_bg</item>
         <item name="android:drawablePadding">16dp</item>
         <item name="android:drawableTint">?attr/colorSecondary</item>
-    </style>
-
-    <style name="AppBar">
-        <item name="android:background">?attr/colorPrimary</item>
     </style>
 
     <style name="bottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">

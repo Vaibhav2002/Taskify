@@ -2,7 +2,6 @@ package com.vaibhav.taskify.data.remote.harperDb
 
 import com.vaibhav.taskify.data.models.requests.SQLModel
 import com.vaibhav.taskify.util.Resource
-import java.util.*
 import javax.inject.Inject
 
 class HarperDbAuthDataSource @Inject constructor(private val api: Api) {
@@ -11,15 +10,15 @@ class HarperDbAuthDataSource @Inject constructor(private val api: Api) {
         return SQLModel("SELECT * FROM edufy.user WHERE email = '${email}' LIMIT 1")
     }
 
-    private fun getSQLModelForStoringUser(user: User): SQLModel {
-        return SQLModel("INSERT INTO edufy.user (username,email, profile_img) VALUE ('${user.username}','${user.email}','${user.profile_img}')")
+    private fun getSQLModelForStoringUser(userDTO: UserDTO): SQLModel {
+        return SQLModel("INSERT INTO edufy.user (username,email, profile_img) VALUE ('${userDTO.username}','${userDTO.email}','${userDTO.profile_img}')")
     }
 
-    suspend fun storeUserIntoDb(user: User): Resource<User> = try {
-        val sqlModel = getSQLModelForStoringUser(user)
+    suspend fun storeUserIntoDb(userDTO: UserDTO): Resource<UserDTO> = try {
+        val sqlModel = getSQLModelForStoringUser(userDTO)
         val response = api.saveUserInDb(sqlModel)
         if (response.isSuccessful)
-            Resource.Success(data = user)
+            Resource.Success(data = userDTO)
         else
             Resource.Error(message = "Failed to store users")
     } catch (e: Exception) {
@@ -27,7 +26,7 @@ class HarperDbAuthDataSource @Inject constructor(private val api: Api) {
     }
 
 
-    suspend fun getUserData(email: String): Resource<User> = try {
+    suspend fun getUserData(email: String): Resource<UserDTO> = try {
         val sqlModel = getSQLModelForGettingUserByEmail(email)
         val response = api.getUserInfo(sqlModel)
         if (response.isSuccessful) {
@@ -36,7 +35,7 @@ class HarperDbAuthDataSource @Inject constructor(private val api: Api) {
                     Resource.Success(data = it[0])
                 else
                     Resource.Error(message = "User does not exist")
-            } ?: Resource.Error(message = "Failed")
+            } ?: Resource.Error(message = "Failed to store user")
         } else Resource.Error(message = "Failed to store users")
     } catch (e: Exception) {
         Resource.Error(message = e.message.toString())

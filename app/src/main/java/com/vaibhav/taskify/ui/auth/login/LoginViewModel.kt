@@ -1,18 +1,14 @@
 package com.vaibhav.taskify.ui.auth.login
 
 import android.content.Intent
-import android.net.Uri
-import androidx.lifecycle.*
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.vaibhav.taskify.data.models.entity.UserEntity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.vaibhav.taskify.data.repo.AuthRepo
 import com.vaibhav.taskify.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @HiltViewModel
@@ -51,7 +47,7 @@ class LoginViewModel @Inject constructor(private val authRepo: AuthRepo) : ViewM
 
     fun onGoogleLoginPressed(data: Intent) = viewModelScope.launch {
         _loginState.emit(Resource.Loading())
-        _loginState.emit(authRepo.loginUsingUsingGoogle(data))
+        _loginState.emit(authRepo.loginUsingGoogle(data))
     }
 
 

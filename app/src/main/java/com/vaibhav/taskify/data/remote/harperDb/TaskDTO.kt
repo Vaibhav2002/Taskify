@@ -1,6 +1,6 @@
 package com.vaibhav.taskify.data.remote.harperDb
 
-data class Task(
+data class TaskDTO(
     val email: String,
     val task_title: String,
     val task_description: String,

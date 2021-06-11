@@ -8,4 +8,10 @@ and track your productivity </string>
     <string name="sign_in_subhead">Sign in using the email and password you entered during registration</string>
     <string name="sign_in_head">Let\'s sign you in</string>
     <string name="signInSocial">Sign in with your social account</string>
+    <string name="let_s_create_your_account">Let\'s create your account</string>
+    <string name="registerSubHead">Create a new account using your email and password</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

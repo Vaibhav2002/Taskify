@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.FragmentLoginBinding
@@ -20,6 +21,7 @@ import com.vaibhav.taskify.util.showErrorToast
 import com.vaibhav.taskify.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import timber.log.Timber
 
 @AndroidEntryPoint
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -27,15 +29,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private val binding by viewBinding(FragmentLoginBinding::bind)
     private val viewModel: LoginViewModel by viewModels()
 
-    private val gso =
-        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-    private val googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+    private lateinit var gso: GoogleSignInOptions
+
+    private lateinit var googleSignInClient: GoogleSignInClient
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initializeSocialMediaSignIn()
 
         binding.emailInput.doOnTextChanged { text, _, _, _ ->
             viewModel.onEmailTextChange(email = text.toString())
@@ -46,7 +48,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         binding.emailInput.setText(viewModel.email.value)
         binding.passwordInput.setText(viewModel.password.value)
-
 
         binding.goToRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
@@ -77,6 +78,16 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     }
 
+    private fun initializeSocialMediaSignIn() {
+        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+
+    }
+
     private fun navigateToHomeScreen() {
         findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
         requireActivity().finish()
@@ -84,10 +95,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RESULT_OK) {
-            if (requestCode == GOOGLE_SIGN_IN) {
-                data?.let { viewModel.onGoogleLoginPressed(it) }
-            }
+        Timber.d("${resultCode == RESULT_OK}")
+        if (requestCode == GOOGLE_SIGN_IN) {
+            Timber.d(data.toString())
+            data?.let { viewModel.onGoogleLoginPressed(it) }
         }
     }
 }

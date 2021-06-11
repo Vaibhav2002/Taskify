@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/userNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
+        tools:text="Vaibhav Jaiswal"/>
+    <TextView
+        android:id="@+id/userEmailText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorOnPrimaryVariant"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body2"
+        tools:text="vaibhavsam2511@gmail.com"/>
+
+
+</LinearLayout>

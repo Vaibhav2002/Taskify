@@ -7,38 +7,38 @@ import javax.inject.Inject
 class HarperDbTaskDataSource @Inject constructor(private val api: Api) {
 
 
-    private fun getSQLModelForInsertTask(task: Task) =
+    private fun getSQLModelForInsertTask(taskDTO: TaskDTO) =
         SQLModel(
             sql = String.format(
                 "INSERT INTO edufy.tasks(task_id, email, task_title, task_description,task_category," +
                         " start_time, end_time, started, completed, created_time) VALUE ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d)",
-                task.task_id,
-                task.email,
-                task.task_title,
-                task.task_description,
-                task.task_category,
-                task.start_time,
-                task.end_time,
-                task.started,
-                task.completed,
-                task.created_time
+                taskDTO.task_id,
+                taskDTO.email,
+                taskDTO.task_title,
+                taskDTO.task_description,
+                taskDTO.task_category,
+                taskDTO.start_time,
+                taskDTO.end_time,
+                taskDTO.started,
+                taskDTO.completed,
+                taskDTO.created_time
             )
 
         )
 
-    private fun getSQLModelForUpdateTask(task: Task) =
+    private fun getSQLModelForUpdateTask(taskDTO: TaskDTO) =
         SQLModel(
             sql = String.format(
                 "UPDATE edufy.tasks SET task_title = '%s', task_description = '%s',task_category = '%s'," +
                         "start_time = '%s', end_time = '%s', started = '%s', completed = %s WHERE task_id = '%s'",
-                task.task_title,
-                task.task_description,
-                task.task_category,
-                task.start_time,
-                task.end_time,
-                task.started,
-                task.completed,
-                task.task_id
+                taskDTO.task_title,
+                taskDTO.task_description,
+                taskDTO.task_category,
+                taskDTO.start_time,
+                taskDTO.end_time,
+                taskDTO.started,
+                taskDTO.completed,
+                taskDTO.task_id
             )
 
         )
@@ -52,22 +52,22 @@ class HarperDbTaskDataSource @Inject constructor(private val api: Api) {
     )
 
 
-    suspend fun insertTask(task: Task): Resource<Task> = try {
-        val sqlModel = getSQLModelForInsertTask(task)
+    suspend fun insertTask(taskDTO: TaskDTO): Resource<TaskDTO> = try {
+        val sqlModel = getSQLModelForInsertTask(taskDTO)
         val response = api.insertTask(sqlModel)
         if (response.isSuccessful)
-            Resource.Success(data = task, response.message())
+            Resource.Success(data = taskDTO, response.message())
         else
             Resource.Error("Failed to save task")
     } catch (e: Exception) {
         Resource.Error(e.message.toString())
     }
 
-    suspend fun updateTask(task: Task): Resource<Task> = try {
-        val sqlModel = getSQLModelForUpdateTask(task)
+    suspend fun updateTask(taskDTO: TaskDTO): Resource<TaskDTO> = try {
+        val sqlModel = getSQLModelForUpdateTask(taskDTO)
         val response = api.updateTask(sqlModel)
         if (response.isSuccessful)
-            Resource.Success(data = task, response.message())
+            Resource.Success(data = taskDTO, response.message())
         else
             Resource.Error("Failed to update task")
     } catch (e: Exception) {
@@ -75,7 +75,7 @@ class HarperDbTaskDataSource @Inject constructor(private val api: Api) {
     }
 
 
-    suspend fun getAllTasksOfUser(email: String): Resource<List<Task>> = try {
+    suspend fun getAllTasksOfUser(email: String): Resource<List<TaskDTO>> = try {
         val sqlModel = getSqlModelToGetTasks(email)
         val response = api.getAllTasksOfUser(sqlModel)
         if (response.isSuccessful) {

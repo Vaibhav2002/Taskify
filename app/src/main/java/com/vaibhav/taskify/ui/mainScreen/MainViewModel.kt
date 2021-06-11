@@ -12,10 +12,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val authRepo: AuthRepo) : ViewModel() {
 
-    private val user = authRepo.getUserData()
-
 
     init {
-        Timber.d(user.toString())
+        Timber.d(authRepo.getUserData().toString())
     }
 }

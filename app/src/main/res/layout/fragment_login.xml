@@ -118,29 +118,15 @@
             android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption" />
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/googleButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="24dp">
+            android:paddingHorizontal="32dp"
+            android:layout_marginTop="24dp"
+            style="@style/googleLoginButton"
+            android:text="Sign in with Google" />
 
-            <ImageButton
-                android:id="@+id/googleButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/google" />
-
-            <ImageButton
-                android:id="@+id/facebookButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/facebook" />
-
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

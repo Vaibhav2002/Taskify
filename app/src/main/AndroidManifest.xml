@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.mainScreen.MainActivity" />
+        <activity android:name=".ui.mainScreen.MainActivity" android:theme="@style/Theme.Taskify" />
     </application>
 
 </manifest>
