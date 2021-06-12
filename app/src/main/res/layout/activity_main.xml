@@ -12,28 +12,32 @@
 
     <nl.psdcompany.duonavigationdrawer.views.DuoMenuView
         android:id="@+id/duoMenuView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        app:footer="@layout/drawer_footer"
-        app:header="@layout/drawer_header" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:background="@color/drawerColor" />
 
-    <include
-        layout="@layout/drawer_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/duoMenuView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:tag="menu"
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/drawer_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp" />
+
+    </RelativeLayout>
+
 
     <include
         android:id="@+id/activity_main_content"
         layout="@layout/activity_main_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:tag="content" />
 
 
 </nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout>

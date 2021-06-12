@@ -17,11 +17,11 @@
         <item name="colorSecondary">@color/lt_yellow</item>
         <item name="colorOnSecondary">@color/lt_deepblue</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/lt_deepblue</item>
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="appBar">
+    <style name="appBar" parent="Widget.Design.AppBarLayout">
         <item name="android:background">?attr/colorSurface</item>
         <item name="android:elevation">4dp</item>
     </style>
@@ -75,5 +75,15 @@
         <item name="android:textColor">@color/lt_darkpblue</item>
     </style>
 
+
+    <style name="Widget.App.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TabLayout</item>
+    </style>
+
+    <style name="ThemeOverlay.App.TabLayout" parent="">
+        <item name="colorPrimary">@color/lt_darkpblue</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/gray3</item>
+    </style>
 
 </resources>

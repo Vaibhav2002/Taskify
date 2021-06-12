@@ -1,9 +1,13 @@
 package com.vaibhav.taskify.ui.auth.login
 
+import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -30,7 +34,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private val viewModel: LoginViewModel by viewModels()
 
     private lateinit var gso: GoogleSignInOptions
-
+    private lateinit var googleLoginLauncher: ActivityResultLauncher<Intent>
     private lateinit var googleSignInClient: GoogleSignInClient
 
 
@@ -49,6 +53,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.emailInput.setText(viewModel.email.value)
         binding.passwordInput.setText(viewModel.password.value)
 
+        googleLoginLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == RESULT_OK)
+                    handleGoogleLogin(it.data)
+
+            }
+
         binding.goToRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
@@ -58,7 +69,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         binding.googleButton.setOnClickListener {
             val signInIntent = googleSignInClient.signInIntent
-            startActivityForResult(signInIntent, GOOGLE_SIGN_IN)
+            googleLoginLauncher.launch(signInIntent)
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -93,12 +104,16 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         requireActivity().finish()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        Timber.d("${resultCode == RESULT_OK}")
-        if (requestCode == GOOGLE_SIGN_IN) {
-            Timber.d(data.toString())
-            data?.let { viewModel.onGoogleLoginPressed(it) }
-        }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        Timber.d("${resultCode == RESULT_OK}")
+//        if (requestCode == GOOGLE_SIGN_IN) {
+//            Timber.d(data.toString())
+//            data?.let { viewModel.onGoogleLoginPressed(it) }
+//        }
+//    }
+
+    private fun handleGoogleLogin(data: Intent?) {
+        data?.let { viewModel.onGoogleLoginPressed(it) }
     }
 }

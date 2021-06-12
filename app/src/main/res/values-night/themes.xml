@@ -20,9 +20,10 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="appBar">
+    <style name="appBar" parent="Widget.Design.AppBarLayout">
         <item name="android:background">?attr/colorSurface</item>
         <item name="android:elevation">0dp</item>
+        <item name="elevation">0dp</item>
     </style>
 
     <style name="button_layout_getting_started">
@@ -74,5 +75,16 @@
 
     <style name="bottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">
         <item name="backgroundTint">?attr/colorPrimaryVariant</item>
+    </style>
+
+
+    <style name="Widget.App.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TabLayout</item>
+    </style>
+
+    <style name="ThemeOverlay.App.TabLayout" parent="">
+        <item name="colorPrimary">@color/dt_yellow</item>
+        <item name="colorSurface">@color/dt_darkpblue</item>
+        <item name="colorOnSurface">@color/gray3</item>
     </style>
 </resources>

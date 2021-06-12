@@ -1,9 +1,12 @@
 package com.vaibhav.taskify.ui.auth.register
 
 import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -28,6 +31,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private val binding by viewBinding(FragmentRegisterBinding::bind)
     private val viewModel: RegisterViewModel by viewModels()
+    private lateinit var googleSignUpLauncher: ActivityResultLauncher<Intent>
 
     private lateinit var gso: GoogleSignInOptions
 
@@ -54,6 +58,12 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         binding.usernameInput.setText(viewModel.username.value)
 
 
+        googleSignUpLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == RESULT_OK)
+                    handleGoogleSignUp(it.data)
+            }
+
         binding.goToLogin.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
@@ -62,8 +72,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         }
 
         binding.googleButton.setOnClickListener {
-            val signInIntent = googleSignInClient.signInIntent
-            startActivityForResult(signInIntent, GOOGLE_SIGN_IN)
+            val signUpIntent = googleSignInClient.signInIntent
+            googleSignUpLauncher.launch(signUpIntent)
         }
 
 
@@ -98,13 +108,9 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         requireActivity().finish()
     }
 
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        Timber.d("${resultCode == Activity.RESULT_OK}")
-        if (requestCode == GOOGLE_SIGN_IN) {
-            data?.let { viewModel.onGoogleRegisterPressed(it) }
-        }
+    private fun handleGoogleSignUp(data: Intent?) {
+        data?.let { viewModel.onGoogleRegisterPressed(it) }
     }
+
 
 }
