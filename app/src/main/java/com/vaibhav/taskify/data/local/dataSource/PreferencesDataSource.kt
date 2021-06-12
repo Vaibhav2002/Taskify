@@ -1,4 +1,4 @@
-package com.vaibhav.taskify.data.local
+package com.vaibhav.taskify.data.local.dataSource
 
 import android.content.SharedPreferences
 import com.google.gson.Gson

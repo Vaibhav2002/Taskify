@@ -2,6 +2,8 @@ package com.vaibhav.taskify.data.remote.harperDb
 
 
 import com.vaibhav.taskify.data.models.requests.SQLModel
+import com.vaibhav.taskify.data.models.remote.TaskDTO
+import com.vaibhav.taskify.data.models.remote.UserDTO
 import com.vaibhav.taskify.util.BASIC_AUTH
 import retrofit2.Response
 import retrofit2.http.Body
@@ -37,6 +39,12 @@ interface Api {
 
     @POST("/")
     suspend fun updateTask(
+        @Body task: SQLModel,
+        @Header("Authorization") header: String = BASIC_AUTH
+    ): Response<Any>
+
+    @POST("/")
+    suspend fun deleteTask(
         @Body task: SQLModel,
         @Header("Authorization") header: String = BASIC_AUTH
     ): Response<Any>

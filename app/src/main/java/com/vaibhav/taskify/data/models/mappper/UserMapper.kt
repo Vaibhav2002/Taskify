@@ -1,7 +1,7 @@
 package com.vaibhav.taskify.data.models.mappper
 
 import com.vaibhav.taskify.data.models.entity.UserEntity
-import com.vaibhav.taskify.data.remote.harperDb.UserDTO
+import com.vaibhav.taskify.data.models.remote.UserDTO
 
 
 class UserMapper : Mapper<UserDTO, UserEntity> {

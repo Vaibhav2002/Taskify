@@ -4,11 +4,11 @@ package com.vaibhav.taskify.data.repo
 import android.content.Intent
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.vaibhav.taskify.data.local.PreferencesDataSource
+import com.vaibhav.taskify.data.local.dataSource.PreferencesDataSource
 import com.vaibhav.taskify.data.models.mappper.UserMapper
 import com.vaibhav.taskify.data.remote.FirebaseAuthDataSource
-import com.vaibhav.taskify.data.remote.harperDb.HarperDbAuthDataSource
-import com.vaibhav.taskify.data.remote.harperDb.UserDTO
+import com.vaibhav.taskify.data.remote.dataSource.HarperDbAuthDataSource
+import com.vaibhav.taskify.data.models.remote.UserDTO
 import com.vaibhav.taskify.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -22,6 +22,9 @@ class AuthRepo @Inject constructor(
 ) {
 
     fun getUserData() = preferencesDataSource.getUserData()
+
+    fun isUserLoggedIn() =
+        authDataSource.isUserLoggedIn() && preferencesDataSource.getUserData() != null
 
     suspend fun loginUser(email: String, password: String): Resource<Unit> =
         withContext(Dispatchers.IO) {

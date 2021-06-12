@@ -1,6 +1,8 @@
-package com.vaibhav.taskify.data.remote.harperDb
+package com.vaibhav.taskify.data.remote.dataSource
 
 import com.vaibhav.taskify.data.models.requests.SQLModel
+import com.vaibhav.taskify.data.remote.harperDb.Api
+import com.vaibhav.taskify.data.models.remote.UserDTO
 import com.vaibhav.taskify.util.Resource
 import javax.inject.Inject
 

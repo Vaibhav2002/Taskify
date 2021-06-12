@@ -17,6 +17,8 @@ import javax.inject.Inject
 class FirebaseAuthDataSource @Inject constructor(private val auth: FirebaseAuth) {
 
     fun logoutUser() = auth.signOut()
+    
+    fun isUserLoggedIn() = auth.currentUser !=null
 
     suspend fun loginUser(email: String, password: String): Resource<Unit> =
         withContext(Dispatchers.IO) {

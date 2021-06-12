@@ -1,6 +1,8 @@
-package com.vaibhav.taskify.data.remote.harperDb
+package com.vaibhav.taskify.data.remote.dataSource
 
 import com.vaibhav.taskify.data.models.requests.SQLModel
+import com.vaibhav.taskify.data.remote.harperDb.Api
+import com.vaibhav.taskify.data.models.remote.TaskDTO
 import com.vaibhav.taskify.util.Resource
 import javax.inject.Inject
 
@@ -11,7 +13,7 @@ class HarperDbTaskDataSource @Inject constructor(private val api: Api) {
         SQLModel(
             sql = String.format(
                 "INSERT INTO edufy.tasks(task_id, email, task_title, task_description,task_category," +
-                        " start_time, end_time, started, completed, created_time) VALUE ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d)",
+                        " start_time, end_time, started, completed, created_time) VALUE ('%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', %d)",
                 taskDTO.task_id,
                 taskDTO.email,
                 taskDTO.task_title,
@@ -30,7 +32,7 @@ class HarperDbTaskDataSource @Inject constructor(private val api: Api) {
         SQLModel(
             sql = String.format(
                 "UPDATE edufy.tasks SET task_title = '%s', task_description = '%s',task_category = '%s'," +
-                        "start_time = '%s', end_time = '%s', started = '%s', completed = %s WHERE task_id = '%s'",
+                        "start_time = '%d', end_time = '%d', started = '%s', completed = %s WHERE task_id = '%s'",
                 taskDTO.task_title,
                 taskDTO.task_description,
                 taskDTO.task_category,
@@ -49,6 +51,10 @@ class HarperDbTaskDataSource @Inject constructor(private val api: Api) {
             "SELECT * FROM edufy.tasks WHERE email = '%s' ORDER BY created_time DESC, start_time DESC",
             email,
         )
+    )
+
+    private fun getSQlModelToDeleteTask(taskId: String) = SQLModel(
+        sql = "DELETE FROM edufy.tasks WHERE task_id = '${taskId}'"
     )
 
 
@@ -84,6 +90,18 @@ class HarperDbTaskDataSource @Inject constructor(private val api: Api) {
             } ?: Resource.Error("failed to load tasks")
         } else
             Resource.Error("failed to load tasks")
+    } catch (e: Exception) {
+        Resource.Error(e.message.toString())
+    }
+
+    suspend fun deleteTask(taskId: String): Resource<Unit> = try {
+        val sqlModel = getSQlModelToDeleteTask(taskId)
+        val response = api.deleteTask(sqlModel)
+        if (response.isSuccessful) {
+            response.body()?.let {
+                Resource.Success(message = "Task deleted successfully")
+            } ?: Resource.Error(message = response.message())
+        } else Resource.Error(response.message())
     } catch (e: Exception) {
         Resource.Error(e.message.toString())
     }

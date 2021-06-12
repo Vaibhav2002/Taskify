@@ -1,4 +1,4 @@
-package com.vaibhav.taskify.data.remote.harperDb
+package com.vaibhav.taskify.data.models.remote
 
 data class TaskDTO(
     val email: String,
@@ -6,7 +6,7 @@ data class TaskDTO(
     val task_description: String,
     val task_category: String,
     val start_time: Long,
-    val end_time: String,
+    val end_time: Long,
     val started: Boolean,
     val completed: Boolean,
     val created_time: Long,
