@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="task"
+            type="com.vaibhav.taskify.data.models.entity.TaskEntity" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/taskTagImage"
+                setTagImage="@{task.task_category}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/home_task" />
+
+
+            <TextView
+                android:id="@+id/runningTaskTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:includeFontPadding="false"
+                android:text="@{task.task_title}"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
+                android:textColor="?attr/colorOnSurface"
+                app:layout_constraintStart_toEndOf="@+id/taskTagImage"
+                app:layout_constraintTop_toTopOf="@+id/taskTagImage"
+                tools:text="DSA SPRINT" />
+
+
+            <TextView
+                android:id="@+id/runningTaskTime"
+                setTaskDuration="@{task}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:includeFontPadding="false"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"
+                android:textColor="?attr/colorOnSurface"
+                app:layout_constraintBottom_toBottomOf="@id/taskTagImage"
+                app:layout_constraintStart_toStartOf="@id/runningTaskTitle"
+                app:layout_constraintTop_toBottomOf="@id/runningTaskTitle"
+                tools:text="1:30am - 2:40pm" />
+
+            <!--        <TextView-->
+            <!--            android:id="@+id/runningTaskDurationText"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginTop="8dp"-->
+            <!--            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"-->
+            <!--            android:textColor="@color/colorOnRunningTask"-->
+            <!--            app:layout_constraintEnd_toEndOf="@+id/imageButton"-->
+            <!--            app:layout_constraintTop_toBottomOf="@+id/imageButton"-->
+            <!--            tools:text="12:00am - 3:00pm" />-->
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/taskTagTv"
+                    setBackground="@{task.task_category}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="4dp"
+                    android:text="@{task.task_category.name()}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                    android:textColor="@color/white"
+                    tools:background="@drawable/home_task_background"
+                    tools:text="HOME" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <TextView
+                style="@style/completedTagText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/completed_tag_bg"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp"
+                android:text="Completed"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:visibility="@{task.completed ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -1,97 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="4dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="8dp"
-    app:cardBackgroundColor="@color/runningTaskColor">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="task"
+            type="com.vaibhav.taskify.data.models.entity.TaskEntity" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        app:cardBackgroundColor="@color/runningTaskColor"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/runningTaskTimerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/poppins_medium"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
-            android:textColor="@color/colorOnRunningTask"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="02:30:14" />
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/next_arrow"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/colorOnRunningTask" />
-
-        <TextView
-            android:id="@+id/runningTaskDurationText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"
-            android:textColor="@color/colorOnRunningTask"
-            app:layout_constraintEnd_toEndOf="@+id/imageButton"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton"
-            tools:text="12:00am - 3:00pm" />
-
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/colorOnRunningTask"
-            app:cardCornerRadius="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/runningTaskDurationText"
-            app:layout_constraintTop_toBottomOf="@+id/runningTaskDurationText">
 
             <TextView
+                android:id="@+id/runningTaskTimerText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="4dp"
-                android:text="STUDY"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-                android:textColor="@color/colorOnRunningTaskType" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_medium"
+                android:includeFontPadding="false"
+                android:text="02:30:14"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
+                android:textColor="@color/colorOnRunningTask"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </com.google.android.material.card.MaterialCardView>
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/next_arrow"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/colorOnRunningTask" />
+
+            <TextView
+                android:id="@+id/runningTaskDurationText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"
+                android:textColor="@color/colorOnRunningTask"
+                app:layout_constraintEnd_toEndOf="@+id/imageButton"
+                app:layout_constraintTop_toBottomOf="@+id/imageButton"
+                tools:text="12:00am - 3:00pm" />
 
 
-        <TextView
-            android:id="@+id/runningTaskTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
-            android:includeFontPadding="false"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body2"
-            android:textColor="@color/colorOnRunningTask"
-            app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
-            app:layout_constraintStart_toStartOf="@+id/runningTaskTimerText"
-            app:layout_constraintTop_toTopOf="@+id/materialCardView"
-            tools:text="DSA SPRINT" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/colorOnRunningTask"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/runningTaskDurationText"
+                app:layout_constraintTop_toBottomOf="@+id/runningTaskDurationText">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="4dp"
+                    android:text="@{task.task_category.name()}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                    android:textColor="@color/colorOnRunningTaskType"
+                    tools:text="STUDY" />
+
+            </com.google.android.material.card.MaterialCardView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/runningTaskTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:includeFontPadding="false"
+                android:text="@{task.task_title}"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body2"
+                android:textColor="@color/colorOnRunningTask"
+                app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
+                app:layout_constraintStart_toStartOf="@+id/runningTaskTimerText"
+                app:layout_constraintTop_toTopOf="@+id/materialCardView"
+                tools:text="DSA SPRINT" />
 
 
-</com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

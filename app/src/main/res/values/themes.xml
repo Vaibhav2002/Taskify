@@ -86,4 +86,18 @@
         <item name="colorOnSurface">@color/gray3</item>
     </style>
 
+    <style name="task" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">#fafaff</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+
+    <style name="task_tag">
+        <item name="android:alpha">1</item>
+    </style>
+
+    <style name="completedTagText">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

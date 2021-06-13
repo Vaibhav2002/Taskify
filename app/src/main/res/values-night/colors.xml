@@ -3,8 +3,9 @@
 
     <color name="white">#ffffff</color>
     <color name="gray2">#f1f1f1</color>
-    <color name="gray3">#9a9a9a</color>
-    <color name="gray4">#6A6A6A</color>
+    <color name="gray3">#AAAAAA</color>
+    <color name="gray4">#9a9a9a</color>
+    <color name="gray5">#6A6A6A</color>
     <color name="black">#000000</color>
 
     <!--    lightTheme-->
@@ -37,9 +38,20 @@
     <color name="drawerColor">#292546</color>
 
 
+    <color name="completedTagColor">#f1aa9b</color>
     <color name="runningTaskColor">#f0c38e</color>
     <color name="colorOnRunningTask">#312c51</color>
     <color name="colorOnRunningTaskType">#ececed</color>
+
+
+    <color name="home_task_color1">#FD5B71</color>
+    <color name="home_task_color2">#FF788B</color>
+    <color name="work_task_color1">#9b51e0</color>
+    <color name="work_task_color2">#CD9CFF</color>
+    <color name="study_task_color1">#07e092</color>
+    <color name="study_task_color2">#50FF9A</color>
+    <color name="gym_task_color1">#ffa656</color>
+    <color name="gym_task_color2">#FFB878</color>
 
 
 </resources>

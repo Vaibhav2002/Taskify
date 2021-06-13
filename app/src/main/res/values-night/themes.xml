@@ -87,4 +87,21 @@
         <item name="colorSurface">@color/dt_darkpblue</item>
         <item name="colorOnSurface">@color/gray3</item>
     </style>
+
+
+    <style name="task" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/dt_blue</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+
+    <style name="task_tag">
+        <item name="android:alpha">0.4</item>
+    </style>
+
+
+    <style name="completedTagText">
+        <item name="android:textColor">@color/dt_darkpblue</item>
+    </style>
+
 </resources>

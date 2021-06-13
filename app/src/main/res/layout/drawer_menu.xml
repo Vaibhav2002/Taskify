@@ -1,53 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:background="@color/drawerColor"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/drawerColor"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/avatarImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        app:civ_border_color="?attr/colorSecondary"
+        app:civ_border_width="3dp"
+        tools:src="@tools:sample/avatars" />
 
 
     <TextView
         android:id="@+id/userNameText"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/avatarImage"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
         android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
         android:textColor="@color/white"
         tools:text="Vaibhav Jaiswal" />
 
     <TextView
         android:id="@+id/userEmailText"
-        android:layout_below="@+id/userNameText"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
-        android:layout_marginStart="8dp"
         android:layout_width="wrap_content"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body2"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userNameText"
+        android:layout_marginStart="8dp"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"
         android:textColor="@color/colorOnPrimaryVariant"
         tools:text="vaibhavsam2511@gmail.com" />
 
     <LinearLayout
-        android:layout_centerVertical="true"
-        android:layout_gravity="center_vertical"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="32dp"
+        android:layout_gravity="center_vertical"
         android:orientation="vertical">
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:background="@android:color/transparent"
-            android:drawablePadding="16dp"
-            android:drawableStart="@drawable/home"
-            android:gravity="center_vertical"
             android:id="@+id/homeItem"
-            android:includeFontPadding="false"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:layout_width="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/home"
+            android:drawablePadding="16dp"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
             android:paddingHorizontal="16dp"
             android:text="Home"
             android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
@@ -55,15 +66,15 @@
             app:drawableTint="@color/colorOnPrimary" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:background="@android:color/transparent"
-            android:drawablePadding="16dp"
-            android:drawableStart="@drawable/stats"
-            android:gravity="center_vertical"
             android:id="@+id/statsItem"
-            android:includeFontPadding="false"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:layout_width="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/stats"
+            android:drawablePadding="16dp"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
             android:paddingHorizontal="16dp"
             android:text="Statistics"
             android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
@@ -71,14 +82,15 @@
             app:drawableTint="@color/colorOnPrimary" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:background="@android:color/transparent"
-            android:drawablePadding="16dp"
-            android:drawableStart="@drawable/profile"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
+            android:id="@+id/profileItem"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:layout_width="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/profile"
+            android:drawablePadding="16dp"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
             android:paddingHorizontal="16dp"
             android:text="Profile"
             android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
@@ -86,13 +98,14 @@
             app:drawableTint="@color/colorOnPrimary" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/aboutItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:drawablePadding="16dp"
             android:drawableStart="@drawable/info"
+            android:drawablePadding="16dp"
             android:gravity="center_vertical"
             android:includeFontPadding="false"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:paddingHorizontal="16dp"
             android:text="About"
             android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
@@ -103,12 +116,12 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:background="@drawable/secondary_outlined_button"
         android:id="@+id/signOutBtn"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/secondary_outlined_button"
         android:paddingHorizontal="56dp"
         android:text="Sign out"
         android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button"

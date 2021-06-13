@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="@string/hello_blank_fragment" />
+        android:text="ProfileFragment"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5" />
 
 </FrameLayout>

@@ -3,14 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?attr/colorSurface"
     tools:context=".ui.mainScreen.home.onGoing.OnGoingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/runningTaskRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
-        android:text="ongoing" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/running_task_layout" />
 
 </FrameLayout>

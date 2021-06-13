@@ -35,10 +35,20 @@
     <color name="colorOnPrimaryVariant">#d9eff7</color>
 
     <color name="drawerColor">#4741a6</color>
-
+    <color name="completedTagColor">#4741a6</color>
     <color name="runningTaskColor">#4741a6</color>
     <color name="colorOnRunningTask">#ffffff</color>
     <color name="colorOnRunningTaskType">#4741a6</color>
+
+
+    <color name="home_task_color1">#FD5B71</color>
+    <color name="home_task_color2">#FF788B</color>
+    <color name="work_task_color1">#9b51e0</color>
+    <color name="work_task_color2">#CD9CFF</color>
+    <color name="study_task_color1">#07e092</color>
+    <color name="study_task_color2">#50FF9A</color>
+    <color name="gym_task_color1">#ffa656</color>
+    <color name="gym_task_color2">#FFB878</color>
 
 
 </resources>

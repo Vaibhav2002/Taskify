@@ -3,13 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?attr/colorSurface"
     tools:context=".ui.mainScreen.home.upComing.UpComingFragment">
 
-    <TextView
-        android:gravity="center"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/upcomingTaskRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
-        android:text="UpComing" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/task_item_layout" />
 
 </FrameLayout>

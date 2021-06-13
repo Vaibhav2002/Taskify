@@ -8,6 +8,7 @@ import com.vaibhav.taskify.data.remote.dataSource.HarperDbTaskDataSource
 import com.vaibhav.taskify.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
@@ -21,6 +22,7 @@ class TaskRepo @Inject constructor(
         val cal = Calendar.getInstance()
         cal.timeInMillis = System.currentTimeMillis()
         cal.set(Calendar.HOUR_OF_DAY, 0)
+        Timber.d(cal.timeInMillis.toString())
         return cal.timeInMillis
     }
 
@@ -39,6 +41,7 @@ class TaskRepo @Inject constructor(
 
     suspend fun fetchAllTasks(email: String): Resource<Unit> = withContext(Dispatchers.IO) {
         val resource = harperDbTaskDataSource.getAllTasksOfUser(email)
+        Timber.d(resource.data.toString())
         if (resource is Resource.Success) {
             saveAllNewDataInDb(resource.data!!)
             Resource.Success(message = "Tasks fetched successfully")
@@ -86,6 +89,7 @@ class TaskRepo @Inject constructor(
     private suspend fun updateTaskInDB(taskEntity: TaskEntity) =
         taskDataSource.updateTask(taskEntity)
 
-    private suspend fun deleteTaskFromDb(taskEntity: TaskEntity) = taskDataSource.deleteTask(taskEntity)
+    private suspend fun deleteTaskFromDb(taskEntity: TaskEntity) =
+        taskDataSource.deleteTask(taskEntity)
 
 }
