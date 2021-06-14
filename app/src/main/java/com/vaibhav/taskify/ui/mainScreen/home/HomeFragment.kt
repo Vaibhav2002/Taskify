@@ -10,9 +10,11 @@ import com.vaibhav.taskify.databinding.FragmentHomeBinding
 import com.vaibhav.taskify.ui.mainScreen.MainViewModel
 import com.vaibhav.taskify.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
+
 
     private val binding by viewBinding(FragmentHomeBinding::bind)
     private val sharedViewModel: MainViewModel by activityViewModels()
@@ -23,7 +25,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         homePagerAdapter = HomePagerAdapter(requireActivity())
         initViewPager()
-
+        Timber.d("In home fragment")
     }
 
     private fun initViewPager() {

@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/home_nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav_graph"
+    app:startDestination="@id/onGoingFragment">
 
+    <fragment
+        android:id="@+id/onGoingFragment"
+        android:name="com.vaibhav.taskify.ui.mainScreen.home.onGoing.OnGoingFragment"
+        android:label="fragment_on_going"
+        tools:layout="@layout/fragment_on_going"></fragment>
+    <fragment
+        android:id="@+id/completedFragment"
+        android:name="com.vaibhav.taskify.ui.mainScreen.home.completed.CompletedFragment"
+        android:label="fragment_completed"
+        tools:layout="@layout/fragment_completed" />
+    <fragment
+        android:id="@+id/upComingFragment"
+        android:name="com.vaibhav.taskify.ui.mainScreen.home.upComing.UpComingFragment"
+        android:label="fragment_up_coming"
+        tools:layout="@layout/fragment_up_coming"></fragment>
 </navigation>

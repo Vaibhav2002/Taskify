@@ -12,7 +12,12 @@ import javax.inject.Inject
 @HiltViewModel
 class OnGoingViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewModel() {
 
-    val onGoingTasks =
-        taskRepo.getAllOnGoingTasksOfToday()
+    val pausedTasks =
+        taskRepo.getAllPausedTasks()
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
+//
+//    val runningTask = taskRepo.getRunningTask()
+//        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
+
+
 }

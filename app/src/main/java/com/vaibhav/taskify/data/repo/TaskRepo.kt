@@ -6,6 +6,7 @@ import com.vaibhav.taskify.data.models.mappper.TaskMapper
 import com.vaibhav.taskify.data.models.remote.TaskDTO
 import com.vaibhav.taskify.data.remote.dataSource.HarperDbTaskDataSource
 import com.vaibhav.taskify.util.Resource
+import com.vaibhav.taskify.util.TaskState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -27,16 +28,21 @@ class TaskRepo @Inject constructor(
     }
 
 
-    fun getAllOnGoingTasksOfToday() = taskDataSource.getAllTasksOfToday(
-        started = true, completed = false, todaysTime = getTodaysTime()
+    fun getAllPausedTasks() = taskDataSource.getAllTasksOfToday(
+        state = TaskState.PAUSED.name, todaysTime = getTodaysTime()
     )
 
     fun getAllCompletedTasksOfToday() = taskDataSource.getAllTasksOfToday(
-        started = true, completed = true, todaysTime = getTodaysTime()
+        state = TaskState.COMPLETED.name, todaysTime = getTodaysTime()
     )
 
     fun getAllUpComingTasksOfToday() = taskDataSource.getAllTasksOfToday(
-        started = false, completed = false, todaysTime = getTodaysTime()
+        state = TaskState.NOT_STARTED.name, todaysTime = getTodaysTime()
+    )
+
+    fun getRunningTask() = taskDataSource.getAllTasksOfToday(
+        state = TaskState.RUNNING.name,
+        todaysTime = getTodaysTime()
     )
 
     suspend fun fetchAllTasks(email: String): Resource<Unit> = withContext(Dispatchers.IO) {

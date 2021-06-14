@@ -2,23 +2,32 @@ package com.vaibhav.taskify.util
 
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.vaibhav.taskify.data.models.entity.TaskEntity
+import java.time.Duration
 import java.util.*
 
 @BindingAdapter("setTaskDuration")
 fun TextView.setTaskDuration(task: TaskEntity) {
-    val cal1 = Calendar.getInstance()
-    cal1.timeInMillis = task.start_time
-    var startTime = "${cal1.time.hours}:${cal1.time.minutes}"
-    if (cal1.time.minutes == 0)
-        startTime += "0"
-    cal1.timeInMillis = task.end_time
-    var endTime = "${cal1.time.hours}:${cal1.time.minutes}"
-    if (cal1.time.minutes == 0)
-        endTime += "0"
-    text = "$startTime - $endTime"
+    val duration = Duration.ofMillis(task.timeLeft)
+    var minutes = duration.toMinutes().toInt()
+    val hours = minutes / 60
+    minutes %= 60
+    text = "${hours}hrs ${minutes}min"
 }
+
+@BindingAdapter("setTimeLeft")
+fun TextView.setTimeLeft(timeLeft: Long) {
+    val duration = Duration.ofMillis(timeLeft)
+    var seconds = duration.seconds
+    val hours = seconds / 60 / 60
+    seconds %= 60 * 60
+    val minutes = seconds / 60
+    seconds %= 60
+    text = "${hours}:${minutes}:${seconds}"
+}
+
 
 @BindingAdapter("setBackground")
 fun TextView.setBackground(taskType: TaskType) {
@@ -28,4 +37,15 @@ fun TextView.setBackground(taskType: TaskType) {
 @BindingAdapter("setTagImage")
 fun ImageView.setTagImage(taskType: TaskType) {
     setImageResource(taskType.imageId)
+}
+
+@BindingAdapter("setTaskState")
+fun TextView.setTaskState(taskState: TaskState) {
+    text = taskState.name.lowercase()
+        .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
+}
+
+@BindingAdapter("setTaskStateVisibility")
+fun TextView.setTaskStateVisibility(taskState: TaskState) {
+    isVisible = taskState == TaskState.COMPLETED || taskState == TaskState.PAUSED
 }

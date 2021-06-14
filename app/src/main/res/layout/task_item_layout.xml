@@ -6,7 +6,6 @@
     <data>
 
         <import type="android.view.View" />
-
         <variable
             name="task"
             type="com.vaibhav.taskify.data.models.entity.TaskEntity" />
@@ -64,7 +63,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/taskTagImage"
                 app:layout_constraintStart_toStartOf="@id/runningTaskTitle"
                 app:layout_constraintTop_toBottomOf="@id/runningTaskTitle"
-                tools:text="1:30am - 2:40pm" />
+                tools:text="3hr 20min" />
 
             <!--        <TextView-->
             <!--            android:id="@+id/runningTaskDurationText"-->
@@ -113,10 +112,10 @@
                 android:includeFontPadding="false"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="4dp"
-                android:text="Completed"
+                setTaskState="@{task.state}"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                android:visibility="@{task.completed ? View.VISIBLE : View.INVISIBLE}"
+                setTaskStateVisibility="@{task.state}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:visibility="visible" />

@@ -50,5 +50,7 @@
     <color name="gym_task_color1">#ffa656</color>
     <color name="gym_task_color2">#FFB878</color>
 
+    <color name="stopWatchScreenBg">#4741a6</color>
+    <color name="colorOnStopWatchScreen">#ffffff</color>
 
 </resources>

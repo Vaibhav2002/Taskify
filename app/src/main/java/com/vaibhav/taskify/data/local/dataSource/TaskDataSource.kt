@@ -8,8 +8,8 @@ class TaskDataSource @Inject constructor(private val taskDAO: TaskDAO) {
 
     fun getTaskAfterGivenTime(time: Long) = taskDAO.getTaskAfterGivenTime(time)
 
-    fun getAllTasksOfToday(started: Boolean, completed: Boolean, todaysTime: Long) =
-        taskDAO.getAllTasksOfToday(started, completed, todaysTime)
+    fun getAllTasksOfToday(state: String, todaysTime: Long) =
+        taskDAO.getAllTasksOfToday(state, todaysTime)
 
     suspend fun insertTask(taskEntity: List<TaskEntity>) = taskDAO.insertTask(taskEntity)
 

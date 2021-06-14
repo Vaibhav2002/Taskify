@@ -2,7 +2,9 @@ package com.vaibhav.taskify.data.models.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.vaibhav.taskify.util.TaskState
 import com.vaibhav.taskify.util.TaskType
+import java.io.Serializable
 
 @Entity(tableName = "task_table")
 data class TaskEntity(
@@ -10,11 +12,10 @@ data class TaskEntity(
     val task_title: String,
     val task_description: String,
     val task_category: TaskType,
-    val start_time: Long,
-    val end_time: Long,
-    val started: Boolean,
-    val completed: Boolean,
+    var state: TaskState,
+    val duration: Long,
+    var timeLeft: Long,
     val created_time: Long = System.currentTimeMillis(),
     @PrimaryKey
     val task_id: String = "$email.$created_time"
-)
+) : Serializable

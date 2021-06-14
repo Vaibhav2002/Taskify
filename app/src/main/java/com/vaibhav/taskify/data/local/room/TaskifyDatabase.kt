@@ -5,9 +5,9 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.vaibhav.taskify.data.models.entity.TaskEntity
 
-@Database(entities = [TaskEntity::class], version = 1, exportSchema = false)
-@TypeConverters(TaskCategoryTypeConverter::class)
+@Database(entities = [TaskEntity::class], version = 2, exportSchema = false)
+@TypeConverters(TaskCategoryTypeConverter::class, TaskStateTypeConverter::class)
 abstract class TaskifyDatabase : RoomDatabase() {
 
-    abstract fun getTaskDao():TaskDAO
+    abstract fun getTaskDao(): TaskDAO
 }

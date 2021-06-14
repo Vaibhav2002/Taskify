@@ -5,10 +5,9 @@ data class TaskDTO(
     val task_title: String,
     val task_description: String,
     val task_category: String,
-    val start_time: Long,
-    val end_time: Long,
-    val started: Boolean,
-    val completed: Boolean,
+    val state: String,
+    val duration: Long,
+    val time_left: Long,
     val created_time: Long,
     val task_id: String = "$email.$created_time"
 )

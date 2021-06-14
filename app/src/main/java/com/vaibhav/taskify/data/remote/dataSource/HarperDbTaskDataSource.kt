@@ -1,8 +1,8 @@
 package com.vaibhav.taskify.data.remote.dataSource
 
+import com.vaibhav.taskify.data.models.remote.TaskDTO
 import com.vaibhav.taskify.data.models.requests.SQLModel
 import com.vaibhav.taskify.data.remote.harperDb.Api
-import com.vaibhav.taskify.data.models.remote.TaskDTO
 import com.vaibhav.taskify.util.Resource
 import javax.inject.Inject
 
@@ -13,16 +13,15 @@ class HarperDbTaskDataSource @Inject constructor(private val api: Api) {
         SQLModel(
             sql = String.format(
                 "INSERT INTO edufy.tasks(task_id, email, task_title, task_description,task_category," +
-                        " start_time, end_time, started, completed, created_time) VALUE ('%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s', %d)",
+                        "state, duration,time_left, created_time) VALUE ('%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d')",
                 taskDTO.task_id,
                 taskDTO.email,
                 taskDTO.task_title,
                 taskDTO.task_description,
                 taskDTO.task_category,
-                taskDTO.start_time,
-                taskDTO.end_time,
-                taskDTO.started,
-                taskDTO.completed,
+                taskDTO.state,
+                taskDTO.duration,
+                taskDTO.time_left,
                 taskDTO.created_time
             )
 
@@ -32,14 +31,13 @@ class HarperDbTaskDataSource @Inject constructor(private val api: Api) {
         SQLModel(
             sql = String.format(
                 "UPDATE edufy.tasks SET task_title = '%s', task_description = '%s',task_category = '%s'," +
-                        "start_time = '%d', end_time = '%d', started = '%s', completed = %s WHERE task_id = '%s'",
+                        "state = '%s', duration = '%d', time_left = '%d' WHERE task_id = '%s'",
                 taskDTO.task_title,
                 taskDTO.task_description,
                 taskDTO.task_category,
-                taskDTO.start_time,
-                taskDTO.end_time,
-                taskDTO.started,
-                taskDTO.completed,
+                taskDTO.state,
+                taskDTO.duration,
+                taskDTO.time_left,
                 taskDTO.task_id
             )
 
@@ -48,7 +46,7 @@ class HarperDbTaskDataSource @Inject constructor(private val api: Api) {
 
     private fun getSqlModelToGetTasks(email: String) = SQLModel(
         sql = String.format(
-            "SELECT * FROM edufy.tasks WHERE email = '%s' ORDER BY created_time DESC, start_time DESC",
+            "SELECT * FROM edufy.tasks WHERE email = '%s' ORDER BY created_time DESC",
             email,
         )
     )

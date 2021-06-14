@@ -18,11 +18,19 @@
         android:id="@+id/statsFragmentGlobal"
         app:destination="@id/statsFragment" />
 
+    <action
+        android:id="@+id/timerFragmentGlobal"
+        app:destination="@id/timerFragment" />
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.vaibhav.taskify.ui.mainScreen.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_timerFragment"
+            app:destination="@id/timerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.vaibhav.taskify.ui.mainScreen.about.AboutFragment"
@@ -38,4 +46,16 @@
         android:name="com.vaibhav.taskify.ui.mainScreen.stats.StatsFragment"
         android:label="fragment_stats"
         tools:layout="@layout/fragment_stats" />
+    <fragment
+        android:id="@+id/timerFragment"
+        android:name="com.vaibhav.taskify.ui.mainScreen.TimerFragment"
+        android:label="fragment_timer"
+        tools:layout="@layout/fragment_timer">
+        <argument
+            android:name="stopWatchFor"
+            app:argType="com.vaibhav.taskify.util.StopWatchFor" />
+        <argument
+            android:name="task"
+            app:argType="com.vaibhav.taskify.data.models.entity.TaskEntity" />
+    </fragment>
 </navigation>

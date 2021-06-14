@@ -1,21 +1,28 @@
 package com.vaibhav.taskify.ui.mainScreen
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import coil.load
 import com.vaibhav.chatofy.util.viewBinding
 import com.vaibhav.taskify.R
+import com.vaibhav.taskify.data.models.entity.TaskEntity
 import com.vaibhav.taskify.databinding.ActivityMainBinding
 import com.vaibhav.taskify.databinding.DrawerMenuBinding
+import com.vaibhav.taskify.service.ServiceTimer
+import com.vaibhav.taskify.service.TimerService
+import com.vaibhav.taskify.util.DURATION
+import com.vaibhav.taskify.util.StopWatchFor
 import com.vaibhav.taskify.util.TopLevelScreens
 import com.vaibhav.taskify.util.setUsable
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -23,6 +30,20 @@ class MainActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivityMainBinding::inflate)
     private lateinit var navController: NavController
     private val viewModel: MainViewModel by viewModels()
+
+    @Inject
+    lateinit var timer: ServiceTimer
+
+//    private val connection = object : ServiceConnection {
+//        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+//            viewModel.isServiceRunning = true
+//        }
+//
+//        override fun onServiceDisconnected(name: ComponentName?) {
+//            viewModel.isServiceRunning = false
+//        }
+//    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +62,30 @@ class MainActivity : AppCompatActivity() {
             binding.drawer.closeDrawer()
             setNavButtons()
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.runningTask.collect {
+//                if (it.isNotEmpty()) {
+//                    startService(it[0])
+//                } else {
+//                    stopService()
+//                }
+            }
+        }
+
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            Timber.d("DEstination chnaged")
+//            if(destination.id == R.id.timerFragment)
+//                supportActionBar?.hide()
+//            else
+//                supportActionBar?.show()
+        }
+
+        timer._timeLeft.observe(this) {
+            viewModel.setTimeLeft(it)
+        }
+
+
     }
 
     private fun initializeDrawerLayout() {
@@ -64,17 +109,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
-        binding.drawer.setDrawerListener(object : DrawerLayout.DrawerListener {
-            override fun onDrawerSlide(drawerView: View, slideOffset: Float) = Unit
-
-            override fun onDrawerOpened(drawerView: View) {
-            }
-
-            override fun onDrawerClosed(drawerView: View) = Unit
-
-            override fun onDrawerStateChanged(newState: Int) = Unit
-        })
     }
 
     private fun handleNavigation(screen: TopLevelScreens) {
@@ -85,9 +119,11 @@ class MainActivity : AppCompatActivity() {
             TopLevelScreens.PROFILE -> R.id.profileFragmentGlobal
             TopLevelScreens.STATS -> R.id.statsFragmentGlobal
             TopLevelScreens.ABOUt -> R.id.aboutFragmentGlobal
+            TopLevelScreens.TIMER -> R.id.timerFragmentGlobal
         }
         Timber.d(navigationId.toString())
-        navController.popBackStack()
+        if (screen != TopLevelScreens.TIMER)
+            navController.popBackStack()
         navController.navigate(navigationId)
     }
 
@@ -99,6 +135,28 @@ class MainActivity : AppCompatActivity() {
         openDrawerView.profileItem.setUsable(currentFragment, TopLevelScreens.PROFILE)
         openDrawerView.aboutItem.setUsable(currentFragment, TopLevelScreens.ABOUt)
         openDrawerView.statsItem.setUsable(currentFragment, TopLevelScreens.STATS)
+    }
+
+
+    private fun startService(task: TaskEntity) {
+        Intent(this, TimerService::class.java).also {
+            it.putExtra(DURATION, task.timeLeft)
+            startService(it)
+        }
+    }
+
+    private fun stopService() {
+        if (viewModel.isServiceRunning) {
+            Intent(this, TimerService::class.java).also {
+                stopService(it)
+            }
+        }
+    }
+
+    fun showTimer(stopWatchFor: StopWatchFor, task: TaskEntity) {
+        viewModel.task = task
+        viewModel.stopWatchFor = stopWatchFor
+        handleNavigation(TopLevelScreens.TIMER)
     }
 
 

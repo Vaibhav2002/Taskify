@@ -16,6 +16,7 @@ import com.vaibhav.taskify.data.local.room.TaskifyDatabase
 import com.vaibhav.taskify.data.models.mappper.TaskMapper
 import com.vaibhav.taskify.data.models.mappper.UserMapper
 import com.vaibhav.taskify.data.remote.harperDb.Api
+import com.vaibhav.taskify.service.ServiceTimer
 import com.vaibhav.taskify.util.BASE_URL
 import com.vaibhav.taskify.util.dataStore
 import dagger.Module
@@ -96,6 +97,10 @@ object Module {
     @Provides
     @Singleton
     fun providesTaskDao(taskifyDatabase: TaskifyDatabase): TaskDAO = taskifyDatabase.getTaskDao()
+
+    @Provides
+    @Singleton
+    fun providesTimer(): ServiceTimer = ServiceTimer
 
 
 }

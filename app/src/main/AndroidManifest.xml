@@ -21,7 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.mainScreen.MainActivity" android:theme="@style/Theme.Taskify" />
+        <activity
+            android:name=".ui.mainScreen.MainActivity"
+            android:theme="@style/Theme.Taskify" />
+
+        <service android:name=".service.TimerService" />
     </application>
 
 </manifest>
