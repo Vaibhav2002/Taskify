@@ -61,7 +61,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
             viewModel.pauseTask(mainViewModel.timeLeft.value)
         }
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.startTaskState.collect {
+            viewModel.taskState.collect {
 
                 Timber.d(it.toString())
             }
@@ -85,6 +85,20 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
                         setViewsForRunningTask()
                     }
                     TaskState.COMPLETED -> findNavController().popBackStack()
+                }
+            }
+
+            viewModel.taskState.collect {
+                binding.loadingAnim.isVisible = it is Resource.Loading
+                when (it) {
+                    is Resource.Empty -> Unit
+                    is Resource.Error -> {
+                        requireContext().showToast(viewModel.getTaskMessage())
+                    }
+                    is Resource.Loading -> Unit
+                    is Resource.Success -> {
+                        requireContext().showToast(viewModel.getTaskMessage())
+                    }
                 }
             }
         }
@@ -127,5 +141,6 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
             }
         }
     }
+
 
 }

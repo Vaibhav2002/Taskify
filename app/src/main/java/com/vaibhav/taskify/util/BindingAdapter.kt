@@ -1,5 +1,6 @@
 package com.vaibhav.taskify.util
 
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -18,6 +19,18 @@ fun TextView.setTaskDuration(task: TaskEntity) {
     val minutes = seconds / 60
     seconds %= 60
     text = "${hours}hrs ${minutes}min ${seconds}sec"
+}
+
+
+@BindingAdapter("setTaskDuration")
+fun EditText.setTaskDuration(timeLeft: Long) {
+    val duration = Duration.ofMillis(timeLeft)
+    var seconds = duration.seconds
+    val hours = seconds / 60 / 60
+    seconds %= 60 * 60
+    val minutes = seconds / 60
+    seconds %= 60
+    setText("${hours}hrs ${minutes}min ${seconds}sec")
 }
 
 @BindingAdapter("setTimeLeft")

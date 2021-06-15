@@ -30,6 +30,7 @@
     <color name="authButtonColor">#4741a6</color>
     <color name="authBottomBgColor">#ffffff</color>
     <color name="dividerColor">#AAAAAA</color>
+    <color name="authTextHeadingColor">@color/lt_deepblue</color>
 
     <color name="colorOnPrimary">#ffffff</color>
     <color name="colorOnPrimaryVariant">#d9eff7</color>
@@ -52,5 +53,7 @@
 
     <color name="stopWatchScreenBg">#4741a6</color>
     <color name="colorOnStopWatchScreen">#ffffff</color>
+
+    <color name="addTaskSpinner">@color/gray2</color>
 
 </resources>

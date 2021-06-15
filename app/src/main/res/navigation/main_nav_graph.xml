@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_homeFragment_to_timerFragment"
             app:destination="@id/timerFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addTaskActivity"
+            app:destination="@id/addTaskActivity" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -58,4 +61,9 @@
             android:name="task"
             app:argType="com.vaibhav.taskify.data.models.entity.TaskEntity" />
     </fragment>
+    <activity
+        android:id="@+id/addTaskActivity"
+        android:name="com.vaibhav.taskify.ui.addTaskScreen.AddTaskActivity"
+        android:label="activity_add_task"
+        tools:layout="@layout/activity_add_task" />
 </navigation>

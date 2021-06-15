@@ -15,8 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class TimerViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewModel() {
 
-    private val _startTaskState = MutableStateFlow<Resource<Unit>>(Resource.Empty())
-    val startTaskState: StateFlow<Resource<Unit>> = _startTaskState
+    private val _taskState = MutableStateFlow<Resource<Unit>>(Resource.Empty())
+    val taskState: StateFlow<Resource<Unit>> = _taskState
 
     private val _operation = MutableStateFlow<TaskState?>(null)
     val operation: StateFlow<TaskState?> = _operation
@@ -24,31 +24,44 @@ class TimerViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewM
     var task: TaskEntity? = null
 
     fun startTask() = viewModelScope.launch {
-        _startTaskState.emit(Resource.Loading())
+        _taskState.emit(Resource.Loading())
         task?.let {
             it.state = TaskState.RUNNING
-            _startTaskState.emit(taskRepo.updateTask(it))
+            _taskState.emit(taskRepo.updateTask(it))
             _operation.emit(TaskState.RUNNING)
-        } ?: _startTaskState.emit(Resource.Error("Task is null"))
+        } ?: _taskState.emit(Resource.Error("Task is null"))
     }
 
     fun pauseTask(timeLeft: Long) = viewModelScope.launch {
-        _startTaskState.emit(Resource.Loading())
+        _taskState.emit(Resource.Loading())
         task?.let {
             it.state = TaskState.PAUSED
             it.timeLeft = timeLeft
-            _startTaskState.emit(taskRepo.updateTask(it))
+            _taskState.emit(taskRepo.updateTask(it))
             _operation.emit(TaskState.PAUSED)
-        } ?: _startTaskState.emit(Resource.Error("Task is null"))
+        } ?: _taskState.emit(Resource.Error("Task is null"))
     }
 
     fun stopTask(timeLeft: Long) = viewModelScope.launch {
-        _startTaskState.emit(Resource.Loading())
+        _taskState.emit(Resource.Loading())
         task?.let {
             it.state = TaskState.COMPLETED
             it.timeLeft = timeLeft
-            _startTaskState.emit(taskRepo.updateTask(it))
+            _taskState.emit(taskRepo.updateTask(it))
             _operation.emit(TaskState.COMPLETED)
-        } ?: _startTaskState.emit(Resource.Error("Task is null"))
+        } ?: _taskState.emit(Resource.Error("Task is null"))
+    }
+
+    fun getTaskMessage(): String {
+        val taskOperation = when (operation.value) {
+            TaskState.RUNNING -> "run"
+            TaskState.PAUSED -> "pause"
+            TaskState.COMPLETED -> "stop"
+            else -> ""
+        }
+        return if (taskState is Resource.Success<*>)
+            "Task $taskOperation successful"
+        else
+            "Failed to $taskOperation task"
     }
 }

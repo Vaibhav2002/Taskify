@@ -14,6 +14,12 @@ and track your productivity </string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string-array name="spinner_item">
+        <item>Home</item>
+        <item>Work</item>
+        <item>Study</item>
+        <item>Gym</item>
+    </string-array>
 
 
     <string name="loremIpsum">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem</string>

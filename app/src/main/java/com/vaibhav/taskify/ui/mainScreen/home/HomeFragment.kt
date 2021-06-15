@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.FragmentHomeBinding
@@ -26,6 +27,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         homePagerAdapter = HomePagerAdapter(requireActivity())
         initViewPager()
         Timber.d("In home fragment")
+        binding.addTask.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_addTaskActivity)
+        }
     }
 
     private fun initViewPager() {

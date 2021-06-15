@@ -29,6 +29,7 @@
     <color name="authTextFieldIconTint">#f0c38e</color>
     <color name="authButtonColor">#f0c38e</color>
     <color name="authBottomBgColor">#312c51</color>
+    <color name="authTextHeadingColor">@color/dt_yellow</color>
 
     <color name="dividerColor">#ececed</color>
 
@@ -42,6 +43,8 @@
     <color name="runningTaskColor">#f0c38e</color>
     <color name="colorOnRunningTask">#312c51</color>
     <color name="colorOnRunningTaskType">#ececed</color>
+
+    <color name="addTaskSpinner">@color/dt_blue</color>
 
 
     <color name="home_task_color1">#FD5B71</color>

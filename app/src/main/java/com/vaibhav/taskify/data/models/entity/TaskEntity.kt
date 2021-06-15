@@ -12,9 +12,9 @@ data class TaskEntity(
     val task_title: String,
     val task_description: String,
     val task_category: TaskType,
-    var state: TaskState,
     val duration: Long,
-    var timeLeft: Long,
+    var state: TaskState = TaskState.NOT_STARTED,
+    var timeLeft: Long = duration,
     val created_time: Long = System.currentTimeMillis(),
     @PrimaryKey
     val task_id: String = "$email.$created_time"

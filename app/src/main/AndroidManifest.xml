@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Taskify">
         <activity
+            android:name=".ui.addTaskScreen.AddTaskActivity"
+            android:theme="@style/Theme.Taskify.NoStatusBarTheme"></activity>
+        <activity
             android:name=".ui.auth.AuthActivity"
             android:theme="@style/Theme.Taskify.NoStatusBarTheme">
             <intent-filter>

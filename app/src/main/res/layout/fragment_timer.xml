@@ -1,159 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/stopWatchScreenBg"
-    android:orientation="vertical"
-    android:padding="16dp"
     tools:context=".ui.mainScreen.timer.TimerFragment">
 
-
-    <ImageButton
-        android:id="@+id/back_arrow"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/rounded_button"
-        android:src="@drawable/back_arrow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/taskTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:includeFontPadding="false"
-        android:maxLines="2"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
-        android:textColor="@color/colorOnStopWatchScreen"
-        tools:text="DSA Sprint" />
-
-
-    <TextView
-        android:id="@+id/taskDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:maxLines="6"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body2"
-        android:textColor="@color/colorOnStopWatchScreen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/back_arrow"
-        app:layout_constraintTop_toBottomOf="@+id/back_arrow"
-        tools:text="@string/loremIpsum" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:cardCornerRadius="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-            android:id="@+id/taskTagTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="4dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-            android:textColor="@color/white"
-            tools:background="@drawable/home_task_background"
-            tools:text="HOME" />
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <RelativeLayout
-        android:id="@+id/timerBarLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:visibility="invisible"
-        tools:visibility="visible">
-
-        <com.mikhaellopez.circularprogressbar.CircularProgressBar
-            android:id="@+id/timerBar"
-            android:layout_width="240dp"
-            android:layout_height="240dp"
-            app:cpb_background_progressbar_color="?attr/colorPrimaryVariant"
-            app:cpb_background_progressbar_width="40dp"
-            app:cpb_progress="70"
-            app:cpb_progress_direction="to_right"
-            app:cpb_progressbar_color="?attr/colorSecondary"
-            app:cpb_progressbar_width="30dp"
-            app:cpb_round_border="true" />
-
-
-        <TextView
-            android:id="@+id/timerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="24dp"
-            android:includeFontPadding="false"
-            tools:text="03:45:00"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
-            android:textColor="@color/colorOnStopWatchScreen" />
-
-
-    </RelativeLayout>
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="16dp"
-        android:gravity="bottom"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/startButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/filled_round_button"
-                android:backgroundTint="?attr/colorSecondary"
-                android:text="START"
-                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/pauseButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/filled_round_button"
-                android:backgroundTint="?attr/colorSecondary"
-                android:text="PAUSE"
-                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button" />
-        </RelativeLayout>
+        android:orientation="vertical"
+        android:padding="16dp">
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/stopButton"
+        <ImageButton
+            android:id="@+id/back_arrow"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/rounded_button"
+            android:src="@drawable/back_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/taskTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="24dp"
+            android:includeFontPadding="false"
+            android:maxLines="2"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
+            android:textColor="@color/colorOnStopWatchScreen"
+            tools:text="DSA Sprint" />
+
+
+        <TextView
+            android:id="@+id/taskDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:maxLines="6"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body2"
+            android:textColor="@color/colorOnStopWatchScreen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/back_arrow"
+            app:layout_constraintTop_toBottomOf="@+id/back_arrow"
+            tools:text="@string/loremIpsum" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/secondary_outlined_button"
-            android:text="STOP"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button"
-            android:textColor="?attr/colorSecondary"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/taskTagTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                android:textColor="@color/white"
+                tools:background="@drawable/home_task_background"
+                tools:text="HOME" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <RelativeLayout
+            android:id="@+id/timerBarLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:visibility="invisible"
+            tools:visibility="visible">
+
+            <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                android:id="@+id/timerBar"
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                app:cpb_background_progressbar_color="?attr/colorPrimaryVariant"
+                app:cpb_background_progressbar_width="40dp"
+                app:cpb_progress="70"
+                app:cpb_progress_direction="to_right"
+                app:cpb_progressbar_color="?attr/colorSecondary"
+                app:cpb_progressbar_width="30dp"
+                app:cpb_round_border="true" />
+
+
+            <TextView
+                android:id="@+id/timerText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="24dp"
+                android:includeFontPadding="false"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
+                android:textColor="@color/colorOnStopWatchScreen"
+                tools:text="03:45:00" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/startButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/filled_round_button"
+                    android:backgroundTint="?attr/colorSecondary"
+                    android:text="START"
+                    android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/pauseButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/filled_round_button"
+                    android:backgroundTint="?attr/colorSecondary"
+                    android:text="PAUSE"
+                    android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button" />
+            </RelativeLayout>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/stopButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/secondary_outlined_button"
+                android:text="STOP"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button"
+                android:textColor="?attr/colorSecondary"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
 
-</LinearLayout>
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loadingAnim"
+        android:layout_width="@dimen/loadingAnimSize"
+        android:layout_height="@dimen/loadingAnimSize"
+        android:layout_gravity="center"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading" />
+
+</FrameLayout>

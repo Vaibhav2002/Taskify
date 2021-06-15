@@ -72,6 +72,10 @@
         <item name="android:background">@color/lt_blue</item>
     </style>
 
+    <style name="add_task_top">
+        <item name="android:background">@color/lt_darkpblue</item>
+    </style>
+
     <style name="gettingStartedHeading">
         <item name="android:textColor">@color/lt_darkpblue</item>
     </style>

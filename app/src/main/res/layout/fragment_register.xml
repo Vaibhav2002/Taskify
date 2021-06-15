@@ -38,6 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/authTextHeadingColor"
             android:text="@string/let_s_create_your_account"
             android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5" />
 
