@@ -7,6 +7,7 @@ import com.vaibhav.taskify.data.repo.AuthRepo
 import com.vaibhav.taskify.data.repo.TaskRepo
 import com.vaibhav.taskify.util.Resource
 import com.vaibhav.taskify.util.StopWatchFor
+import com.vaibhav.taskify.util.TaskState
 import com.vaibhav.taskify.util.TopLevelScreens
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -58,6 +59,16 @@ class MainViewModel @Inject constructor(
             _taskFetchState.emit(resource)
         } ?: _taskFetchState.emit(Resource.Error(message = "Failed to get user information"))
 
+    }
+
+
+    fun setTaskAsCompleted() = viewModelScope.launch {
+        Timber.d("Stopping task")
+        if (runningTask.value.isNotEmpty()) {
+            val task = runningTask.value[0]
+            task.state = TaskState.COMPLETED
+            taskRepo.updateTask(task)
+        }
     }
 
 

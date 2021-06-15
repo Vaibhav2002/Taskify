@@ -7,7 +7,7 @@
     android:background="@color/stopWatchScreenBg"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".ui.mainScreen.TimerFragment">
+    tools:context=".ui.mainScreen.timer.TimerFragment">
 
 
     <ImageButton

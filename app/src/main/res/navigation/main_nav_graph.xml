@@ -48,7 +48,7 @@
         tools:layout="@layout/fragment_stats" />
     <fragment
         android:id="@+id/timerFragment"
-        android:name="com.vaibhav.taskify.ui.mainScreen.TimerFragment"
+        android:name="com.vaibhav.taskify.ui.mainScreen.timer.TimerFragment"
         android:label="fragment_timer"
         tools:layout="@layout/fragment_timer">
         <argument

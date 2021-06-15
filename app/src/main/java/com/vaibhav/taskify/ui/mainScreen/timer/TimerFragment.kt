@@ -1,4 +1,4 @@
-package com.vaibhav.taskify.ui.mainScreen
+package com.vaibhav.taskify.ui.mainScreen.timer
 
 import android.os.Bundle
 import android.view.View
@@ -6,14 +6,20 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.FragmentTimerBinding
-import com.vaibhav.taskify.ui.stopwatchScreen.TimerViewModel
+import com.vaibhav.taskify.service.ServiceTimer
+import com.vaibhav.taskify.service.TimerState
+import com.vaibhav.taskify.ui.mainScreen.MainViewModel
 import com.vaibhav.taskify.util.StopWatchFor
+import com.vaibhav.taskify.util.TaskState
 import com.vaibhav.taskify.util.setBackground
 import com.vaibhav.taskify.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import timber.log.Timber
 
 @AndroidEntryPoint
 class TimerFragment : Fragment(R.layout.fragment_timer) {
@@ -37,19 +43,13 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
                 binding.taskTagTv.text = task.task_category.name
                 when (stopWatchFor) {
                     StopWatchFor.RUNNING -> {
-                        binding.startPauseButton.text = "PAUSE"
-                        binding.startPauseButton.isVisible = true
-                        binding.stopButton.isVisible = true
+                        setViewsForRunningTask()
                     }
                     StopWatchFor.PAUSED -> {
-                        binding.startPauseButton.text = "START"
-                        binding.startPauseButton.isVisible = true
-                        binding.stopButton.isVisible = true
+                        setViewsForPausedTask()
                     }
                     StopWatchFor.UPCOMING -> {
-                        binding.startPauseButton.text = "START"
-                        binding.startPauseButton.isVisible = true
-                        binding.stopButton.isVisible = false
+                        setViewsForNotStartedTask()
                     }
                 }
             }
@@ -63,24 +63,56 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
             else
                 viewModel.startTask()
         }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.startTaskState.collect {
+
+                Timber.d(it.toString())
+            }
+        }
         binding.stopButton.setOnClickListener {
             viewModel.stopTask(mainViewModel.timeLeft.value)
         }
-//        lifecycleScope.launchWhenStarted {
-//            viewModel.startTaskState.collect {
-//                when (it) {
-//                    is Resource.Empty -> Unit
-//                    is Resource.Error -> {
-//                        requireContext().showToast(it.message)
-//                    }
-//                    is Resource.Loading -> {
-//
-//                    }
-//                    is Resource.Success -> {
-//
-//                    }
-//                }
-//            }
-//        }
+
+        ServiceTimer.timerState.observe(viewLifecycleOwner) {
+            if (it == TimerState.STOP) {
+                findNavController().popBackStack()
+                ServiceTimer.timerState.postValue(null)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.operation.collect {
+                when (it) {
+                    TaskState.PAUSED -> setViewsForPausedTask()
+                    TaskState.RUNNING -> setViewsForRunningTask()
+                    TaskState.COMPLETED -> findNavController().popBackStack()
+                }
+            }
+        }
     }
+
+    private fun setViewsForNotStartedTask() {
+        binding.startPauseButton.text = "START"
+        binding.startPauseButton.isVisible = true
+        binding.stopButton.isVisible = false
+    }
+
+    private fun setViewsForPausedTask() {
+        binding.startPauseButton.text = "START"
+        binding.startPauseButton.isVisible = true
+        binding.stopButton.isVisible = true
+    }
+
+    private fun setViewsForRunningTask() {
+        binding.startPauseButton.text = "PAUSE"
+        binding.startPauseButton.isVisible = true
+        binding.stopButton.isVisible = true
+        setUpProgressBar()
+    }
+
+
+    private fun setUpProgressBar() {
+
+    }
+
 }

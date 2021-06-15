@@ -1,4 +1,4 @@
-package com.vaibhav.taskify.ui.stopwatchScreen
+package com.vaibhav.taskify.ui.mainScreen.timer
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,6 +18,9 @@ class TimerViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewM
     private val _startTaskState = MutableStateFlow<Resource<Unit>>(Resource.Empty())
     val startTaskState: StateFlow<Resource<Unit>> = _startTaskState
 
+    private val _operation = MutableStateFlow<TaskState?>(null)
+    val operation: StateFlow<TaskState?> = _operation
+
     var task: TaskEntity? = null
 
     fun startTask() = viewModelScope.launch {
@@ -25,6 +28,7 @@ class TimerViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewM
         task?.let {
             it.state = TaskState.RUNNING
             _startTaskState.emit(taskRepo.updateTask(it))
+            _operation.emit(TaskState.RUNNING)
         } ?: _startTaskState.emit(Resource.Error("Task is null"))
     }
 
@@ -34,6 +38,7 @@ class TimerViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewM
             it.state = TaskState.PAUSED
             it.timeLeft = timeLeft
             _startTaskState.emit(taskRepo.updateTask(it))
+            _operation.emit(TaskState.PAUSED)
         } ?: _startTaskState.emit(Resource.Error("Task is null"))
     }
 
@@ -43,6 +48,7 @@ class TimerViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewM
             it.state = TaskState.COMPLETED
             it.timeLeft = timeLeft
             _startTaskState.emit(taskRepo.updateTask(it))
+            _operation.emit(TaskState.COMPLETED)
         } ?: _startTaskState.emit(Resource.Error("Task is null"))
     }
 }

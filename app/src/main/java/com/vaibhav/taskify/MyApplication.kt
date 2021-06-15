@@ -12,4 +12,8 @@ class MyApplication : Application() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
     }
+
+    override fun onTerminate() {
+        super.onTerminate()
+    }
 }

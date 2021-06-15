@@ -1,7 +1,10 @@
 package com.vaibhav.taskify.ui.mainScreen
 
+import android.content.ComponentName
 import android.content.Intent
+import android.content.ServiceConnection
 import android.os.Bundle
+import android.os.IBinder
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -15,14 +18,11 @@ import com.vaibhav.taskify.databinding.ActivityMainBinding
 import com.vaibhav.taskify.databinding.DrawerMenuBinding
 import com.vaibhav.taskify.service.ServiceTimer
 import com.vaibhav.taskify.service.TimerService
-import com.vaibhav.taskify.util.DURATION
-import com.vaibhav.taskify.util.StopWatchFor
-import com.vaibhav.taskify.util.TopLevelScreens
-import com.vaibhav.taskify.util.setUsable
+import com.vaibhav.taskify.service.TimerState
+import com.vaibhav.taskify.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -31,18 +31,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private val viewModel: MainViewModel by viewModels()
 
-    @Inject
-    lateinit var timer: ServiceTimer
 
-//    private val connection = object : ServiceConnection {
-//        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-//            viewModel.isServiceRunning = true
-//        }
-//
-//        override fun onServiceDisconnected(name: ComponentName?) {
-//            viewModel.isServiceRunning = false
-//        }
-//    }
+    private val connection = object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+            viewModel.isServiceRunning = true
+        }
+
+        override fun onServiceDisconnected(name: ComponentName?) {
+            viewModel.isServiceRunning = false
+        }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,23 +63,30 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launchWhenStarted {
             viewModel.runningTask.collect {
-//                if (it.isNotEmpty()) {
-//                    startService(it[0])
-//                } else {
-//                    stopService()
-//                }
+                Timber.d("Running task $it")
+                if (it.isNotEmpty()) {
+                    startService(it[0])
+                } else {
+                    stopService()
+                }
+            }
+        }
+
+        ServiceTimer.timerState.observe(this) {
+            if (it == TimerState.STOP) {
+                viewModel.setTaskAsCompleted()
+                stopService()
             }
         }
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            Timber.d("DEstination chnaged")
-//            if(destination.id == R.id.timerFragment)
-//                supportActionBar?.hide()
-//            else
-//                supportActionBar?.show()
+            if (destination.id == R.id.timerFragment)
+                supportActionBar?.hide()
+            else
+                supportActionBar?.show()
         }
 
-        timer._timeLeft.observe(this) {
+        ServiceTimer.timeLeft.observe(this) {
             viewModel.setTimeLeft(it)
         }
 
@@ -140,16 +145,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun startService(task: TaskEntity) {
         Intent(this, TimerService::class.java).also {
+            it.putExtra(TASK, task)
             it.putExtra(DURATION, task.timeLeft)
             startService(it)
+//            bindService(it, connection, 0)
         }
+        viewModel.isServiceRunning = true
     }
 
     private fun stopService() {
         if (viewModel.isServiceRunning) {
             Intent(this, TimerService::class.java).also {
+//                stopService(it)
                 stopService(it)
+
             }
+//            viewModel.setTaskAsCompleted()
+            viewModel.isServiceRunning = false
         }
     }
 

@@ -21,7 +21,6 @@ import com.vaibhav.taskify.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class OnGoingFragment : Fragment(R.layout.fragment_on_going) {
@@ -35,8 +34,6 @@ class OnGoingFragment : Fragment(R.layout.fragment_on_going) {
     private val activityViewModel: MainViewModel by activityViewModels()
     private lateinit var pausedTasksAdapter: TaskAdapter
 
-    @Inject
-    lateinit var timerlD: ServiceTimer
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,28 +56,27 @@ class OnGoingFragment : Fragment(R.layout.fragment_on_going) {
             )
         }
 
-        if (binding.runningTaskCard.isVisible) {
-            timerlD._timeLeft.observe(viewLifecycleOwner) {
-                binding.runningTaskTimerText.setTimeLeft(it)
-            }
+        ServiceTimer.timeLeft.observe(viewLifecycleOwner) {
+            binding.runningTaskTimerText.setTimeLeft(it)
         }
-
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.pausedTasks.collect {
                 Timber.d(it.toString())
                 pausedTasksAdapter.submitList(it)
             }
+        }
 
-
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             activityViewModel.runningTask.collect {
+                Timber.d("Running $it")
                 binding.runningTv.isVisible = it.isNotEmpty()
                 if (it.isNotEmpty()) {
-                    Timber.d("Running $it")
                     it[0].let { task ->
                         binding.apply {
                             binding.runningTaskDurationText.setTaskDuration(task)
                             binding.runningTaskTitle.text = task.task_title
+                            binding.runningTaskTag.text = task.task_category.name
                         }
                     }
                 }

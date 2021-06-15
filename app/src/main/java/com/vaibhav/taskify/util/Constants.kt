@@ -4,6 +4,7 @@ import com.vaibhav.taskify.R
 
 const val GOOGLE_SIGN_IN = 1001
 const val DURATION = "Duration"
+const val TASK = "TASK"
 const val FROM_NOTIFICATION = 32
 
 enum class TaskType(val imageId: Int, val tagBackground: Int) {

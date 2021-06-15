@@ -11,10 +11,12 @@ import java.util.*
 @BindingAdapter("setTaskDuration")
 fun TextView.setTaskDuration(task: TaskEntity) {
     val duration = Duration.ofMillis(task.timeLeft)
-    var minutes = duration.toMinutes().toInt()
-    val hours = minutes / 60
-    minutes %= 60
-    text = "${hours}hrs ${minutes}min"
+    var seconds = duration.seconds
+    val hours = seconds / 60 / 60
+    seconds %= 60 * 60
+    val minutes = seconds / 60
+    seconds %= 60
+    text = "${hours}hrs ${minutes}min ${seconds}sec"
 }
 
 @BindingAdapter("setTimeLeft")

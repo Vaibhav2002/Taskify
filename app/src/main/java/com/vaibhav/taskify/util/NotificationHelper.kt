@@ -37,7 +37,7 @@ class NotificationHelper @Inject constructor(private val context: Context) {
             NotificationCompat.Builder(context, CHANNEL_ID)
                 .setContentTitle(title)
                 .setContentText(description)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setPriority(NotificationCompat.PRIORITY_MIN)
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .build()
