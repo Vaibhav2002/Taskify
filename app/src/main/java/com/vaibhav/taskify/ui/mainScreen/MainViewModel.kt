@@ -67,6 +67,7 @@ class MainViewModel @Inject constructor(
         if (runningTask.value.isNotEmpty()) {
             val task = runningTask.value[0]
             task.state = TaskState.COMPLETED
+            task.timeLeft = 0
             taskRepo.updateTask(task)
         }
     }

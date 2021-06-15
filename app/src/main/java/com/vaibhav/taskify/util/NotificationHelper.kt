@@ -28,6 +28,8 @@ class NotificationHelper @Inject constructor(private val context: Context) {
     private fun setNotificationChannel() {
         val channel =
             NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
+        channel.setSound(null, null)
+        channel.importance = NotificationManager.IMPORTANCE_MIN
         notificationManager.createNotificationChannel(channel)
 
     }
@@ -40,6 +42,7 @@ class NotificationHelper @Inject constructor(private val context: Context) {
                 .setPriority(NotificationCompat.PRIORITY_MIN)
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setSound(null)
                 .build()
         notificationManager.notify(getNotificationId(), notification)
 

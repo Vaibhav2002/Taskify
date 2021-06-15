@@ -22,6 +22,12 @@ class TimerService : Service() {
     @Inject
     lateinit var notificationHelper: NotificationHelper
 
+    lateinit var timer: CountDownTimer
+
+    override fun onDestroy() {
+        super.onDestroy()
+        timer.cancel()
+    }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Timber.d("started running")
@@ -32,12 +38,11 @@ class TimerService : Service() {
         val pendingIntent =
             PendingIntent.getActivity(applicationContext, FROM_NOTIFICATION, intent, 0)
         ServiceTimer.timerState.postValue(TimerState.START)
-        val timer = object : CountDownTimer(duration, 1000L) {
+        timer = object : CountDownTimer(duration, 1000L) {
             override fun onTick(millisUntilFinished: Long) {
                 Timber.d(millisUntilFinished.toString())
                 val durationVal = Duration.ofMillis(millisUntilFinished)
                 val timerText = getFormattedTimeString(durationVal)
-                Timber.d(timerText)
                 ServiceTimer.timeLeft.postValue(millisUntilFinished)
                 notificationHelper.showNotification(timerText, task.task_title, pendingIntent)
             }

@@ -10,7 +10,8 @@ import java.util.*
 
 @BindingAdapter("setTaskDuration")
 fun TextView.setTaskDuration(task: TaskEntity) {
-    val duration = Duration.ofMillis(task.timeLeft)
+    val timeLeft = if (task.state == TaskState.COMPLETED) task.duration else task.timeLeft
+    val duration = Duration.ofMillis(timeLeft)
     var seconds = duration.seconds
     val hours = seconds / 60 / 60
     seconds %= 60 * 60

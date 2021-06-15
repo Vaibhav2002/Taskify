@@ -26,7 +26,7 @@
         android:layout_marginTop="24dp"
         android:includeFontPadding="false"
         android:maxLines="2"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline4"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
         android:textColor="@color/colorOnStopWatchScreen"
         tools:text="DSA Sprint" />
 
@@ -38,7 +38,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:maxLines="6"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body1"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body2"
         android:textColor="@color/colorOnStopWatchScreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/back_arrow"
@@ -70,6 +70,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/timerBarLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -78,6 +79,7 @@
         tools:visibility="visible">
 
         <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/timerBar"
             android:layout_width="240dp"
             android:layout_height="240dp"
             app:cpb_background_progressbar_color="?attr/colorPrimaryVariant"
@@ -90,12 +92,13 @@
 
 
         <TextView
+            android:id="@+id/timerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="24dp"
             android:includeFontPadding="false"
-            android:text="03:45:00"
+            tools:text="03:45:00"
             android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
             android:textColor="@color/colorOnStopWatchScreen" />
 
@@ -109,16 +112,32 @@
         android:gravity="bottom"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/startPauseButton"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/filled_round_button"
-            android:backgroundTint="?attr/colorSecondary"
-            android:text="START"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button" />
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/startButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/filled_round_button"
+                android:backgroundTint="?attr/colorSecondary"
+                android:text="START"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/pauseButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/filled_round_button"
+                android:backgroundTint="?attr/colorSecondary"
+                android:text="PAUSE"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button" />
+        </RelativeLayout>
 
 
         <androidx.appcompat.widget.AppCompatButton
