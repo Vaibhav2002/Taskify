@@ -76,7 +76,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="Sign in"
+                android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button" />
 
@@ -86,6 +88,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:textAlignment="center"
                 android:background="@android:color/transparent"
                 android:paddingHorizontal="16dp"
                 android:text="Sign up"

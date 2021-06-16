@@ -28,21 +28,36 @@ class NotificationHelper @Inject constructor(private val context: Context) {
     private fun setNotificationChannel() {
         val channel =
             NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
-        channel.setSound(null, null)
-        channel.importance = NotificationManager.IMPORTANCE_MIN
         notificationManager.createNotificationChannel(channel)
 
     }
 
-    fun showNotification(title: String, description: String, pendingIntent: PendingIntent) {
+    fun showSilentNotification(title: String, description: String, pendingIntent: PendingIntent) {
         val notification =
             NotificationCompat.Builder(context, CHANNEL_ID)
                 .setContentTitle(title)
                 .setContentText(description)
-                .setPriority(NotificationCompat.PRIORITY_MIN)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setSound(null)
+                .build()
+        notificationManager.notify(getNotificationId(), notification)
+
+    }
+
+    fun showCompletedNotification(
+        title: String,
+        description: String,
+        pendingIntent: PendingIntent
+    ) {
+        val notification =
+            NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentTitle(title)
+                .setContentText(description)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(R.mipmap.ic_launcher_round)
                 .build()
         notificationManager.notify(getNotificationId(), notification)
 

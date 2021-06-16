@@ -39,9 +39,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/poppins_medium"
-            android:textColor="@color/authTextHeadingColor"
             android:text="@string/sign_in_head"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5" />
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
+            android:textColor="@color/authTextHeadingColor" />
 
         <TextView
             style="@style/grayText"
@@ -90,6 +90,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:alpha="0.5"
             android:layout_marginTop="24dp">
 
             <View
@@ -121,11 +122,11 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/googleButton"
+            style="@style/googleLoginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="32dp"
             android:layout_marginTop="24dp"
-            style="@style/googleLoginButton"
+            android:paddingHorizontal="32dp"
             android:text="Sign in with Google" />
 
 

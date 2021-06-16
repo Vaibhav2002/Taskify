@@ -58,7 +58,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
             viewModel.startTask()
         }
         binding.pauseButton.setOnClickListener {
-            viewModel.pauseTask(mainViewModel.timeLeft.value)
+            viewModel.pauseTask(ServiceTimer.timeLeft.value ?: 0)
         }
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.taskState.collect {
@@ -67,7 +67,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
             }
         }
         binding.stopButton.setOnClickListener {
-            viewModel.stopTask(mainViewModel.timeLeft.value)
+            viewModel.stopTask(ServiceTimer.timeLeft.value ?: 0)
         }
 
         ServiceTimer.timerState.observe(viewLifecycleOwner) {
@@ -87,7 +87,8 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
                     TaskState.COMPLETED -> findNavController().popBackStack()
                 }
             }
-
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.taskState.collect {
                 binding.loadingAnim.isVisible = it is Resource.Loading
                 when (it) {
@@ -97,11 +98,14 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
                     }
                     is Resource.Loading -> Unit
                     is Resource.Success -> {
-                        requireContext().showToast(viewModel.getTaskMessage())
+//                        Timber.d("Success ${viewModel.getTaskMessage()}")
+//                        requireContext().showToast(viewModel.getTaskMessage())
                     }
                 }
+
             }
         }
+
     }
 
     private fun setViewsForNotStartedTask() {
@@ -133,7 +137,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
         binding.timerBar.progressMax = viewModel.task!!.duration.toFloat()
         binding.timerBarLayout.isVisible = true
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            mainViewModel.timeLeft.collect {
+            ServiceTimer.timeLeft.observe(viewLifecycleOwner) {
                 if (viewModel.operation.value == TaskState.RUNNING || viewModel.operation.value == null) {
                     binding.timerText.setTimeLeft(it)
                     binding.timerBar.progress = it.toFloat()

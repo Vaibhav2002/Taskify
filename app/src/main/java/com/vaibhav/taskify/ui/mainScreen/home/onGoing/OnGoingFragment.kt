@@ -62,7 +62,8 @@ class OnGoingFragment : Fragment(R.layout.fragment_on_going) {
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.pausedTasks.collect {
-                Timber.d(it.toString())
+                binding.noPausedTask.isVisible = it.isEmpty()
+                binding.runningTaskRv.isVisible = it.isNotEmpty()
                 pausedTasksAdapter.submitList(it)
             }
         }
@@ -70,7 +71,6 @@ class OnGoingFragment : Fragment(R.layout.fragment_on_going) {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             activityViewModel.runningTask.collect {
                 Timber.d("Running $it")
-                binding.runningTv.isVisible = it.isNotEmpty()
                 if (it.isNotEmpty()) {
                     it[0].let { task ->
                         binding.apply {
@@ -81,6 +81,7 @@ class OnGoingFragment : Fragment(R.layout.fragment_on_going) {
                     }
                 }
                 binding.runningTaskCard.isVisible = it.isNotEmpty()
+                binding.noRunningTask.isVisible = it.isEmpty()
             }
         }
 

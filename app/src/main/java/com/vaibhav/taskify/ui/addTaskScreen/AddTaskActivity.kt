@@ -6,8 +6,10 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import androidx.core.widget.doOnTextChanged
 import com.vaibhav.chatofy.util.makeStatusBarTransparent
+import com.vaibhav.chatofy.util.setMarginTop
 import com.vaibhav.chatofy.util.viewBinding
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.ActivityAddTaskBinding
@@ -26,6 +28,10 @@ class AddTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_task)
         makeStatusBarTransparent()
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
+            binding.backArrow.setMarginTop(insets.systemWindowInsetTop)
+            insets.consumeSystemWindowInsets()
+        }
 
         binding.taskTitle.setText(viewModel.screenState.value.title)
         binding.taskDescription.setText(viewModel.screenState.value.description)
@@ -55,7 +61,7 @@ class AddTaskActivity : AppCompatActivity() {
                 ) {
                     val taskCategory =
                         TaskType.valueOf(arrayAdapter.getItem(position).toString().uppercase())
-                    binding.taskCategoryColor.setCardBackgroundColor(taskCategory.color)
+                    binding.taskCategoryColor.setBackgroundResource(taskCategory.tagBackground)
                     viewModel.onCategoryChanged(taskCategory)
                 }
 

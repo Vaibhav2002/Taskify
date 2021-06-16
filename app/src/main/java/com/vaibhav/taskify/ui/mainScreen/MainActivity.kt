@@ -1,10 +1,7 @@
 package com.vaibhav.taskify.ui.mainScreen
 
-import android.content.ComponentName
 import android.content.Intent
-import android.content.ServiceConnection
 import android.os.Bundle
-import android.os.IBinder
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -30,18 +27,6 @@ class MainActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivityMainBinding::inflate)
     private lateinit var navController: NavController
     private val viewModel: MainViewModel by viewModels()
-
-
-    private val connection = object : ServiceConnection {
-        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-            viewModel.isServiceRunning = true
-        }
-
-        override fun onServiceDisconnected(name: ComponentName?) {
-            viewModel.isServiceRunning = false
-        }
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,17 +64,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.timerFragment)
                 supportActionBar?.hide()
             else
                 supportActionBar?.show()
         }
-
-        ServiceTimer.timeLeft.observe(this) {
-            viewModel.setTimeLeft(it)
-        }
-
 
     }
 
@@ -142,18 +122,22 @@ class MainActivity : AppCompatActivity() {
         openDrawerView.statsItem.setUsable(currentFragment, TopLevelScreens.STATS)
     }
 
-
     private fun startService(task: TaskEntity) {
-        Intent(this, TimerService::class.java).also {
-            it.putExtra(TASK, task)
-            it.putExtra(DURATION, task.timeLeft)
-            startService(it)
+        Timber.d("StartService ${viewModel.isServiceRunning}")
+        if (!viewModel.isServiceRunning) {
+            Timber.d("Starting service")
+            Intent(this, TimerService::class.java).also {
+                it.putExtra(TASK, task)
+                it.putExtra(DURATION, task.timeLeft)
+                startService(it)
 //            bindService(it, connection, 0)
+            }
+            viewModel.isServiceRunning = true
         }
-        viewModel.isServiceRunning = true
     }
 
     private fun stopService() {
+        Timber.d("StopService ${viewModel.isServiceRunning}")
         if (viewModel.isServiceRunning) {
             Intent(this, TimerService::class.java).also {
 //                stopService(it)

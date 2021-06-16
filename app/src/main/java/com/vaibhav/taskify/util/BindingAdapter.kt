@@ -13,12 +13,15 @@ import java.util.*
 fun TextView.setTaskDuration(task: TaskEntity) {
     val timeLeft = if (task.state == TaskState.COMPLETED) task.duration else task.timeLeft
     val duration = Duration.ofMillis(timeLeft)
-    var seconds = duration.seconds
-    val hours = seconds / 60 / 60
-    seconds %= 60 * 60
-    val minutes = seconds / 60
-    seconds %= 60
-    text = "${hours}hrs ${minutes}min ${seconds}sec"
+    val seconds = duration.seconds
+    text =
+        String.format(
+            "%dhrs %02dmin %02dsec",
+            seconds / 3600,
+            (seconds % 3600) / 60,
+            (seconds % 60)
+        );
+
 }
 
 
@@ -26,22 +29,21 @@ fun TextView.setTaskDuration(task: TaskEntity) {
 fun EditText.setTaskDuration(timeLeft: Long) {
     val duration = Duration.ofMillis(timeLeft)
     var seconds = duration.seconds
-    val hours = seconds / 60 / 60
-    seconds %= 60 * 60
-    val minutes = seconds / 60
-    seconds %= 60
-    setText("${hours}hrs ${minutes}min ${seconds}sec")
+    setText(
+        String.format(
+            "%dhrs %02min %02sec",
+            seconds / 3600,
+            (seconds % 3600) / 60,
+            (seconds % 60)
+        )
+    )
 }
 
 @BindingAdapter("setTimeLeft")
 fun TextView.setTimeLeft(timeLeft: Long) {
     val duration = Duration.ofMillis(timeLeft)
-    var seconds = duration.seconds
-    val hours = seconds / 60 / 60
-    seconds %= 60 * 60
-    val minutes = seconds / 60
-    seconds %= 60
-    text = "${hours}:${minutes}:${seconds}"
+    val seconds = duration.seconds
+    text = String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60));
 }
 
 

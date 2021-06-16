@@ -36,9 +36,6 @@ class MainViewModel @Inject constructor(
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
     val runningTask: StateFlow<List<TaskEntity>> = _runningTask
 
-    private val _timeLeft = MutableStateFlow<Long>(0)
-    val timeLeft: StateFlow<Long> = _timeLeft
-
     var isServiceRunning = false
 
     var stopWatchFor: StopWatchFor? = null
@@ -46,10 +43,6 @@ class MainViewModel @Inject constructor(
 
 
     fun getUserData() = authRepo.getUserData()
-
-    fun setTimeLeft(time: Long) = viewModelScope.launch {
-        _timeLeft.emit(time)
-    }
 
     fun fetchAllTasks() = viewModelScope.launch {
         Timber.d("fetching all tasks")

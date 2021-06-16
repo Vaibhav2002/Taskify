@@ -4,7 +4,7 @@
     <style name="Theme.Taskify.NoStatusBarTheme">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowTranslucentStatus">true</item>
-
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.Taskify" parent="Theme.MaterialComponents.DayNight.NoActionBar">

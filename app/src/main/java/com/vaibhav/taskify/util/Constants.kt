@@ -6,6 +6,7 @@ const val GOOGLE_SIGN_IN = 1001
 const val DURATION = "Duration"
 const val TASK = "TASK"
 const val FROM_NOTIFICATION = 32
+const val GO_TO_TIMER = "FROM_NOTIFICATION"
 
 enum class TaskType(val imageId: Int, val tagBackground: Int, val color: Int) {
     HOME(R.drawable.home_task, R.drawable.home_task_background, R.color.home_task_color1),

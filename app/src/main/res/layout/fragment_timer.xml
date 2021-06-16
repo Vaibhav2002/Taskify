@@ -170,6 +170,7 @@
         android:id="@+id/loadingAnim"
         android:layout_width="@dimen/loadingAnimSize"
         android:layout_height="@dimen/loadingAnimSize"
+        android:visibility="invisible"
         android:layout_gravity="center"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"

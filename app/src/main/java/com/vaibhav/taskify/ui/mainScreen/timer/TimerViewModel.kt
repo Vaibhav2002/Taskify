@@ -59,7 +59,7 @@ class TimerViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewM
             TaskState.COMPLETED -> "stop"
             else -> ""
         }
-        return if (taskState is Resource.Success<*>)
+        return if (taskState.value is Resource.Success<*>)
             "Task $taskOperation successful"
         else
             "Failed to $taskOperation task"

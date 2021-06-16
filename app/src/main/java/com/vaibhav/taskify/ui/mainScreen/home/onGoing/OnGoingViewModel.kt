@@ -15,9 +15,6 @@ class OnGoingViewModel @Inject constructor(private val taskRepo: TaskRepo) : Vie
     val pausedTasks =
         taskRepo.getAllPausedTasks()
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
-//
-//    val runningTask = taskRepo.getRunningTask()
-//        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
 
 
 }
