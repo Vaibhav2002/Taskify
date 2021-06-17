@@ -6,7 +6,7 @@ enum class TimerState {
     START, STOP
 }
 
-object ServiceTimer {
+object ServiceUtil {
 
     val timeLeft = MutableLiveData<Long>(0)
 

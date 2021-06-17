@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_task_nav_graph"
+    app:startDestination="@id/addTaskDetailFragment">
+
+    <fragment
+        android:id="@+id/addTaskDetailFragment"
+        android:name="com.vaibhav.taskify.ui.addTaskScreen.addTask.AddTaskDetailFragment"
+        android:label="AddTaskDetailFragment">
+        <action
+            android:id="@+id/action_addTaskDetailFragment_to_taskTimeSelectBottomSheetFragment"
+            app:destination="@id/taskTimeSelectBottomSheetFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/taskTimeSelectBottomSheetFragment"
+        android:name="com.vaibhav.taskify.ui.addTaskScreen.taskTimeSelect.TaskTimeSelectBottomSheetFragment"
+        android:label="fragment_task_time_select_bottom_sheet"
+        tools:layout="@layout/fragment_task_time_select_bottom_sheet" />
+</navigation>

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vaibhav.taskify.data.models.entity.TaskEntity
 import com.vaibhav.taskify.data.repo.AuthRepo
+import com.vaibhav.taskify.data.repo.PreferencesRepo
 import com.vaibhav.taskify.data.repo.TaskRepo
 import com.vaibhav.taskify.util.Resource
 import com.vaibhav.taskify.util.StopWatchFor
@@ -21,7 +22,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val authRepo: AuthRepo,
-    private val taskRepo: TaskRepo
+    private val taskRepo: TaskRepo,
+    private val preferencesRepo: PreferencesRepo
 ) : ViewModel() {
 
     val user = authRepo.getUserData()
@@ -36,7 +38,7 @@ class MainViewModel @Inject constructor(
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
     val runningTask: StateFlow<List<TaskEntity>> = _runningTask
 
-    var isServiceRunning = false
+    fun isServiceRunning() = preferencesRepo.isServiceRunning()
 
     var stopWatchFor: StopWatchFor? = null
     var task: TaskEntity? = null
@@ -63,6 +65,14 @@ class MainViewModel @Inject constructor(
             task.timeLeft = 0
             taskRepo.updateTask(task)
         }
+    }
+
+    fun saveServiceStarted() = saveServiceState(true)
+
+    fun saveServiceStopped() = saveServiceState(false)
+
+    private fun saveServiceState(running: Boolean) = viewModelScope.launch {
+        preferencesRepo.setServiceRunning(running)
     }
 
 

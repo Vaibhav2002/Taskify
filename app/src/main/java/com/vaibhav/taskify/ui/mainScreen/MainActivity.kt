@@ -13,7 +13,7 @@ import com.vaibhav.taskify.R
 import com.vaibhav.taskify.data.models.entity.TaskEntity
 import com.vaibhav.taskify.databinding.ActivityMainBinding
 import com.vaibhav.taskify.databinding.DrawerMenuBinding
-import com.vaibhav.taskify.service.ServiceTimer
+import com.vaibhav.taskify.service.ServiceUtil
 import com.vaibhav.taskify.service.TimerService
 import com.vaibhav.taskify.service.TimerState
 import com.vaibhav.taskify.util.*
@@ -57,7 +57,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        ServiceTimer.timerState.observe(this) {
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.taskFetchState.collect {
+                binding.root.isEnabled = it !is Resource.Loading
+                when (it) {
+                    is Resource.Empty -> Unit
+                    is Resource.Error -> {
+                        showToast(it.message)
+                    }
+                    is Resource.Loading -> Unit
+                    is Resource.Success -> Unit
+                }
+            }
+        }
+
+
+        ServiceUtil.timerState.observe(this) {
             if (it == TimerState.STOP) {
                 viewModel.setTaskAsCompleted()
                 stopService()
@@ -123,8 +139,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startService(task: TaskEntity) {
-        Timber.d("StartService ${viewModel.isServiceRunning}")
-        if (!viewModel.isServiceRunning) {
+        Timber.d("StartService ${viewModel.isServiceRunning()}")
+        if (!viewModel.isServiceRunning()) {
             Timber.d("Starting service")
             Intent(this, TimerService::class.java).also {
                 it.putExtra(TASK, task)
@@ -132,20 +148,20 @@ class MainActivity : AppCompatActivity() {
                 startService(it)
 //            bindService(it, connection, 0)
             }
-            viewModel.isServiceRunning = true
+            viewModel.saveServiceStarted()
         }
     }
 
     private fun stopService() {
-        Timber.d("StopService ${viewModel.isServiceRunning}")
-        if (viewModel.isServiceRunning) {
+        Timber.d("StopService ${viewModel.isServiceRunning()}")
+        if (viewModel.isServiceRunning()) {
             Intent(this, TimerService::class.java).also {
 //                stopService(it)
                 stopService(it)
 
             }
 //            viewModel.setTaskAsCompleted()
-            viewModel.isServiceRunning = false
+            viewModel.saveServiceStopped()
         }
     }
 

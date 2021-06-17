@@ -32,13 +32,13 @@ class TimerService : LifecycleService() {
         val task = intent.getSerializableExtra(TASK) as TaskEntity
 
         val pendingIntent = getPendingIntent(task)
-        ServiceTimer.timerState.postValue(TimerState.START)
+        ServiceUtil.timerState.postValue(TimerState.START)
         timer = object : CountDownTimer(duration, 1000L) {
             override fun onTick(millisUntilFinished: Long) {
                 Timber.d(millisUntilFinished.toString())
                 val durationVal = Duration.ofMillis(millisUntilFinished)
                 val timerText = getFormattedTimeString(durationVal)
-                ServiceTimer.timeLeft.postValue(millisUntilFinished)
+                ServiceUtil.timeLeft.postValue(millisUntilFinished)
                 notificationHelper.showSilentNotification(timerText, task.task_title, pendingIntent)
             }
 
@@ -48,8 +48,8 @@ class TimerService : LifecycleService() {
                     task.task_title,
                     pendingIntent
                 )
-                ServiceTimer.timerState.postValue(TimerState.STOP)
-                ServiceTimer.timeLeft.postValue(duration)
+                ServiceUtil.timerState.postValue(TimerState.STOP)
+                ServiceUtil.timeLeft.postValue(duration)
             }
         }
         timer.start()

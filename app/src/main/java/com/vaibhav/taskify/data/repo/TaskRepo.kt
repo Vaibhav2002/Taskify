@@ -27,6 +27,12 @@ class TaskRepo @Inject constructor(
         return cal.timeInMillis
     }
 
+    private fun getTimeOfLastWeek(): Long {
+        val currentTime = System.currentTimeMillis()
+        return currentTime - (7 * 24 * 60 * 60 * 1000)
+    }
+
+    fun getAllTasksSinceLastWeek() = taskDataSource.getTaskAfterGivenTime(getTimeOfLastWeek())
 
     fun getAllPausedTasks() = taskDataSource.getAllTasksOfToday(
         state = TaskState.PAUSED.name, todaysTime = getTodaysTime()

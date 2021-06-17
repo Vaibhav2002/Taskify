@@ -5,6 +5,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.datastore.preferences.preferencesDataStore
 import timber.log.Timber
+import java.time.Duration
 
 fun Context.showToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -17,4 +18,15 @@ fun Button.setUsable(currentFragment: Int, topLevelScreens: TopLevelScreens) {
     Timber.d((currentFragment != topLevelScreens.fragmentId).toString())
     isEnabled = currentFragment != topLevelScreens.fragmentId
     alpha = if (currentFragment != topLevelScreens.fragmentId) 1F else 0.5F
+}
+
+fun Long.formatDuration(): String {
+    val duration = Duration.ofMillis(this)
+    val seconds = duration.seconds
+    return String.format(
+        "%dhrs %02dmin %02dsec",
+        seconds / 3600,
+        (seconds % 3600) / 60,
+        (seconds % 60)
+    )
 }

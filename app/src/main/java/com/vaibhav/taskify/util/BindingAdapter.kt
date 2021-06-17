@@ -12,31 +12,19 @@ import java.util.*
 @BindingAdapter("setTaskDuration")
 fun TextView.setTaskDuration(task: TaskEntity) {
     val timeLeft = if (task.state == TaskState.COMPLETED) task.duration else task.timeLeft
-    val duration = Duration.ofMillis(timeLeft)
-    val seconds = duration.seconds
-    text =
-        String.format(
-            "%dhrs %02dmin %02dsec",
-            seconds / 3600,
-            (seconds % 3600) / 60,
-            (seconds % 60)
-        );
+    text = timeLeft.formatDuration()
 
+}
+
+@BindingAdapter("setTaskDuration")
+fun TextView.setDuration(timeLeft: Long) {
+    text = timeLeft.formatDuration()
 }
 
 
 @BindingAdapter("setTaskDuration")
 fun EditText.setTaskDuration(timeLeft: Long) {
-    val duration = Duration.ofMillis(timeLeft)
-    var seconds = duration.seconds
-    setText(
-        String.format(
-            "%dhrs %02min %02sec",
-            seconds / 3600,
-            (seconds % 3600) / 60,
-            (seconds % 60)
-        )
-    )
+    setText(timeLeft.formatDuration())
 }
 
 @BindingAdapter("setTimeLeft")

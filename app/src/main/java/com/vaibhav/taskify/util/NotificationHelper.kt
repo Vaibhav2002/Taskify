@@ -27,7 +27,7 @@ class NotificationHelper @Inject constructor(private val context: Context) {
 
     private fun setNotificationChannel() {
         val channel =
-            NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
+            NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_LOW)
         notificationManager.createNotificationChannel(channel)
 
     }

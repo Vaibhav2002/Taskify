@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.data.models.entity.TaskEntity
 import com.vaibhav.taskify.databinding.FragmentOnGoingBinding
-import com.vaibhav.taskify.service.ServiceTimer
+import com.vaibhav.taskify.service.ServiceUtil
 import com.vaibhav.taskify.ui.adapters.TaskAdapter
 import com.vaibhav.taskify.ui.mainScreen.MainActivity
 import com.vaibhav.taskify.ui.mainScreen.MainViewModel
@@ -56,7 +56,7 @@ class OnGoingFragment : Fragment(R.layout.fragment_on_going) {
             )
         }
 
-        ServiceTimer.timeLeft.observe(viewLifecycleOwner) {
+        ServiceUtil.timeLeft.observe(viewLifecycleOwner) {
             binding.runningTaskTimerText.setTimeLeft(it)
         }
 

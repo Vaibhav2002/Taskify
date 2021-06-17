@@ -1,16 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:orientation="vertical"
     tools:context=".ui.mainScreen.stats.StatsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="StatsFragment"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="16dp"
+        android:text="Statistics of last week"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6" />
 
-</FrameLayout>
+    <!--    <com.vaibhav.taskify.customview.ChartProgressBar-->
+    <!--        android:id="@+id/barChart"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="160dp"-->
+    <!--        android:gravity="center"-->
+    <!--        app:hdBarCanBeClick="true"-->
+    <!--        app:hdBarHeight="160dp"-->
+    <!--        app:hdBarWidth="20dp"-->
+    <!--        app:hdBarRadius="10dp"-->
+    <!--        android:layout_marginHorizontal="16dp"-->
+    <!--        app:hdProgressColor="@color/barChartColor"-->
+    <!--        app:hdProgressClickColor="@color/barChartClickColor" />-->
+
+    <TextView
+        style="@style/grayText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Weekly task breakdown"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle1" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp">
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        style="@style/grayText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Tasks"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle1" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/allTaskRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/task_item_layout" />
+
+</LinearLayout>

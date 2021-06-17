@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.vaibhav.taskify.data.models.entity.UserEntity
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -12,6 +13,7 @@ class SharedPreferencesDataSource @Inject constructor(private val sharedPreferen
 
     companion object {
         const val USER_SAVE_KEY = "user"
+        const val SERVICE_KEY = "Service"
     }
 
 
@@ -28,4 +30,18 @@ class SharedPreferencesDataSource @Inject constructor(private val sharedPreferen
     override suspend fun removeUserData() = sharedPreferences.edit().remove(USER_SAVE_KEY).apply()
 
 
+    override fun isServiceRunning() = sharedPreferences.getBoolean(SERVICE_KEY, false)
+
+
+    override suspend fun setServiceRunning(running: Boolean) {
+        sharedPreferences.edit().putBoolean(SERVICE_KEY, running).apply()
+    }
+
+    override fun getUserDataFlow(): Flow<UserEntity> {
+        TODO("Not yet implemented")
+    }
+
+    override fun isServiceRunningByFlow(): Flow<Boolean> {
+        TODO("Not yet implemented")
+    }
 }

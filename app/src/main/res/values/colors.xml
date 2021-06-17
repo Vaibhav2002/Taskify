@@ -16,6 +16,8 @@
     <color name="lt_lightblue">#d9eff7</color>
     <color name="lt_yellow">#f9ce69</color>
 
+    <color name="surface">@color/white</color>
+
     <!--    darkTheme-->
 
     <color name="dt_deepblue">#292546</color>
@@ -55,5 +57,9 @@
     <color name="colorOnStopWatchScreen">#ffffff</color>
 
     <color name="addTaskSpinner">@color/gray2</color>
+
+
+    <color name="barChartColor">@color/lt_blue</color>
+    <color name="barChartClickColor">@color/lt_darkpblue</color>
 
 </resources>

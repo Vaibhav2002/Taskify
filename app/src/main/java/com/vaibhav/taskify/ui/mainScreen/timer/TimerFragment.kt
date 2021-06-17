@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.FragmentTimerBinding
-import com.vaibhav.taskify.service.ServiceTimer
+import com.vaibhav.taskify.service.ServiceUtil
 import com.vaibhav.taskify.service.TimerState
 import com.vaibhav.taskify.ui.mainScreen.MainViewModel
 import com.vaibhav.taskify.util.*
@@ -58,7 +58,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
             viewModel.startTask()
         }
         binding.pauseButton.setOnClickListener {
-            viewModel.pauseTask(ServiceTimer.timeLeft.value ?: 0)
+            viewModel.pauseTask(ServiceUtil.timeLeft.value ?: 0)
         }
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.taskState.collect {
@@ -67,13 +67,13 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
             }
         }
         binding.stopButton.setOnClickListener {
-            viewModel.stopTask(ServiceTimer.timeLeft.value ?: 0)
+            viewModel.stopTask(ServiceUtil.timeLeft.value ?: 0)
         }
 
-        ServiceTimer.timerState.observe(viewLifecycleOwner) {
+        ServiceUtil.timerState.observe(viewLifecycleOwner) {
             if (it == TimerState.STOP) {
                 findNavController().popBackStack()
-                ServiceTimer.timerState.postValue(null)
+                ServiceUtil.timerState.postValue(null)
             }
         }
 
@@ -137,7 +137,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
         binding.timerBar.progressMax = viewModel.task!!.duration.toFloat()
         binding.timerBarLayout.isVisible = true
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            ServiceTimer.timeLeft.observe(viewLifecycleOwner) {
+            ServiceUtil.timeLeft.observe(viewLifecycleOwner) {
                 if (viewModel.operation.value == TaskState.RUNNING || viewModel.operation.value == null) {
                     binding.timerText.setTimeLeft(it)
                     binding.timerBar.progress = it.toFloat()
