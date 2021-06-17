@@ -58,6 +58,7 @@
         android:id="@+id/allTaskRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layoutAnimation="@anim/layout_anim"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/task_item_layout" />
 

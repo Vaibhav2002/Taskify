@@ -11,6 +11,7 @@
         android:id="@+id/completedTaskRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layoutAnimation="@anim/layout_anim"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/task_item_layout" />
 

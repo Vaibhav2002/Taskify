@@ -177,6 +177,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
+        android:visibility="invisible"
         app:lottie_rawRes="@raw/loading" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
