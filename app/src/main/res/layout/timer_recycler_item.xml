@@ -10,8 +10,11 @@
         android:id="@+id/tvTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline4"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:padding="8dp"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
         android:textColor="?attr/colorOnSurface"
-        tools:text="07" />
+        tools:text="06" />
 
 </LinearLayout>

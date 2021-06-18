@@ -36,7 +36,11 @@ class TaskTimeSelectBottomSheetFragment :
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTaskTimeSelectBottomSheetBinding.inflate(inflater, container, false)
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
         return binding.root
     }
 

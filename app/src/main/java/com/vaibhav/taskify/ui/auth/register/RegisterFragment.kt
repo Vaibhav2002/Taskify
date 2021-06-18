@@ -1,6 +1,5 @@
 package com.vaibhav.taskify.ui.auth.register
 
-import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
@@ -18,13 +17,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.FragmentRegisterBinding
-import com.vaibhav.taskify.util.GOOGLE_SIGN_IN
 import com.vaibhav.taskify.util.Resource
+import com.vaibhav.taskify.util.setLargeImage
 import com.vaibhav.taskify.util.showErrorToast
 import com.vaibhav.taskify.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import timber.log.Timber
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment(R.layout.fragment_register) {
@@ -42,6 +40,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
         initializeSocialMediaSignIn()
 
+        binding.registerImage.setLargeImage(R.drawable.login_illustration)
 
         binding.emailInput.doOnTextChanged { text, _, _, _ ->
             viewModel.onEmailTextChange(email = text.toString())

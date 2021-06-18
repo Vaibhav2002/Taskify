@@ -13,9 +13,7 @@ import com.vaibhav.taskify.R
 import com.vaibhav.taskify.data.models.entity.TaskEntity
 import com.vaibhav.taskify.databinding.ActivityMainBinding
 import com.vaibhav.taskify.databinding.DrawerMenuBinding
-import com.vaibhav.taskify.service.ServiceUtil
 import com.vaibhav.taskify.service.TimerService
-import com.vaibhav.taskify.service.TimerState
 import com.vaibhav.taskify.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -73,12 +71,12 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        ServiceUtil.timerState.observe(this) {
-            if (it == TimerState.STOP) {
-                viewModel.setTaskAsCompleted()
-                stopService()
-            }
-        }
+//        ServiceUtil.timerState.observe(this) {
+//            if (it == TimerState.STOP) {
+//                viewModel.setTaskAsCompleted()
+//                stopService()
+//            }
+//        }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.timerFragment)

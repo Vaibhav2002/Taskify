@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.vaibhav.taskify.data.models.entity.TaskEntity
 import com.vaibhav.taskify.data.repo.TaskRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -27,11 +28,11 @@ class StatsViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewM
     val millisInADay = 24 * 60 * 60 * 1000
 
     init {
-        initializeAllDays()
-        listenAndFormatData()
+//        initializeAllDays()
+//        listenAndFormatData()
     }
 
-    private fun initializeAllDays() {
+    private fun initializeAllDays() = viewModelScope.launch(Dispatchers.IO) {
         for (i in 1..7)
             days.add(Calendar.getInstance())
         for (i in 1 until days.size)
@@ -39,7 +40,7 @@ class StatsViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewM
     }
 
 
-    private fun listenAndFormatData() = viewModelScope.launch {
+    private fun listenAndFormatData() = viewModelScope.launch(Dispatchers.IO) {
         val map = mutableMapOf<Calendar, MutableList<TaskEntity>>()
         lastWeekTasks.collect { tasks ->
             tasks.forEach {

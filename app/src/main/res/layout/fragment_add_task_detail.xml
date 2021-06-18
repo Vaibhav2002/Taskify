@@ -20,11 +20,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/taskImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="48dp"
-        android:src="@drawable/task_illustration"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"

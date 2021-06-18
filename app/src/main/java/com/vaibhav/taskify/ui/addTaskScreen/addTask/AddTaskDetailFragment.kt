@@ -32,6 +32,7 @@ class AddTaskDetailFragment : Fragment(R.layout.fragment_add_task_detail) {
             binding.backArrow.setMarginTop(insets.systemWindowInsetTop)
             insets.consumeSystemWindowInsets()
         }
+        binding.taskImage.setLargeImage(R.drawable.task_illustration)
 
 
         binding.taskTitle.setText(viewModel.screenState.value.title)

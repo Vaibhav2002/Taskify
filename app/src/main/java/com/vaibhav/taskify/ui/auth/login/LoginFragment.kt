@@ -1,12 +1,10 @@
 package com.vaibhav.taskify.ui.auth.login
 
-import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
@@ -19,13 +17,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.FragmentLoginBinding
-import com.vaibhav.taskify.util.GOOGLE_SIGN_IN
 import com.vaibhav.taskify.util.Resource
+import com.vaibhav.taskify.util.setLargeImage
 import com.vaibhav.taskify.util.showErrorToast
 import com.vaibhav.taskify.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import timber.log.Timber
 
 @AndroidEntryPoint
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -49,7 +46,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.passwordInput.doOnTextChanged { text, _, _, _ ->
             viewModel.onPasswordTextChange(password = text.toString())
         }
-
+        binding.loginImage.setLargeImage(R.drawable.login_illustration)
         binding.emailInput.setText(viewModel.email.value)
         binding.passwordInput.setText(viewModel.password.value)
 

@@ -9,13 +9,13 @@
 
 
     <ImageView
+        android:id="@+id/loginImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="44dp"
-        android:src="@drawable/login_illustration"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"

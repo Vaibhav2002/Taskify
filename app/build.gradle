@@ -122,6 +122,7 @@ dependencies {
 
 
     implementation 'com.github.beksomega:loopinglayout:0.4.1'
+    implementation 'com.github.hellosagar:ProgressButton:0.1'
 
 
 }

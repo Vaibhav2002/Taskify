@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import coil.load
 import com.vaibhav.taskify.data.models.entity.TaskEntity
 import java.time.Duration
 import java.util.*
@@ -19,6 +20,14 @@ fun TextView.setTaskDuration(task: TaskEntity) {
 @BindingAdapter("setTaskDuration")
 fun TextView.setDuration(timeLeft: Long) {
     text = timeLeft.formatDuration()
+}
+
+
+@BindingAdapter("setLargeImage")
+fun ImageView.setLargeImage(image: Int) {
+    this.load(image) {
+        crossfade(true)
+    }
 }
 
 

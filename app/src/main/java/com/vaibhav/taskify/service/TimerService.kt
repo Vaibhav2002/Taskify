@@ -4,7 +4,10 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.os.CountDownTimer
 import androidx.lifecycle.LifecycleService
+import androidx.lifecycle.lifecycleScope
 import com.vaibhav.taskify.data.models.entity.TaskEntity
+import com.vaibhav.taskify.data.repo.PreferencesRepo
+import com.vaibhav.taskify.data.repo.TaskRepo
 import com.vaibhav.taskify.ui.mainScreen.MainActivity
 import com.vaibhav.taskify.util.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,17 +23,19 @@ class TimerService : LifecycleService() {
 
     lateinit var timer: CountDownTimer
 
-    override fun onDestroy() {
-        super.onDestroy()
-        timer.cancel()
-    }
+    @Inject
+    lateinit var taskRepo: TaskRepo
 
-    override fun onStart(intent: Intent?, startId: Int) {
-        super.onStart(intent, startId)
+    @Inject
+    lateinit var preferencesRepo: PreferencesRepo
+
+    lateinit var task: TaskEntity
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Timber.d("started running")
+        super.onStart(intent, startId)
         val duration = intent!!.getLongExtra(DURATION, 0L)
-        val task = intent.getSerializableExtra(TASK) as TaskEntity
-
+        task = intent.getSerializableExtra(TASK) as TaskEntity
         val pendingIntent = getPendingIntent(task)
         ServiceUtil.timerState.postValue(TimerState.START)
         timer = object : CountDownTimer(duration, 1000L) {
@@ -48,12 +53,14 @@ class TimerService : LifecycleService() {
                     task.task_title,
                     pendingIntent
                 )
-                ServiceUtil.timerState.postValue(TimerState.STOP)
+                finishTask(task)
                 ServiceUtil.timeLeft.postValue(duration)
             }
         }
         timer.start()
+        return super.onStartCommand(intent, flags, startId)
     }
+
 
 
     private fun getFormattedTimeString(duration: Duration): String {
@@ -67,6 +74,21 @@ class TimerService : LifecycleService() {
         intent.putExtra(GO_TO_TIMER, true)
         intent.putExtra(TASK, task)
         return PendingIntent.getActivity(applicationContext, FROM_NOTIFICATION, intent, 0)
+    }
+
+
+    private fun finishTask(task: TaskEntity) = lifecycleScope.launchWhenStarted {
+        task.timeLeft = 0
+        task.state = TaskState.COMPLETED
+        taskRepo.updateTask(task)
+        preferencesRepo.setServiceRunning(false)
+        stopSelf()
+    }
+
+
+    override fun onDestroy() {
+        Timber.d("OnDestroy called")
+        super.onDestroy()
     }
 
 

@@ -7,7 +7,8 @@ import com.vaibhav.taskify.data.models.remote.TaskDTO
 import com.vaibhav.taskify.data.remote.dataSource.HarperDbTaskDataSource
 import com.vaibhav.taskify.util.Resource
 import com.vaibhav.taskify.util.TaskState
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.*
@@ -32,26 +33,27 @@ class TaskRepo @Inject constructor(
         return currentTime - (7 * 24 * 60 * 60 * 1000)
     }
 
-    fun getAllTasksSinceLastWeek() = taskDataSource.getTaskAfterGivenTime(getTimeOfLastWeek())
+    fun getAllTasksSinceLastWeek() =
+        taskDataSource.getTaskAfterGivenTime(getTimeOfLastWeek()).flowOn(IO)
 
     fun getAllPausedTasks() = taskDataSource.getAllTasksOfToday(
         state = TaskState.PAUSED.name, todaysTime = getTodaysTime()
-    )
+    ).flowOn(IO)
 
     fun getAllCompletedTasksOfToday() = taskDataSource.getAllTasksOfToday(
         state = TaskState.COMPLETED.name, todaysTime = getTodaysTime()
-    )
+    ).flowOn(IO)
 
     fun getAllUpComingTasksOfToday() = taskDataSource.getAllTasksOfToday(
         state = TaskState.NOT_STARTED.name, todaysTime = getTodaysTime()
-    )
+    ).flowOn(IO)
 
     fun getRunningTask() = taskDataSource.getAllTasksOfToday(
         state = TaskState.RUNNING.name,
         todaysTime = getTodaysTime()
-    )
+    ).flowOn(IO)
 
-    suspend fun fetchAllTasks(email: String): Resource<Unit> = withContext(Dispatchers.IO) {
+    suspend fun fetchAllTasks(email: String): Resource<Unit> = withContext(IO) {
         val resource = harperDbTaskDataSource.getAllTasksOfUser(email)
         Timber.d(resource.data.toString())
         if (resource is Resource.Success) {
@@ -60,7 +62,7 @@ class TaskRepo @Inject constructor(
         } else Resource.Error(message = resource.message)
     }
 
-    suspend fun addNewTask(taskEntity: TaskEntity): Resource<Unit> = withContext(Dispatchers.IO) {
+    suspend fun addNewTask(taskEntity: TaskEntity): Resource<Unit> = withContext(IO) {
         val taskDAO = taskMapper.toNetwork(taskEntity)
         val resource = harperDbTaskDataSource.insertTask(taskDAO)
         if (resource is Resource.Success) {
@@ -69,7 +71,7 @@ class TaskRepo @Inject constructor(
         } else Resource.Error(message = resource.message)
     }
 
-    suspend fun updateTask(taskEntity: TaskEntity): Resource<Unit> = withContext(Dispatchers.IO) {
+    suspend fun updateTask(taskEntity: TaskEntity): Resource<Unit> = withContext(IO) {
         val taskDAO = taskMapper.toNetwork(taskEntity)
         val resource = harperDbTaskDataSource.updateTask(taskDAO)
         if (resource is Resource.Success) {
@@ -78,7 +80,7 @@ class TaskRepo @Inject constructor(
         } else Resource.Error(message = resource.message)
     }
 
-    suspend fun deleteTask(taskEntity: TaskEntity): Resource<Unit> = withContext(Dispatchers.IO) {
+    suspend fun deleteTask(taskEntity: TaskEntity): Resource<Unit> = withContext(IO) {
         val resource = harperDbTaskDataSource.deleteTask(taskEntity.task_id)
         if (resource is Resource.Success) {
             deleteTaskFromDb(taskEntity)
