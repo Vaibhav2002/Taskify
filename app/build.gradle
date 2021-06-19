@@ -125,4 +125,7 @@ dependencies {
     implementation 'com.github.hellosagar:ProgressButton:0.1'
 
 
+    implementation 'com.diogobernardino:williamchart:3.10.1'
+
+
 }

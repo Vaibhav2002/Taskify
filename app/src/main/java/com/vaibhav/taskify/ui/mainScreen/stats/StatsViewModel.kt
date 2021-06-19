@@ -2,12 +2,16 @@ package com.vaibhav.taskify.ui.mainScreen.stats
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vaibhav.taskify.data.models.Bar
 import com.vaibhav.taskify.data.models.entity.TaskEntity
 import com.vaibhav.taskify.data.repo.TaskRepo
+import com.vaibhav.taskify.util.DAYS
+import com.vaibhav.taskify.util.TaskType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
@@ -20,52 +24,96 @@ class StatsViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewM
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
 
 
-    private val _dataFormatted = MutableStateFlow<Map<Calendar, List<TaskEntity>>>(emptyMap())
-    val dataFormatted: StateFlow<Map<Calendar, List<TaskEntity>>> = _dataFormatted
+    private val _barData = MutableStateFlow<List<Bar>>(emptyList())
+    val barData: StateFlow<List<Bar>> = _barData
 
-    private val days = mutableListOf<Calendar>()
+    private val _donutData = MutableStateFlow<Map<TaskType, List<TaskEntity>>>(emptyMap())
+    val donutData: StateFlow<Map<TaskType, List<TaskEntity>>> = _donutData
+
+    private
+    val days = mutableListOf<Calendar>()
 
     val millisInADay = 24 * 60 * 60 * 1000
 
     init {
-//        initializeAllDays()
-//        listenAndFormatData()
+        viewModelScope.launch {
+            initializeAllDays()
+            listenAndFormatData()
+        }
+
     }
 
-    private fun initializeAllDays() = viewModelScope.launch(Dispatchers.IO) {
+    private suspend fun initializeAllDays() = withContext(Dispatchers.IO) {
         for (i in 1..7)
             days.add(Calendar.getInstance())
         for (i in 1 until days.size)
             days[i].timeInMillis = days[i - 1].timeInMillis - millisInADay
     }
 
+    private suspend fun initDays(map: MutableMap<Calendar, MutableList<TaskEntity>>) =
+        withContext(Dispatchers.IO) {
+            val iterator = days.iterator()
+            while (iterator.hasNext()) {
+                map[iterator.next()] = mutableListOf()
+            }
+        }
 
-    private fun listenAndFormatData() = viewModelScope.launch(Dispatchers.IO) {
+    private suspend fun listenAndFormatData() = withContext(Dispatchers.IO) {
         val map = mutableMapOf<Calendar, MutableList<TaskEntity>>()
+        initDays(map)
         lastWeekTasks.collect { tasks ->
             tasks.forEach {
                 val cal = findCalendarInstanceOfTask(it)
                 cal?.let { calendar ->
-                    if (map[calendar] == null)
-                        map[calendar] = mutableListOf()
                     map[calendar]?.add(it)
                 }
             }
-            Timber.d("Map $map")
-            map.toSortedMap { cal1, cal2 -> cal1.timeInMillis.compareTo(cal2.timeInMillis) * -1 }
-            _dataFormatted.emit(map)
+            map.toSortedMap { cal1, cal2 -> cal1.timeInMillis.compareTo(cal2.timeInMillis) }
+            prepareBarData(map)
+            prepareDonutData(tasks)
         }
     }
 
-    private fun findCalendarInstanceOfTask(taskEntity: TaskEntity): Calendar? {
-        var cal: Calendar? = null
-        for (calendar in days) {
-            if (calendar.timeInMillis < taskEntity.created_time) {
-                cal = calendar
-                break
+    private suspend fun findCalendarInstanceOfTask(taskEntity: TaskEntity): Calendar? =
+        withContext(Dispatchers.IO) {
+            var cal: Calendar? = null
+            for (calendar in days) {
+                if (calendar.timeInMillis < taskEntity.created_time) {
+                    cal = calendar
+                    break
+                }
             }
+            return@withContext cal
         }
-        return cal
+
+
+    private suspend fun prepareBarData(map: Map<Calendar, List<TaskEntity>>) {
+        var id = 0
+        val barList = mutableListOf<Bar>()
+        map.forEach {
+            val day = DAYS.getDayFromNumber(it.key[Calendar.DAY_OF_WEEK])
+            val bar = Bar(
+                barId = id++,
+                count = it.value.size,
+                day = day.getShortFormFromNumber(),
+                dayFull = day.getFullName(),
+                timeStamp = it.key.timeInMillis
+            )
+            barList.add(bar)
+        }
+        barList.reverse()
+        _barData.emit(barList)
     }
+
+
+    private suspend fun prepareDonutData(data: List<TaskEntity>) =
+        viewModelScope.launch(Dispatchers.IO) {
+            Timber.d(data.toString())
+            val map = data.groupBy {
+                it.task_category
+            }
+            _donutData.emit(map)
+        }
+
 
 }

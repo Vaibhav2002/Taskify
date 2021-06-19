@@ -1,12 +1,17 @@
 package com.vaibhav.taskify.util
 
+import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import coil.load
+import com.vaibhav.taskify.R
 import com.vaibhav.taskify.data.models.entity.TaskEntity
+import timber.log.Timber
 import java.time.Duration
 import java.util.*
 
@@ -63,4 +68,31 @@ fun TextView.setTaskState(taskState: TaskState) {
 @BindingAdapter("setTaskStateVisibility")
 fun TextView.setTaskStateVisibility(taskState: TaskState) {
     isVisible = taskState == TaskState.COMPLETED || taskState == TaskState.PAUSED
+}
+
+
+@BindingAdapter("setBarHeight")
+fun FrameLayout.setBarHeight(height: Int) {
+    val percent = (height.toDouble() / 15.0 * 100).toInt()
+    Timber.d("percent $percent")
+    val params = layoutParams
+    val maxHeight = resources.getDimension(R.dimen.bar_height).toInt()
+    params.height = maxHeight * percent / 100
+    Timber.d("finalheight ${maxHeight * percent / 100}")
+    layoutParams = params
+}
+
+@SuppressLint("UseCompatLoadingForDrawables")
+@BindingAdapter("setBarBackground")
+fun FrameLayout.setBarBackground(isPressed: Boolean) {
+    backgroundTintList = ColorStateList.valueOf(
+        if (isPressed) resources.getColor(R.color.barChartClickColor) else resources.getColor(R.color.barChartColor)
+    )
+
+}
+
+
+@BindingAdapter("setBarCount")
+fun TextView.setBarCount(count: Int) {
+    text = "$count"
 }

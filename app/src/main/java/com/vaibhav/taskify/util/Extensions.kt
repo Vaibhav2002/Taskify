@@ -20,13 +20,15 @@ fun Button.setUsable(currentFragment: Int, topLevelScreens: TopLevelScreens) {
     alpha = if (currentFragment != topLevelScreens.fragmentId) 1F else 0.5F
 }
 
-fun Long.formatDuration(): String {
+fun Long.formatDuration(format: String = "%dhrs %02dmin %02dsec"): String {
     val duration = Duration.ofMillis(this)
     val seconds = duration.seconds
     return String.format(
-        "%dhrs %02dmin %02dsec",
+        format,
         seconds / 3600,
         (seconds % 3600) / 60,
         (seconds % 60)
     )
 }
+
+

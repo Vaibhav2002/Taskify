@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="bar"
+            type="com.vaibhav.taskify.data.models.Bar" />
+    </data>
+
+
+    <FrameLayout
+        android:id="@+id/barStick"
+        setBarHeight="@{bar.count}"
+        android:layout_width="@dimen/bar_width"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="8dp"
+        android:background="@drawable/bar_bg"
+        tools:background="@drawable/bar_bg">
+
+    </FrameLayout>
+
+</layout>

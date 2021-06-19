@@ -8,6 +8,9 @@
     <color name="gray5">#6A6A6A</color>
     <color name="black">#000000</color>
 
+
+    <color name="OnSurface">@color/gray5</color>
+
     <!--    lightTheme-->
 
     <color name="lt_deepblue">#011638</color>
@@ -19,6 +22,7 @@
     <color name="surface">@color/white</color>
 
     <!--    darkTheme-->
+
 
     <color name="dt_deepblue">#292546</color>
     <color name="dt_darkpblue">#312c51</color>

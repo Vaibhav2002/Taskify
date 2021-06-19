@@ -28,6 +28,9 @@
     <color name="dt_gray">#ececed</color>
 
 
+    <color name="OnSurface">@color/gray3</color>
+
+
     <color name="authTextFieldIconTint">#f0c38e</color>
     <color name="authButtonColor">#f0c38e</color>
     <color name="authBottomBgColor">#312c51</color>

@@ -12,7 +12,6 @@ import com.vaibhav.taskify.ui.mainScreen.MainActivity
 import com.vaibhav.taskify.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import java.time.Duration
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -23,6 +22,7 @@ class TimerService : LifecycleService() {
 
     lateinit var timer: CountDownTimer
 
+
     @Inject
     lateinit var taskRepo: TaskRepo
 
@@ -31,9 +31,10 @@ class TimerService : LifecycleService() {
 
     lateinit var task: TaskEntity
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Timber.d("started running")
+
+    override fun onStart(intent: Intent?, startId: Int) {
         super.onStart(intent, startId)
+        Timber.d("Service started ${this.hashCode()}")
         val duration = intent!!.getLongExtra(DURATION, 0L)
         task = intent.getSerializableExtra(TASK) as TaskEntity
         val pendingIntent = getPendingIntent(task)
@@ -41,8 +42,7 @@ class TimerService : LifecycleService() {
         timer = object : CountDownTimer(duration, 1000L) {
             override fun onTick(millisUntilFinished: Long) {
                 Timber.d(millisUntilFinished.toString())
-                val durationVal = Duration.ofMillis(millisUntilFinished)
-                val timerText = getFormattedTimeString(durationVal)
+                val timerText = millisUntilFinished.formatDuration("%d:%02d:%02d left")
                 ServiceUtil.timeLeft.postValue(millisUntilFinished)
                 notificationHelper.showSilentNotification(timerText, task.task_title, pendingIntent)
             }
@@ -58,15 +58,15 @@ class TimerService : LifecycleService() {
             }
         }
         timer.start()
-        return super.onStartCommand(intent, flags, startId)
     }
 
+//    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+//        Timber.d("started running")
+//        super.onStart(intent, startId)
+//
+//        return super.onStartCommand(intent, flags, startId)
+//    }
 
-
-    private fun getFormattedTimeString(duration: Duration): String {
-        val seconds = duration.seconds
-        return String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60));
-    }
 
     private fun getPendingIntent(task: TaskEntity): PendingIntent {
         val intent = Intent(this@TimerService, MainActivity::class.java)
@@ -87,9 +87,13 @@ class TimerService : LifecycleService() {
 
 
     override fun onDestroy() {
-        Timber.d("OnDestroy called")
+        Timber.d("OnDestroy called ${this.hashCode()}")
+        if (::timer.isInitialized)
+            timer.cancel()
         super.onDestroy()
     }
+
+
 
 
 }

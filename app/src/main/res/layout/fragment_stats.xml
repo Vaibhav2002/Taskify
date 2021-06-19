@@ -1,65 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
-    android:orientation="vertical"
     tools:context=".ui.mainScreen.stats.StatsFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_margin="16dp"
-        android:text="Statistics of last week"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6" />
-
-    <!--    <com.vaibhav.taskify.customview.ChartProgressBar-->
-    <!--        android:id="@+id/barChart"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="160dp"-->
-    <!--        android:gravity="center"-->
-    <!--        app:hdBarCanBeClick="true"-->
-    <!--        app:hdBarHeight="160dp"-->
-    <!--        app:hdBarWidth="20dp"-->
-    <!--        app:hdBarRadius="10dp"-->
-    <!--        android:layout_marginHorizontal="16dp"-->
-    <!--        app:hdProgressColor="@color/barChartColor"-->
-    <!--        app:hdProgressClickColor="@color/barChartClickColor" />-->
-
-    <TextView
-        style="@style/grayText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Weekly task breakdown"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle1" />
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp">
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurface"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_margin="16dp"
+            android:text="Statistics of last week"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.db.williamchart.view.BarChartView
+            android:id="@+id/barChart"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginHorizontal="16dp"
+            android:paddingHorizontal="16dp"
+            app:chart_barsColor="@color/barChartColor"
+            app:chart_barsRadius="12dp"
+            app:chart_spacing="16dp" />
 
-    <TextView
-        style="@style/grayText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Tasks"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle1" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/allTaskRecycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layoutAnimation="@anim/layout_anim"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/task_item_layout" />
+        <TextView
+            style="@style/grayText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Weekly task breakdown"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle1" />
 
-</LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/home_dot" />
+
+                <TextView
+                    android:id="@+id/homeTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="Home"
+                    android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"
+                    android:textColor="?attr/colorOnSurface" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/study_dot" />
+
+                <TextView
+                    android:id="@+id/studyTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="Study"
+                    android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"
+                    android:textColor="?attr/colorOnSurface" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/work_dot" />
+
+                <TextView
+                    android:id="@+id/workTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="Work"
+                    android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"
+                    android:textColor="?attr/colorOnSurface" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/gym_dot" />
+
+                <TextView
+                    android:id="@+id/gymTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="Gym"
+                    android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"
+                    android:textColor="?attr/colorOnSurface" />
+
+
+            </GridLayout>
+
+
+            <com.db.williamchart.view.DonutChartView
+                android:id="@+id/donutChart"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:chart_donutRoundCorners="true"
+                app:chart_donutThickness="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/totalTaskCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline4"
+                android:textColor="@color/barChartClickColor"
+                app:layout_constraintBottom_toBottomOf="@+id/donutChart"
+                app:layout_constraintEnd_toEndOf="@+id/donutChart"
+                app:layout_constraintStart_toStartOf="@+id/donutChart"
+                app:layout_constraintTop_toTopOf="@+id/donutChart"
+                tools:text="12" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp">
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            style="@style/grayText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Tasks"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle1" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/allTaskRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutAnimation="@anim/layout_anim"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/task_item_layout" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -2,4 +2,8 @@
 <resources>
     <dimen name="auth_bg_corner_radius">30dp</dimen>
     <dimen name="loadingAnimSize">120dp</dimen>
+    <dimen name="bar_height">80dp</dimen>
+    <dimen name="bar_width">20dp</dimen>
+    <dimen name="dotSize">12dp</dimen>
+    <dimen name="dot_radius">6dp</dimen>
 </resources>

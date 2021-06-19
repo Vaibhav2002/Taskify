@@ -62,7 +62,7 @@ class OnGoingFragment : Fragment(R.layout.fragment_on_going) {
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.pausedTasks.collect {
-                binding.noPausedTask.isVisible = it.isEmpty()
+                binding.noPausedTasks.isVisible = it.isEmpty()
                 binding.runningTaskRv.isVisible = it.isNotEmpty()
                 pausedTasksAdapter.submitList(it)
             }

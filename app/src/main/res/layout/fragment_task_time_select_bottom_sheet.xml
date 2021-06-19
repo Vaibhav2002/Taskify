@@ -1,51 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
     android:background="@drawable/dialog_background"
-    android:orientation="vertical"
-    android:padding="24dp"
-    tools:context=".ui.addTaskScreen.taskTimeSelect.TaskTimeSelectBottomSheetFragment">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:padding="32dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvHours"
+        android:layout_width="wrap_content"
+        android:layout_height="140dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toStartOf="@+id/rvMinutes"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/submitBtn"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/timer_recycler_item" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMinutes"
+        android:layout_width="wrap_content"
+        android:layout_height="140dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toStartOf="@+id/rvSeconds"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/rvHours"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/timer_recycler_item" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSeconds"
+        android:layout_width="wrap_content"
+        android:layout_height="140dp"
+        app:layout_constraintEnd_toEndOf="@+id/submitBtn"
+        app:layout_constraintStart_toEndOf="@+id/rvMinutes"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/timer_recycler_item" />
+
+    <TextView
+        style="@style/grayText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
+        android:layout_marginTop="8dp"
+        android:text="hrs"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body1"
+        app:layout_constraintEnd_toEndOf="@+id/rvHours"
+        app:layout_constraintStart_toStartOf="@+id/rvHours"
+        app:layout_constraintTop_toBottomOf="@+id/rvHours" />
 
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/grayText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="min"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body1"
+        app:layout_constraintEnd_toEndOf="@+id/rvMinutes"
+        app:layout_constraintStart_toStartOf="@+id/rvMinutes"
+        app:layout_constraintTop_toBottomOf="@+id/rvMinutes" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvHours"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:layout_marginEnd="24dp"
-            tools:listitem="@layout/timer_recycler_item" />
+    <TextView
+        style="@style/grayText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="sec"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body1"
+        app:layout_constraintEnd_toEndOf="@+id/rvSeconds"
+        app:layout_constraintStart_toStartOf="@+id/rvSeconds"
+        app:layout_constraintTop_toBottomOf="@+id/rvSeconds" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvMinutes"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:layout_marginEnd="24dp"
-            tools:listitem="@layout/timer_recycler_item" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvSeconds"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            tools:listitem="@layout/timer_recycler_item" />
-
-    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/submitBtn"
         style="@style/authButton"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="SET TIME"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button" />
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 

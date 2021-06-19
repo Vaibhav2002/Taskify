@@ -6,6 +6,6 @@
         android:height="@dimen/dotSize" />
     <corners android:radius="@dimen/dot_radius" />
     <gradient
-        android:endColor="@color/home_task_color2"
-        android:startColor="@color/home_task_color1" />
+        android:endColor="@color/study_task_color2"
+        android:startColor="@color/study_task_color1" />
 </shape>
