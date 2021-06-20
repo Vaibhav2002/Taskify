@@ -85,10 +85,10 @@ class AuthRepo @Inject constructor(
 //            return@withContext getUserDataAfterLogin(resource, resource.data!!.email!!)
 //        }
 
-    private suspend fun logoutUser() {
-        authDataSource.logoutUser()
-        preferencesDataSource.removeUserData();
-    }
+     suspend fun logoutUser() {
+         authDataSource.logoutUser()
+         preferencesDataSource.removeUserData();
+     }
 
     private suspend fun removeUser() {
         authDataSource.removeUser();

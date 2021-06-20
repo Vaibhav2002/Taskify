@@ -2,13 +2,11 @@ package com.vaibhav.taskify.util
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
-import android.widget.EditText
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import coil.load
+import coil.size.Scale
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.data.models.entity.TaskEntity
 import timber.log.Timber
@@ -95,4 +93,21 @@ fun FrameLayout.setBarBackground(isPressed: Boolean) {
 @BindingAdapter("setBarCount")
 fun TextView.setBarCount(count: Int) {
     text = "$count"
+}
+
+
+@BindingAdapter("setUserProfileImage")
+fun ImageView.setProfileImage(url: String) {
+    val random = (0..1).random()
+    val errorImage = if (random == 0) R.drawable.avatar_male else R.drawable.avatar_female
+    load(url) {
+        scale(Scale.FILL)
+        crossfade(true)
+        error(errorImage)
+    }
+}
+
+@BindingAdapter("setTaskTypeBackground")
+fun LinearLayout.setTaskTypeBg(taskType: TaskType) {
+    background = resources.getDrawable(taskType.tagBackground)
 }

@@ -46,6 +46,7 @@ class StatsViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewM
     private suspend fun initializeAllDays() = withContext(Dispatchers.IO) {
         for (i in 1..7)
             days.add(Calendar.getInstance())
+        days[0].set(Calendar.HOUR_OF_DAY, 0)
         for (i in 1 until days.size)
             days[i].timeInMillis = days[i - 1].timeInMillis - millisInADay
     }

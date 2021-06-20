@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="task"
+            type="com.vaibhav.taskify.data.models.TaskCount" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="16dp">
+
+
+        <LinearLayout
+            setTaskTypeBackground="@{task.taskType}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp"
+            tools:background="@drawable/home_task_background">
+
+            <TextView
+                android:id="@+id/taskTagTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{task.taskType.name()}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                android:textColor="@color/white"
+                tools:text="HOME" />
+
+            <TextView
+                setBarCount="@{task.count}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginVertical="4dp"
+                android:layout_marginStart="8dp"
+                android:gravity="top"
+                android:includeFontPadding="false"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body2"
+                android:textColor="@color/white"
+                tools:text="10" />
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

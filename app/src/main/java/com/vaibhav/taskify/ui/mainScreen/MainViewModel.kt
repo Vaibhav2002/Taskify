@@ -44,6 +44,10 @@ class MainViewModel @Inject constructor(
     var task: TaskEntity? = null
 
 
+    private val _logout = MutableStateFlow(false)
+    val shouldLogout: StateFlow<Boolean> = _logout
+
+
     fun getUserData() = authRepo.getUserData()
 
     fun fetchAllTasks() = viewModelScope.launch {
@@ -73,6 +77,12 @@ class MainViewModel @Inject constructor(
 
     private fun saveServiceState(running: Boolean) = viewModelScope.launch {
         preferencesRepo.setServiceRunning(running)
+    }
+
+
+    fun onLogoutPressed() = viewModelScope.launch {
+        authRepo.logoutUser()
+        _logout.emit(true)
     }
 
 

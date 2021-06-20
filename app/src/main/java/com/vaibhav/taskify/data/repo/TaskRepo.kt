@@ -53,6 +53,10 @@ class TaskRepo @Inject constructor(
         todaysTime = getTodaysTime()
     ).flowOn(IO)
 
+    fun getTaskCounts() = taskDataSource.getTaskCounts().flowOn(IO)
+
+    fun getTaskStates() = taskDataSource.getTaskStates().flowOn(IO)
+
     suspend fun fetchAllTasks(email: String): Resource<Unit> = withContext(IO) {
         val resource = harperDbTaskDataSource.getAllTasksOfUser(email)
         Timber.d(resource.data.toString())

@@ -1,7 +1,9 @@
 package com.vaibhav.taskify.data.local.room
 
 import androidx.room.*
+import com.vaibhav.taskify.data.models.TaskCount
 import com.vaibhav.taskify.data.models.entity.TaskEntity
+import com.vaibhav.taskify.util.TaskState
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -16,6 +18,11 @@ interface TaskDAO {
         todaysTime: Long
     ): Flow<List<TaskEntity>>
 
+    @Query("SELECT COUNT(task_category) AS count, task_category FROM task_table GROUP BY task_category")
+    fun getTasksByCount(): Flow<List<TaskCount>>
+
+    @Query("SELECT state FROM task_table")
+    fun getTaskStates(): Flow<List<TaskState>>
 
     @Insert
     suspend fun insertTask(taskEntity: List<TaskEntity>)

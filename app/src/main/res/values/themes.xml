@@ -17,6 +17,8 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/lt_yellow</item>
         <item name="colorOnSecondary">@color/lt_deepblue</item>
+
+        <item name="colorBackgroundFloating">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/lt_deepblue</item>
         <!-- Customize your theme here. -->
@@ -24,7 +26,7 @@
 
     <style name="appBar" parent="Widget.Design.AppBarLayout">
         <item name="android:background">?attr/colorSurface</item>
-        <item name="android:elevation">4dp</item>
+        <item name="android:elevation">0dp</item>
     </style>
 
     <style name="grayText">

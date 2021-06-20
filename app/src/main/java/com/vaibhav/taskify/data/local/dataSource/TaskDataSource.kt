@@ -11,6 +11,10 @@ class TaskDataSource @Inject constructor(private val taskDAO: TaskDAO) {
     fun getAllTasksOfToday(state: String, todaysTime: Long) =
         taskDAO.getAllTasksOfToday(state, todaysTime)
 
+    fun getTaskCounts() = taskDAO.getTasksByCount()
+
+    fun getTaskStates() = taskDAO.getTaskStates()
+
     suspend fun insertTask(taskEntity: List<TaskEntity>) = taskDAO.insertTask(taskEntity)
 
     suspend fun updateTask(taskEntity: TaskEntity) = taskDAO.updateTask(taskEntity)
@@ -18,5 +22,7 @@ class TaskDataSource @Inject constructor(private val taskDAO: TaskDAO) {
     suspend fun deleteTask(taskEntity: TaskEntity) = taskDAO.deleteTask(taskEntity)
 
     suspend fun deleteAllTasks() = taskDAO.deleteAllTasks()
+
+
 
 }

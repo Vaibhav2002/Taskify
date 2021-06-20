@@ -1,7 +1,6 @@
 package com.vaibhav.taskify.data.remote
 
 
-import android.accounts.Account
 import android.content.Intent
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -16,7 +15,7 @@ import javax.inject.Inject
 
 class FirebaseAuthDataSource @Inject constructor(private val auth: FirebaseAuth) {
 
-    fun logoutUser() = auth.signOut()
+    suspend fun logoutUser() = auth.signOut()
     
     fun isUserLoggedIn() = auth.currentUser !=null
 
@@ -33,6 +32,7 @@ class FirebaseAuthDataSource @Inject constructor(private val auth: FirebaseAuth)
     suspend fun removeUser() {
         auth.currentUser?.delete()
     }
+
 
     suspend fun registerUser(email: String, username: String, password: String): Resource<Unit> =
         withContext(Dispatchers.IO) {

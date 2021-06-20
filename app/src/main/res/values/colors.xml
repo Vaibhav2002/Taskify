@@ -66,4 +66,8 @@
     <color name="barChartColor">@color/lt_blue</color>
     <color name="barChartClickColor">@color/lt_darkpblue</color>
 
+    <color name="profileNameTextColor">@color/lt_darkpblue</color>
+    <color name="profileBoxColor">@color/lt_darkpblue</color>
+    <color name="colorOnprofileBox">@color/white</color>
+
 </resources>

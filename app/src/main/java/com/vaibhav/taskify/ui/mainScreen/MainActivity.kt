@@ -14,6 +14,7 @@ import com.vaibhav.taskify.data.models.entity.TaskEntity
 import com.vaibhav.taskify.databinding.ActivityMainBinding
 import com.vaibhav.taskify.databinding.DrawerMenuBinding
 import com.vaibhav.taskify.service.TimerService
+import com.vaibhav.taskify.ui.auth.AuthActivity
 import com.vaibhav.taskify.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -52,6 +53,13 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     stopService()
                 }
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.shouldLogout.collect {
+                if (it)
+                    goBackToAuth()
             }
         }
 
@@ -106,6 +114,9 @@ class MainActivity : AppCompatActivity() {
             statsItem.setOnClickListener {
                 handleNavigation(TopLevelScreens.STATS)
             }
+            logoutBtn.setOnClickListener {
+                viewModel.onLogoutPressed()
+            }
         }
 
     }
@@ -130,10 +141,12 @@ class MainActivity : AppCompatActivity() {
         val openDrawerView = DrawerMenuBinding.bind(binding.drawer.menuView)
         val currentFragment = navController.currentDestination?.id ?: 0
         Timber.d("Current $currentFragment")
-        openDrawerView.homeItem.setUsable(currentFragment, TopLevelScreens.HOME)
-        openDrawerView.profileItem.setUsable(currentFragment, TopLevelScreens.PROFILE)
-        openDrawerView.aboutItem.setUsable(currentFragment, TopLevelScreens.ABOUt)
-        openDrawerView.statsItem.setUsable(currentFragment, TopLevelScreens.STATS)
+        openDrawerView.apply {
+            homeItem.setUsable(currentFragment, TopLevelScreens.HOME)
+            profileItem.setUsable(currentFragment, TopLevelScreens.PROFILE)
+            aboutItem.setUsable(currentFragment, TopLevelScreens.ABOUt)
+            statsItem.setUsable(currentFragment, TopLevelScreens.STATS)
+        }
     }
 
     private fun startService(task: TaskEntity) {
@@ -144,7 +157,6 @@ class MainActivity : AppCompatActivity() {
                 it.putExtra(TASK, task)
                 it.putExtra(DURATION, task.timeLeft)
                 startService(it)
-//            bindService(it, connection, 0)
             }
             viewModel.saveServiceStarted()
         }
@@ -154,11 +166,8 @@ class MainActivity : AppCompatActivity() {
         Timber.d("StopService ${viewModel.isServiceRunning()}")
         if (viewModel.isServiceRunning()) {
             Intent(this, TimerService::class.java).also {
-//                stopService(it)
                 stopService(it)
-
             }
-//            viewModel.setTaskAsCompleted()
             viewModel.saveServiceStopped()
         }
     }
@@ -169,6 +178,12 @@ class MainActivity : AppCompatActivity() {
         handleNavigation(TopLevelScreens.TIMER)
     }
 
+    private fun goBackToAuth() {
+        Intent(this, AuthActivity::class.java).also {
+            startActivity(it)
+            finish()
+        }
+    }
 
 }
 

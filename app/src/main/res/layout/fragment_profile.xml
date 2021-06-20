@@ -1,16 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     tools:context=".ui.mainScreen.profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/gradient"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="ProfileFragment"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
 
-</FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@drawable/profile_gradient"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileImg"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_above="@id/nameBox"
+        android:layout_centerHorizontal="true"
+        android:elevation="16dp"
+        android:scaleType="centerCrop"
+        app:civ_border_color="?attr/colorBackgroundFloating"
+        app:civ_border_width="4dp"
+        tools:src="@drawable/avatar_female" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/nameBox"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_below="@id/gradient"
+        android:layout_marginHorizontal="44dp"
+        android:layout_marginTop="-60dp"
+        android:clickable="false"
+        app:cardBackgroundColor="?attr/colorBackgroundFloating"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="24dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/nameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
+                android:textColor="@color/profileNameTextColor"
+                tools:text="Vaibhav Jaiswal" />
+
+
+            <TextView
+                android:id="@+id/emailText"
+                style="@style/grayText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"
+                tools:text="vaibhavsam2511@gmail.com" />
+
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nameBox"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Tasks"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
+            android:textColor="?attr/colorOnSurface" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/profile_detail_card_bg">
+
+
+            <TextView
+                android:id="@+id/completedTaskCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:includeFontPadding="false"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
+                android:textColor="@color/colorOnprofileBox"
+                app:layout_constraintEnd_toStartOf="@+id/IncompleteTaskCount"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="10" />
+
+            <TextView
+                android:id="@+id/IncompleteTaskCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
+                android:textColor="@color/colorOnprofileBox"
+                app:layout_constraintEnd_toStartOf="@+id/totalTaskCount"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/completedTaskCount"
+                app:layout_constraintTop_toTopOf="@+id/completedTaskCount"
+                tools:text="10" />
+
+            <TextView
+                android:id="@+id/totalTaskCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
+                android:textColor="@color/colorOnprofileBox"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/IncompleteTaskCount"
+                app:layout_constraintTop_toTopOf="@+id/IncompleteTaskCount"
+                tools:text="10" />
+
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:text="Completed"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"
+                android:textColor="?attr/colorOnPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/completedTaskCount"
+                app:layout_constraintStart_toStartOf="@+id/completedTaskCount"
+                app:layout_constraintTop_toBottomOf="@+id/completedTaskCount" />
+
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Incomplete"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"
+                android:textColor="?attr/colorOnPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/textView6"
+                app:layout_constraintEnd_toEndOf="@+id/IncompleteTaskCount"
+                app:layout_constraintStart_toStartOf="@+id/IncompleteTaskCount"
+                app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"
+                android:textColor="?attr/colorOnPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                app:layout_constraintEnd_toEndOf="@+id/totalTaskCount"
+                app:layout_constraintStart_toStartOf="@+id/totalTaskCount"
+                app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Task types"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
+            android:textColor="?attr/colorOnSurface" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/taskTypeRv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/task_type_recycler_item" />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:drawableStart="@drawable/logout_icon"
+        android:drawablePadding="16dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:text="Logout from your account"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body2"
+        android:textColor="?attr/colorOnSurface" />
+
+
+</RelativeLayout>

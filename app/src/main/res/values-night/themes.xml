@@ -17,6 +17,9 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/dt_yellow</item>
         <item name="colorOnSecondary">@color/dt_darkpblue</item>
+
+
+        <item name="colorBackgroundFloating">@color/dt_blue</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
