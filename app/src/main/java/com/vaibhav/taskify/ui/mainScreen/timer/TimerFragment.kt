@@ -12,6 +12,7 @@ import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.FragmentTimerBinding
 import com.vaibhav.taskify.service.ServiceUtil
 import com.vaibhav.taskify.service.TimerState
+import com.vaibhav.taskify.ui.mainScreen.MainActivity
 import com.vaibhav.taskify.ui.mainScreen.MainViewModel
 import com.vaibhav.taskify.util.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,6 +52,9 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
                 }
             }
         }
+        val isInternetAvailable = viewModel.isInternetAvailable()
+
+
         binding.backArrow.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -59,12 +63,6 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
         }
         binding.pauseButton.setOnClickListener {
             viewModel.pauseTask(ServiceUtil.timeLeft.value ?: 0)
-        }
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.taskState.collect {
-
-                Timber.d(it.toString())
-            }
         }
         binding.stopButton.setOnClickListener {
             viewModel.stopTask(ServiceUtil.timeLeft.value ?: 0)
@@ -87,6 +85,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
                     TaskState.COMPLETED -> findNavController().popBackStack()
                 }
             }
+
         }
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.taskState.collect {
@@ -94,12 +93,13 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
                 when (it) {
                     is Resource.Empty -> Unit
                     is Resource.Error -> {
-                        requireContext().showToast(viewModel.getTaskMessage())
+                        Timber.d(it.errorType?.name)
+                        it.errorType?.let { error ->
+                            (requireActivity() as MainActivity).showErrorDialog(error)
+                        } ?: requireContext().showToast(it.message)
                     }
                     is Resource.Loading -> Unit
                     is Resource.Success -> {
-//                        Timber.d("Success ${viewModel.getTaskMessage()}")
-//                        requireContext().showToast(viewModel.getTaskMessage())
                     }
                 }
 

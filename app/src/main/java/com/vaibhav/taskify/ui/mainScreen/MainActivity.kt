@@ -7,13 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import coil.load
 import com.vaibhav.chatofy.util.viewBinding
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.data.models.entity.TaskEntity
 import com.vaibhav.taskify.databinding.ActivityMainBinding
 import com.vaibhav.taskify.databinding.DrawerMenuBinding
 import com.vaibhav.taskify.service.TimerService
+import com.vaibhav.taskify.ui.ErrorDialogFragment
 import com.vaibhav.taskify.ui.auth.AuthActivity
 import com.vaibhav.taskify.util.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
             setNavButtons()
         }
 
+
         lifecycleScope.launchWhenStarted {
             viewModel.runningTask.collect {
                 Timber.d("Running task $it")
@@ -70,7 +71,9 @@ class MainActivity : AppCompatActivity() {
                 when (it) {
                     is Resource.Empty -> Unit
                     is Resource.Error -> {
-                        showToast(it.message)
+                        it.errorType?.let { error ->
+                            showErrorDialog(error)
+                        } ?: showToast(it.message)
                     }
                     is Resource.Loading -> Unit
                     is Resource.Success -> Unit
@@ -101,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         drawerBinding.apply {
             userNameText.text = viewModel.user?.username
             userEmailText.text = viewModel.user?.email
-            avatarImage.load(viewModel.user?.profileImage)
+            avatarImage.setProfileImage(viewModel.user?.profileImage ?: "")
             homeItem.setOnClickListener {
                 handleNavigation(TopLevelScreens.HOME)
             }
@@ -184,6 +187,11 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    fun showErrorDialog(errorTYpe: ErrorTYpe) {
+        ErrorDialogFragment(errorTYpe).show(supportFragmentManager, SHOW_ERROR_DIALOG)
+    }
+
 
 }
 

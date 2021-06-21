@@ -8,6 +8,7 @@ const val DURATION = "Duration"
 const val TASK = "TASK"
 const val FROM_NOTIFICATION = 32
 const val GO_TO_TIMER = "FROM_NOTIFICATION"
+const val SHOW_ERROR_DIALOG = "ERROR_DIALOG"
 
 enum class TaskType(val imageId: Int, val tagBackground: Int, val color: Int) {
     HOME(R.drawable.home_task, R.drawable.home_task_background, R.color.home_task_color1),
@@ -26,8 +27,26 @@ enum class TaskState {
     RUNNING, PAUSED, COMPLETED, NOT_STARTED
 }
 
+data class TaskStateCount(
+    var completed: Int = 0,
+    var total: Int = 0,
+    var incomplete: Int = total - completed,
+)
+
 enum class StopWatchFor {
     UPCOMING, RUNNING, PAUSED
+}
+
+
+enum class ErrorTYpe(val title: Int, val message: Int, val image: Int) {
+    NO_INTERNET(R.string.no_internet_title, R.string.no_internet_message, R.drawable.no_internet),
+    NO_TASKS(R.string.no_tasks_title, R.string.no_tasks_message, R.drawable.no_tasks),
+    NO_TASKS_LAST_WEEK(
+        R.string.no_tasks_title,
+        R.string.no_tasks_last_week_message,
+        R.drawable.no_tasks
+    ),
+    UNKNOWN(R.string.unknown_error_title, R.string.unknown_error_message, R.drawable.no_internet)
 }
 
 enum class DAYS(index: Int) {

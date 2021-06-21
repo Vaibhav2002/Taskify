@@ -180,10 +180,21 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/allTaskRecycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="10dp"
             android:layoutAnimation="@anim/layout_anim"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/task_item_layout" />
+
+
+        <include
+            android:id="@+id/errorLayout"
+            layout="@layout/no_tasks_error_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="-32dp"
+            android:visibility="invisible"
+            tools:visibility="visible" />
 
     </LinearLayout>
 

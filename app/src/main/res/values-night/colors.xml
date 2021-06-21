@@ -68,11 +68,15 @@
 
     <color name="barChartColor">@color/dt_blue</color>
     <color name="barChartClickColor">@color/dt_yellow</color>
+    <color name="barChartLabelColor">@color/dt_pink</color>
 
 
     <color name="profileNameTextColor">@color/dt_yellow</color>
     <color name="profileBoxColor">@color/dt_blue</color>
     <color name="colorOnprofileBox">@color/dt_pink</color>
 
+
+    <color name="AboutTextColor">@color/dt_yellow</color>
+    <color name="versionColor">@color/dt_pink</color>
 
 </resources>

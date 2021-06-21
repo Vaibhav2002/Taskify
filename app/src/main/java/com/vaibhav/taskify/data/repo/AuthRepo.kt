@@ -9,6 +9,8 @@ import com.vaibhav.taskify.data.models.mappper.UserMapper
 import com.vaibhav.taskify.data.models.remote.UserDTO
 import com.vaibhav.taskify.data.remote.FirebaseAuthDataSource
 import com.vaibhav.taskify.data.remote.dataSource.HarperDbAuthDataSource
+import com.vaibhav.taskify.util.ErrorTYpe
+import com.vaibhav.taskify.util.NetworkUtils
 import com.vaibhav.taskify.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -19,7 +21,8 @@ class AuthRepo @Inject constructor(
     private val authDataSource: FirebaseAuthDataSource,
     private val harperDbAuthDataSource: HarperDbAuthDataSource,
     @Named("sharedPref") private val preferencesDataSource: PreferencesDataSource,
-    private val userMapper: UserMapper
+    private val userMapper: UserMapper,
+    private val networkUtils: NetworkUtils
 ) {
 
     fun getUserData() = preferencesDataSource.getUserData()
@@ -30,12 +33,22 @@ class AuthRepo @Inject constructor(
 
     suspend fun loginUser(email: String, password: String): Resource<Unit> =
         withContext(Dispatchers.IO) {
+            if (!networkUtils.checkInternetConnection())
+                return@withContext Resource.Error(
+                    message = "No internet",
+                    errorType = ErrorTYpe.NO_INTERNET
+                )
             val resource = authDataSource.loginUser(email, password)
-            return@withContext getUserDataAfterLogin<Unit>(resource, email)
+            return@withContext getUserDataAfterLogin(resource, email)
         }
 
     suspend fun registerUser(email: String, username: String, password: String): Resource<Unit> =
         withContext(Dispatchers.IO) {
+            if (!networkUtils.checkInternetConnection())
+                return@withContext Resource.Error(
+                    message = "No internet",
+                    errorType = ErrorTYpe.NO_INTERNET
+                )
             val resource =
                 authDataSource.registerUser(email, username = username, password = password)
             val userDTO = UserDTO(email = email, username = username)
@@ -45,9 +58,14 @@ class AuthRepo @Inject constructor(
 
     suspend fun registerUsingGoogle(data: Intent): Resource<Unit> =
         withContext(Dispatchers.IO) {
+            if (!networkUtils.checkInternetConnection())
+                return@withContext Resource.Error(
+                    message = "No internet",
+                    errorType = ErrorTYpe.NO_INTERNET
+                )
             val account = authDataSource.getGoogleAccount(data)
             if (account is Resource.Error)
-                return@withContext Resource.Error("Failed to sign in using Google")
+                return@withContext Resource.Error("Failed to sign up using Google")
             val credential = GoogleAuthProvider.getCredential(account.data?.idToken, null)
             val resource = authDataSource.signInUsingCredential(credential)
             val userDTO = resource.data?.let {
@@ -59,6 +77,11 @@ class AuthRepo @Inject constructor(
 
     suspend fun loginUsingGoogle(data: Intent): Resource<Unit> =
         withContext(Dispatchers.IO) {
+            if (!networkUtils.checkInternetConnection())
+                return@withContext Resource.Error(
+                    message = "No internet",
+                    errorType = ErrorTYpe.NO_INTERNET
+                )
             val account = authDataSource.getGoogleAccount(data)
             if (account is Resource.Error)
                 return@withContext Resource.Error("Failed to sign in using Google")
@@ -87,11 +110,11 @@ class AuthRepo @Inject constructor(
 
      suspend fun logoutUser() {
          authDataSource.logoutUser()
-         preferencesDataSource.removeUserData();
+         preferencesDataSource.removeUserData()
      }
 
     private suspend fun removeUser() {
-        authDataSource.removeUser();
+        authDataSource.removeUser()
         preferencesDataSource.removeUserData()
     }
 
@@ -111,7 +134,7 @@ class AuthRepo @Inject constructor(
                 if (harperResource.message == "User does not exist") removeUser() else logoutUser()
                 return Resource.Error(message = harperResource.message)
             }
-            return Resource.Error(message = "Failed to login user")
+            return Resource.Error(message = authResource.message, errorType = ErrorTYpe.UNKNOWN)
         }
         preferencesDataSource.saveUserData(userMapper.toDomainModel(harperResource.data!!))
         return Resource.Success(message = "User logged in successfully")
@@ -127,7 +150,7 @@ class AuthRepo @Inject constructor(
             if (harperResource is Resource.Error && resource is Resource.Success) {
                 removeUser()
             }
-            return Resource.Error(message = "Failed to register user")
+            return Resource.Error(message = resource.message, errorType = ErrorTYpe.UNKNOWN)
         }
         preferencesDataSource.saveUserData(userMapper.toDomainModel(userDTO))
         return Resource.Success(message = "User registered successfully")

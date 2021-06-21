@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.vaibhav.chatofy.util.setMarginTop
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.FragmentAddTaskDetailBinding
+import com.vaibhav.taskify.ui.addTaskScreen.AddTaskActivity
 import com.vaibhav.taskify.ui.addTaskScreen.AddTaskViewModel
 import com.vaibhav.taskify.util.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,7 +59,9 @@ class AddTaskDetailFragment : Fragment(R.layout.fragment_add_task_detail) {
                 when (it) {
                     is Resource.Empty -> Unit
                     is Resource.Error -> {
-                        requireContext().showToast(it.message)
+                        it.errorType?.let { error ->
+                            (requireActivity() as AddTaskActivity).showErrorDialog(error)
+                        } ?: requireContext().showToast(it.message)
                     }
                     is Resource.Loading -> Unit
                     is Resource.Success -> {

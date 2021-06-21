@@ -6,7 +6,9 @@ import com.vaibhav.taskify.data.remote.harperDb.Api
 import com.vaibhav.taskify.util.Resource
 import javax.inject.Inject
 
-class HarperDbTaskDataSource @Inject constructor(private val api: Api) {
+class HarperDbTaskDataSource @Inject constructor(
+    private val api: Api,
+) {
 
 
     private fun getSQLModelForInsertTask(taskDTO: TaskDTO) =

@@ -33,7 +33,7 @@
         android:layout_height="120dp"
         android:layout_above="@id/nameBox"
         android:layout_centerHorizontal="true"
-        android:elevation="16dp"
+        android:elevation="24dp"
         android:scaleType="centerCrop"
         app:civ_border_color="?attr/colorBackgroundFloating"
         app:civ_border_width="4dp"
@@ -117,10 +117,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:includeFontPadding="false"
+                app:layout_constraintHorizontal_chainStyle="spread"
                 android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
                 android:textColor="@color/colorOnprofileBox"
                 app:layout_constraintEnd_toStartOf="@+id/IncompleteTaskCount"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="10" />
@@ -156,7 +156,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="24dp"
                 android:text="Completed"
                 android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"
@@ -203,14 +203,30 @@
             android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
             android:textColor="?attr/colorOnSurface" />
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/taskTypeRv"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/task_type_recycler_item" />
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/taskTypeRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/task_type_recycler_item" />
+
+            <TextView
+                android:id="@+id/noTasks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginVertical="16dp"
+                android:text="There are no tasks"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"
+                android:textColor="?attr/colorOnSurface"
+                android:visibility="visible" />
+
+        </RelativeLayout>
 
 
     </LinearLayout>

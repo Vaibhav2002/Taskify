@@ -7,9 +7,9 @@ import javax.inject.Inject
 @HiltViewModel
 class TaskTimeViewModel @Inject constructor() : ViewModel() {
 
-    var hours = 0
-    var minutes = 0
-    var seconds = 0
+    var hours = 1
+    var minutes = 1
+    var seconds = 1
 
     val hoursList = (0..10).toList()
     val minutesList = (0..60).toList()

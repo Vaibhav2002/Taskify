@@ -6,7 +6,7 @@ import android.widget.*
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import coil.load
-import coil.size.Scale
+import com.bumptech.glide.Glide
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.data.models.entity.TaskEntity
 import timber.log.Timber
@@ -98,13 +98,20 @@ fun TextView.setBarCount(count: Int) {
 
 @BindingAdapter("setUserProfileImage")
 fun ImageView.setProfileImage(url: String) {
-    val random = (0..1).random()
-    val errorImage = if (random == 0) R.drawable.avatar_male else R.drawable.avatar_female
-    load(url) {
-        scale(Scale.FILL)
-        crossfade(true)
-        error(errorImage)
-    }
+    val errorImage = R.drawable.avatar_male
+    Glide.with(context)
+        .load(url)
+        .error(errorImage)
+        .centerCrop()
+        .into(this)
+}
+
+
+@BindingAdapter("setErrorImage")
+fun ImageView.setErrorImage(uri: Int) {
+    Glide.with(context)
+        .load(uri)
+        .into(this)
 }
 
 @BindingAdapter("setTaskTypeBackground")

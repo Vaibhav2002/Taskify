@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vaibhav.taskify.data.repo.AuthRepo
 import com.vaibhav.taskify.data.repo.TaskRepo
-import com.vaibhav.taskify.ui.mainScreen.profile.ProfileViewModel.ProfileScreenTaskCount.*
 import com.vaibhav.taskify.util.TaskState
+import com.vaibhav.taskify.util.TaskStateCount
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -18,29 +18,23 @@ class ProfileViewModel @Inject constructor(
     private val taskRepo: TaskRepo
 ) : ViewModel() {
 
-    enum class ProfileScreenTaskCount {
-        COMPLETED, INCOMPLETE, TOTAL
-    }
-
     val taskCounts = taskRepo.getTaskCounts()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
 
-    val taskStates = flow<Map<ProfileScreenTaskCount, Int>> {
-        val map = mutableMapOf<ProfileScreenTaskCount, Int>()
+    val taskStates = flow {
+        var total = 0
+        var completed = 0
         taskRepo.getTaskStates()
             .map {
-                map[TOTAL] = it.size
+                total = it.size
                 it.groupBy { taskState ->
                     taskState
                 }
             }.collect {
-                map[COMPLETED] = it[TaskState.COMPLETED]?.size ?: 0
-                map[INCOMPLETE] =
-                    (it[TaskState.NOT_STARTED]?.size ?: 0) + (it[TaskState.PAUSED]?.size ?: 0)
-                emit(map)
+                completed = it[TaskState.COMPLETED]?.size ?: 0
+                emit(TaskStateCount(completed, total))
             }
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyMap())
-
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), TaskStateCount())
 
     private val _logout = MutableStateFlow(false)
     val shouldLogout: StateFlow<Boolean> = _logout

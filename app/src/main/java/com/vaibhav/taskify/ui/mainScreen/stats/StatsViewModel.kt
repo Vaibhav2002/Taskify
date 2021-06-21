@@ -20,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class StatsViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewModel() {
 
+
     val lastWeekTasks = taskRepo.getAllTasksSinceLastWeek()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
 
@@ -30,8 +31,8 @@ class StatsViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewM
     private val _donutData = MutableStateFlow<Map<TaskType, List<TaskEntity>>>(emptyMap())
     val donutData: StateFlow<Map<TaskType, List<TaskEntity>>> = _donutData
 
-    private
-    val days = mutableListOf<Calendar>()
+    private val days = mutableListOf<Calendar>()
+
 
     val millisInADay = 24 * 60 * 60 * 1000
 

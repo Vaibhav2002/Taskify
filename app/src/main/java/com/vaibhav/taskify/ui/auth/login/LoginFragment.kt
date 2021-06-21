@@ -17,10 +17,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.FragmentLoginBinding
-import com.vaibhav.taskify.util.Resource
-import com.vaibhav.taskify.util.setLargeImage
-import com.vaibhav.taskify.util.showErrorToast
-import com.vaibhav.taskify.util.viewBinding
+import com.vaibhav.taskify.ui.auth.AuthActivity
+import com.vaibhav.taskify.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -74,7 +72,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 binding.loadingAnim.isVisible = it is Resource.Loading
                 when (it) {
                     is Resource.Empty -> Unit
-                    is Resource.Error -> showErrorToast(it.message)
+                    is Resource.Error -> {
+                        if (it.errorType == ErrorTYpe.NO_INTERNET)
+                            (requireActivity() as AuthActivity).showErrorDialog(it.errorType)
+                        else
+                            requireContext().showToast(it.message)
+                    }
                     is Resource.Loading -> Unit
                     is Resource.Success -> {
                         navigateToHomeScreen()

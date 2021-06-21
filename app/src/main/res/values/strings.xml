@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Taskify</string>
+    <string name="appTagline">Manage your day to day tasks
+        and boost your productivity</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -21,6 +23,15 @@ and track your productivity </string>
         <item>Gym</item>
     </string-array>
 
+    <string name="no_internet_title">No internet found</string>
+    <string name="no_internet_message">Failed to get your latest tasks Looks like you don\'t have internet connection</string>
+
+    <string name="no_tasks_title">No tasks found</string>
+    <string name="no_tasks_message">Looks like you don\'t have any tasks. Press the add button below to create one</string>
+    <string name="no_tasks_last_week_message">Looks like you have not created any tasks since last week</string>
+
+    <string name="unknown_error_title">Something went wrong</string>
+    <string name="unknown_error_message">Looks like something went wrong while getting your data. Please try again later</string>
 
     <string name="loremIpsum">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem</string>
     <string name="you_have_not_done_any_tasks_yet_nstart_a_task_from_the_home_screen">You have not done any tasks yet.\nStart a task from the home screen</string>

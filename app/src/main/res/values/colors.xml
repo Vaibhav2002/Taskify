@@ -33,7 +33,7 @@
 
 
     <color name="authTextFieldIconTint">#6a6a6a</color>
-    <color name="authButtonColor">#4741a6</color>
+    <color name="authButtonColor">@color/lt_darkpblue</color>
     <color name="authBottomBgColor">#ffffff</color>
     <color name="dividerColor">#AAAAAA</color>
     <color name="authTextHeadingColor">@color/lt_deepblue</color>
@@ -41,11 +41,11 @@
     <color name="colorOnPrimary">#ffffff</color>
     <color name="colorOnPrimaryVariant">#d9eff7</color>
 
-    <color name="drawerColor">#4741a6</color>
-    <color name="completedTagColor">#4741a6</color>
-    <color name="runningTaskColor">#4741a6</color>
-    <color name="colorOnRunningTask">#ffffff</color>
-    <color name="colorOnRunningTaskType">#4741a6</color>
+    <color name="drawerColor">@color/lt_darkpblue</color>
+    <color name="completedTagColor">@color/lt_darkpblue</color>
+    <color name="runningTaskColor">@color/lt_darkpblue</color>
+    <color name="colorOnRunningTask">@color/white</color>
+    <color name="colorOnRunningTaskType">@color/lt_darkpblue</color>
 
 
     <color name="home_task_color1">#FD5B71</color>
@@ -57,7 +57,7 @@
     <color name="gym_task_color1">#ffa656</color>
     <color name="gym_task_color2">#FFB878</color>
 
-    <color name="stopWatchScreenBg">#4741a6</color>
+    <color name="stopWatchScreenBg">@color/lt_darkpblue</color>
     <color name="colorOnStopWatchScreen">#ffffff</color>
 
     <color name="addTaskSpinner">@color/gray2</color>
@@ -65,9 +65,14 @@
 
     <color name="barChartColor">@color/lt_blue</color>
     <color name="barChartClickColor">@color/lt_darkpblue</color>
+    <color name="barChartLabelColor">@color/lt_deepblue</color>
 
     <color name="profileNameTextColor">@color/lt_darkpblue</color>
     <color name="profileBoxColor">@color/lt_darkpblue</color>
     <color name="colorOnprofileBox">@color/white</color>
+
+
+    <color name="AboutTextColor">@color/lt_darkpblue</color>
+    <color name="versionColor">@color/lt_deepblue</color>
 
 </resources>

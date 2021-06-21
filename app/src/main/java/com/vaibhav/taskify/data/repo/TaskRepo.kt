@@ -5,26 +5,24 @@ import com.vaibhav.taskify.data.models.entity.TaskEntity
 import com.vaibhav.taskify.data.models.mappper.TaskMapper
 import com.vaibhav.taskify.data.models.remote.TaskDTO
 import com.vaibhav.taskify.data.remote.dataSource.HarperDbTaskDataSource
-import com.vaibhav.taskify.util.Resource
-import com.vaibhav.taskify.util.TaskState
+import com.vaibhav.taskify.util.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
 class TaskRepo @Inject constructor(
     private val taskDataSource: TaskDataSource,
     private val harperDbTaskDataSource: HarperDbTaskDataSource,
-    private val taskMapper: TaskMapper
+    private val taskMapper: TaskMapper,
+    private val networkUtils: NetworkUtils
 ) {
 
     private fun getTodaysTime(): Long {
         val cal = Calendar.getInstance()
         cal.timeInMillis = System.currentTimeMillis()
         cal.set(Calendar.HOUR_OF_DAY, 0)
-        Timber.d(cal.timeInMillis.toString())
         return cal.timeInMillis
     }
 
@@ -57,31 +55,46 @@ class TaskRepo @Inject constructor(
 
     fun getTaskStates() = taskDataSource.getTaskStates().flowOn(IO)
 
+
     suspend fun fetchAllTasks(email: String): Resource<Unit> = withContext(IO) {
+        if (!networkUtils.checkInternetConnection())
+            return@withContext Resource.Error(
+                message = "No internet",
+                errorType = ErrorTYpe.NO_INTERNET
+            )
         val resource = harperDbTaskDataSource.getAllTasksOfUser(email)
-        Timber.d(resource.data.toString())
         if (resource is Resource.Success) {
             saveAllNewDataInDb(resource.data!!)
             Resource.Success(message = "Tasks fetched successfully")
-        } else Resource.Error(message = resource.message)
+        } else Resource.Error(message = resource.message, errorType = ErrorTYpe.UNKNOWN)
     }
 
     suspend fun addNewTask(taskEntity: TaskEntity): Resource<Unit> = withContext(IO) {
+        if (!networkUtils.checkInternetConnection())
+            return@withContext Resource.Error(
+                message = "No internet",
+                errorType = ErrorTYpe.NO_INTERNET
+            )
         val taskDAO = taskMapper.toNetwork(taskEntity)
         val resource = harperDbTaskDataSource.insertTask(taskDAO)
         if (resource is Resource.Success) {
             insertTasksIntoDb(listOf(taskEntity))
             Resource.Success(message = "Tasks saved successfully")
-        } else Resource.Error(message = resource.message)
+        } else Resource.Error(message = resource.message, errorType = ErrorTYpe.UNKNOWN)
     }
 
     suspend fun updateTask(taskEntity: TaskEntity): Resource<Unit> = withContext(IO) {
+        if (!networkUtils.checkInternetConnection())
+            return@withContext Resource.Error(
+                message = "No internet",
+                errorType = ErrorTYpe.NO_INTERNET
+            )
         val taskDAO = taskMapper.toNetwork(taskEntity)
         val resource = harperDbTaskDataSource.updateTask(taskDAO)
         if (resource is Resource.Success) {
             updateTaskInDB(taskEntity)
             Resource.Success(message = "Tasks updated successfully")
-        } else Resource.Error(message = resource.message)
+        } else Resource.Error(message = resource.message, errorType = ErrorTYpe.UNKNOWN)
     }
 
     suspend fun deleteTask(taskEntity: TaskEntity): Resource<Unit> = withContext(IO) {
@@ -89,7 +102,7 @@ class TaskRepo @Inject constructor(
         if (resource is Resource.Success) {
             deleteTaskFromDb(taskEntity)
             Resource.Success(message = "Tasks deleted successfully")
-        } else Resource.Error(message = resource.message)
+        } else Resource.Error(message = resource.message, errorType = ErrorTYpe.UNKNOWN)
     }
 
     private suspend fun saveAllNewDataInDb(taskDTO: List<TaskDTO>) {

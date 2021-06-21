@@ -7,6 +7,16 @@
     android:background="?attr/colorSurface"
     tools:context=".ui.mainScreen.home.upComing.UpComingFragment">
 
+    <include
+        android:id="@+id/errorLayout"
+        layout="@layout/no_tasks_error_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginTop="16dp"
+        android:visibility="invisible"
+        tools:visibility="visible" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/upcomingTaskRv"
         android:layout_width="match_parent"

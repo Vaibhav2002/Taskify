@@ -82,7 +82,8 @@ class AddTaskViewModel @Inject constructor(
         if (verify()) {
             _addTaskState.emit(Resource.Loading())
             val task = getTaskEntity()
-            _addTaskState.emit(taskRepo.addNewTask(task))
+            val value = taskRepo.addNewTask(task)
+            _addTaskState.emit(value)
         } else
             _addTaskState.emit(Resource.Error("Enter all fields correctly"))
     }

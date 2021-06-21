@@ -13,9 +13,13 @@ sealed class Resource<T>(
     data class Loading<T>(override val data: T? = null) : Resource<T>(data)
     data class Error<T>(
         override val message: String = "Oops something went wrong.",
-        override val data: T? = null
-    ) :
-        Resource<T>(data, message)
+        override val data: T? = null,
+        val errorType: ErrorTYpe? = null
+    ) : Resource<T>(data, message)
 
     class Empty<T>() : Resource<T>()
+
+
 }
+
+

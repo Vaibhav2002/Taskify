@@ -15,7 +15,6 @@
         android:id="@+id/rvHours"
         android:layout_width="wrap_content"
         android:layout_height="140dp"
-        android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toStartOf="@+id/rvMinutes"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@+id/submitBtn"
@@ -26,9 +25,8 @@
         android:id="@+id/rvMinutes"
         android:layout_width="wrap_content"
         android:layout_height="140dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginHorizontal="40dp"
         app:layout_constraintEnd_toStartOf="@+id/rvSeconds"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/rvHours"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/timer_recycler_item" />

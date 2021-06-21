@@ -3,6 +3,7 @@ package com.vaibhav.taskify.ui.mainScreen.profile
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -10,7 +11,7 @@ import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.FragmentProfileBinding
 import com.vaibhav.taskify.ui.adapters.TaskCountAdapter
 import com.vaibhav.taskify.ui.auth.AuthActivity
-import com.vaibhav.taskify.ui.mainScreen.profile.ProfileViewModel.ProfileScreenTaskCount.*
+import com.vaibhav.taskify.util.TaskStateCount
 import com.vaibhav.taskify.util.setProfileImage
 import com.vaibhav.taskify.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,6 +45,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.taskCounts.collect {
+                binding.noTasks.isVisible = it.isEmpty()
                 taskCountAdapter.submitList(it)
             }
         }
@@ -62,11 +64,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     }
 
-    private fun setTaskStateCounts(map: Map<ProfileViewModel.ProfileScreenTaskCount, Int>) {
+    private fun setTaskStateCounts(data: TaskStateCount) {
         binding.apply {
-            completedTaskCount.text = map[COMPLETED].toString()
-            IncompleteTaskCount.text = map[INCOMPLETE].toString()
-            totalTaskCount.text = map[TOTAL].toString()
+            completedTaskCount.text = data.completed.toString()
+            IncompleteTaskCount.text = data.incomplete.toString()
+            totalTaskCount.text = data.total.toString()
         }
     }
 

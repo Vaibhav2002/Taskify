@@ -9,7 +9,7 @@
         android:id="@+id/onGoingFragment"
         android:name="com.vaibhav.taskify.ui.mainScreen.home.onGoing.OnGoingFragment"
         android:label="fragment_on_going"
-        tools:layout="@layout/fragment_on_going"></fragment>
+        tools:layout="@layout/fragment_on_going" />
     <fragment
         android:id="@+id/completedFragment"
         android:name="com.vaibhav.taskify.ui.mainScreen.home.completed.CompletedFragment"

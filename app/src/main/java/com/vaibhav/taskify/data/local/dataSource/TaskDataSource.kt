@@ -15,6 +15,10 @@ class TaskDataSource @Inject constructor(private val taskDAO: TaskDAO) {
 
     fun getTaskStates() = taskDAO.getTaskStates()
 
+//    fun getTotalTaskCount() = taskDAO.getTotalTaskCount()
+//
+//    fun getCompletedTaskCount() = taskDAO.getCompletedTaskCount()
+
     suspend fun insertTask(taskEntity: List<TaskEntity>) = taskDAO.insertTask(taskEntity)
 
     suspend fun updateTask(taskEntity: TaskEntity) = taskDAO.updateTask(taskEntity)

@@ -9,6 +9,9 @@ import com.vaibhav.chatofy.util.makeStatusBarTransparent
 import com.vaibhav.chatofy.util.viewBinding
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.ActivityAddTaskBinding
+import com.vaibhav.taskify.ui.ErrorDialogFragment
+import com.vaibhav.taskify.util.ErrorTYpe
+import com.vaibhav.taskify.util.SHOW_ERROR_DIALOG
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,4 +30,7 @@ class AddTaskActivity : AppCompatActivity() {
 
     }
 
+    fun showErrorDialog(errorTYpe: ErrorTYpe) {
+        ErrorDialogFragment(errorTYpe).show(supportFragmentManager, SHOW_ERROR_DIALOG)
+    }
 }
