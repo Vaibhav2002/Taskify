@@ -48,11 +48,11 @@ class CompletedFragment : Fragment(R.layout.fragment_completed) {
     }
 
     private fun configureErrorImage() {
-        binding.errorLayout.errorImage.load(resources.getDrawable(ErrorTYpe.NO_TASKS.image)) {
+        binding.errorLayout.errorImage.load(resources.getDrawable(ErrorTYpe.NO_COMPLETED_TASKS.image)) {
             crossfade(true)
         }
-        binding.errorLayout.errorTitle.text = getString(ErrorTYpe.NO_TASKS.title)
-        binding.errorLayout.errorDescription.text = getString(ErrorTYpe.NO_TASKS.message)
+        binding.errorLayout.errorTitle.text = getString(ErrorTYpe.NO_COMPLETED_TASKS.title)
+        binding.errorLayout.errorDescription.text = getString(ErrorTYpe.NO_COMPLETED_TASKS.message)
     }
 
 }

@@ -126,10 +126,12 @@ dependencies {
 
 
     implementation 'com.github.beksomega:loopinglayout:0.4.1'
-    implementation 'com.github.hellosagar:ProgressButton:0.1'
 
 
     implementation 'com.diogobernardino:williamchart:3.10.1'
+
+    //dots
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
 
 
 }

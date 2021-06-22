@@ -79,4 +79,9 @@
     <color name="AboutTextColor">@color/dt_yellow</color>
     <color name="versionColor">@color/dt_pink</color>
 
+
+    <color name="taskify_name_color">@color/dt_gray</color>
+    <color name="splashSceenBgColor">@color/dt_darkpblue</color>
+    <color name="splashSceenTextColor">@color/dt_yellow</color>
+
 </resources>

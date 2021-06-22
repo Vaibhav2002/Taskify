@@ -19,5 +19,9 @@ interface PreferencesDataSource {
 
     suspend fun setServiceRunning(running: Boolean)
 
+    fun isOnBoardingComplete(): Boolean
+
+    suspend fun setOnBoardingComplete()
+
 
 }

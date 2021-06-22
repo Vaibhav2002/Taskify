@@ -16,6 +16,7 @@ class DataStorePreferencesDataSource @Inject constructor(private val dataStore: 
     companion object {
         val USER_SAVE_KEY = stringPreferencesKey("user")
         val SERVICE_KEY = booleanPreferencesKey("Service")
+        val ON_BOARDING_KEY = booleanPreferencesKey("OnBoarding")
     }
 
     /**
@@ -57,5 +58,13 @@ class DataStorePreferencesDataSource @Inject constructor(private val dataStore: 
 
     override fun isServiceRunning(): Boolean {
         return true
+    }
+
+    override fun isOnBoardingComplete(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun setOnBoardingComplete() {
+        TODO("Not yet implemented")
     }
 }

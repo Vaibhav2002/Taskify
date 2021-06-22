@@ -8,124 +8,140 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/avatarImage"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        app:civ_border_color="?attr/colorSecondary"
-        app:civ_border_width="3dp"
-        tools:src="@tools:sample/avatars" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatarImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="48dp"
+            app:civ_border_color="?attr/colorSecondary"
+            app:civ_border_width="3dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
 
 
-    <TextView
-        android:id="@+id/userNameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/avatarImage"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
-        android:textColor="@color/white"
-        tools:text="Vaibhav Jaiswal" />
+        <TextView
+            android:id="@+id/userNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/avatarImage"
+            android:layout_marginTop="24dp"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/avatarImage"
+            tools:text="Vaibhav Jaiswal" />
 
-    <TextView
-        android:id="@+id/userEmailText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/userNameText"
-        android:layout_marginStart="8dp"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"
-        android:textColor="@color/colorOnPrimaryVariant"
-        tools:text="vaibhavsam2511@gmail.com" />
+        <TextView
+            android:id="@+id/userEmailText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userNameText"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption"
+            android:textColor="@color/colorOnPrimaryVariant"
+            app:layout_constraintStart_toStartOf="@+id/userNameText"
+            app:layout_constraintTop_toBottomOf="@+id/userNameText"
+            tools:text="vaibhavsam2511@gmail.com" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="32dp"
-        android:layout_gravity="center_vertical"
-        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="48dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/logoutBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userEmailText">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/homeItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/home"
+                android:drawablePadding="16dp"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="16dp"
+                android:text="Home"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
+                android:textColor="@color/colorOnPrimary"
+                app:drawableTint="@color/colorOnPrimary" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/statsItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/stats"
+                android:drawablePadding="16dp"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="16dp"
+                android:text="Statistics"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
+                android:textColor="@color/colorOnPrimary"
+                app:drawableTint="@color/colorOnPrimary" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/profileItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/profile"
+                android:drawablePadding="16dp"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="16dp"
+                android:text="Profile"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
+                android:textColor="@color/colorOnPrimary"
+                app:drawableTint="@color/colorOnPrimary" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/aboutItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/info"
+                android:drawablePadding="16dp"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="16dp"
+                android:text="About"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
+                android:textColor="@color/colorOnPrimary"
+                app:drawableTint="@color/colorOnPrimary" />
+
+
+        </LinearLayout>
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/homeItem"
+            android:id="@+id/logoutBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:background="@android:color/transparent"
-            android:drawableStart="@drawable/home"
-            android:drawablePadding="16dp"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:paddingHorizontal="16dp"
-            android:text="Home"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
-            android:textColor="@color/colorOnPrimary"
-            app:drawableTint="@color/colorOnPrimary" />
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/secondary_outlined_button"
+            android:paddingHorizontal="56dp"
+            android:text="Sign out"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button"
+            android:textColor="?attr/colorSecondary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/statsItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:background="@android:color/transparent"
-            android:drawableStart="@drawable/stats"
-            android:drawablePadding="16dp"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:paddingHorizontal="16dp"
-            android:text="Statistics"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
-            android:textColor="@color/colorOnPrimary"
-            app:drawableTint="@color/colorOnPrimary" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/profileItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:background="@android:color/transparent"
-            android:drawableStart="@drawable/profile"
-            android:drawablePadding="16dp"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:paddingHorizontal="16dp"
-            android:text="Profile"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
-            android:textColor="@color/colorOnPrimary"
-            app:drawableTint="@color/colorOnPrimary" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/aboutItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:drawableStart="@drawable/info"
-            android:drawablePadding="16dp"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:paddingHorizontal="16dp"
-            android:text="About"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
-            android:textColor="@color/colorOnPrimary"
-            app:drawableTint="@color/colorOnPrimary" />
-
-    </LinearLayout>
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/logoutBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/secondary_outlined_button"
-        android:paddingHorizontal="56dp"
-        android:text="Sign out"
-        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button"
-        android:textColor="?attr/colorSecondary" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </RelativeLayout>

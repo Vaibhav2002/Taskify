@@ -2,8 +2,18 @@
     <string name="app_name">Taskify</string>
     <string name="appTagline">Manage your day to day tasks
         and boost your productivity</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="onBoarding1Title">Manage your tasks</string>
+    <string name="onBoarding2Title">See statistics of your tasks</string>
+    <string name="onBoarding3Title">Improve productivity</string>
+
+    <string name="onBoarding1Description">Save all your day to day tasks
+in one place and complete them all</string>
+    <string name="onBoarding2Description">See detail statistics of all the tasks
+you have done within the last week</string>
+    <string name="onBoarding3Description">Improve your daily productivity
+by completing all your tasks in time</string>
+
 
     <string name="gettingStarted_body">Manage all your day to day tasks
 and track your productivity </string>
@@ -24,10 +34,14 @@ and track your productivity </string>
     </string-array>
 
     <string name="no_internet_title">No internet found</string>
-    <string name="no_internet_message">Failed to get your latest tasks Looks like you don\'t have internet connection</string>
+    <string name="no_internet_message">Failed to get your latest tasks. Looks like you don\'t have internet connection</string>
 
     <string name="no_tasks_title">No tasks found</string>
     <string name="no_tasks_message">Looks like you don\'t have any tasks. Press the add button below to create one</string>
+
+    <string name="no_completed_tasks_title">No tasks completed</string>
+    <string name="no_completed_tasks_message">Looks like you have not completed any task. Complete a task to see it here</string>
+
     <string name="no_tasks_last_week_message">Looks like you have not created any tasks since last week</string>
 
     <string name="unknown_error_title">Something went wrong</string>

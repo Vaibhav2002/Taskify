@@ -14,6 +14,7 @@ class SharedPreferencesDataSource @Inject constructor(private val sharedPreferen
     companion object {
         const val USER_SAVE_KEY = "user"
         const val SERVICE_KEY = "Service"
+        const val ON_BOARDING_KEY = "OnBoarding"
     }
 
 
@@ -43,5 +44,13 @@ class SharedPreferencesDataSource @Inject constructor(private val sharedPreferen
 
     override fun isServiceRunningByFlow(): Flow<Boolean> {
         TODO("Not yet implemented")
+    }
+
+    override fun isOnBoardingComplete(): Boolean {
+        return sharedPreferences.getBoolean(ON_BOARDING_KEY, false)
+    }
+
+    override suspend fun setOnBoardingComplete() {
+        sharedPreferences.edit().putBoolean(ON_BOARDING_KEY, true).apply()
     }
 }

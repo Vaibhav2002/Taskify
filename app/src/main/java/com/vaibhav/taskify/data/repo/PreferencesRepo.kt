@@ -11,7 +11,11 @@ class PreferencesRepo @Inject constructor(
 
     fun isServiceRunning() = preferencesDataSource.isServiceRunning()
 
+    fun isOnBoardingComplete() = preferencesDataSource.isOnBoardingComplete()
+
     suspend fun setServiceRunning(running: Boolean) =
         preferencesDataSource.setServiceRunning(running)
+
+    suspend fun setOnBoardingComplete() = preferencesDataSource.setOnBoardingComplete()
 
 }

@@ -41,6 +41,11 @@ enum class StopWatchFor {
 enum class ErrorTYpe(val title: Int, val message: Int, val image: Int) {
     NO_INTERNET(R.string.no_internet_title, R.string.no_internet_message, R.drawable.no_internet),
     NO_TASKS(R.string.no_tasks_title, R.string.no_tasks_message, R.drawable.no_tasks),
+    NO_COMPLETED_TASKS(
+        R.string.no_completed_tasks_title,
+        R.string.no_completed_tasks_message,
+        R.drawable.no_tasks
+    ),
     NO_TASKS_LAST_WEEK(
         R.string.no_tasks_title,
         R.string.no_tasks_last_week_message,
