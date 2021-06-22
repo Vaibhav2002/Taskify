@@ -52,7 +52,7 @@
                 android:layout_marginTop="8dp"
                 android:text="@{onBoarding.description}"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body1"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body2"
                 android:textColor="?attr/colorOnPrimary"
                 tools:text="@string/onBoarding1Description" />
 
