@@ -1,4 +1,4 @@
-package com.vaibhav.taskify.data.models.requests
+package com.vaibhav.taskify.data.models.remote
 
 data class SQLModel(
     val sql: String,

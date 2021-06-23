@@ -1,7 +1,7 @@
 package com.vaibhav.taskify.data.remote.harperDb
 
 
-import com.vaibhav.taskify.data.models.requests.SQLModel
+import com.vaibhav.taskify.data.models.remote.SQLModel
 import com.vaibhav.taskify.data.models.remote.TaskDTO
 import com.vaibhav.taskify.data.models.remote.UserDTO
 import com.vaibhav.taskify.util.BASIC_AUTH

@@ -39,7 +39,7 @@ class NotificationHelper @Inject constructor(private val context: Context) {
                 .setContentText(description)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
-                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setSmallIcon(R.mipmap.taskify_logo_round)
                 .setSound(null)
                 .build()
         notificationManager.notify(getNotificationId(), notification)
@@ -57,7 +57,7 @@ class NotificationHelper @Inject constructor(private val context: Context) {
                 .setContentText(description)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setContentIntent(pendingIntent)
-                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setSmallIcon(R.mipmap.taskify_logo_round)
                 .build()
         notificationManager.notify(getNotificationId(), notification)
 
