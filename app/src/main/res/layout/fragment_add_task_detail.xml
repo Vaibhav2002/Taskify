@@ -72,8 +72,7 @@
             android:layout_marginTop="16dp"
             android:gravity="start|top"
             android:hint="Description"
-            android:maxLength="60"
-            android:maxLines="4" />
+            android:maxLines="6" />
 
         <RelativeLayout
             android:layout_width="match_parent"
