@@ -16,6 +16,29 @@ Clone the repository on your machine. Open the project on your IDE and connect i
 - Clean and Simple Material UI.
 - It supports dark theme too 🌗.
 
+### Insights into the app 🔎
+
+![light_dark.png](media/light_dark.png)
+
+**Taskify** offers light as well as dark theme 🌓. So now you can use Taskify in whatever theme you like the most. 🔥
+
+
+![slide-1.png](media/slide-1.png)
+
+
+**Taskify** supports both email based and Social media authentication like Google authentication. Planning to add Facebook authentication too. 😁
+
+
+
+![slide-2.png](media/slide-2.png)
+
+
+Have a look at your running task, upcoming and completed tasks all in one place. Create a task by pressing the FAB below.
+
+![slide-3.png](media/slide-3.png)
+
+Taskify lets you start a timer ⌚ to track the time you take completing a task. Timer runs in background, so you dont need to keep the app open all the time. 👍 See stats 💪 of all tasks you created within the last week, including total tasks created in a day and breakdown of tasks based on category.
+
 ## 📸 Screenshots
 
 ||||
