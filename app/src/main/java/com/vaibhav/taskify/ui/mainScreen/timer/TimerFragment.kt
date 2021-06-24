@@ -52,14 +52,15 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
                 }
             }
         }
-        val isInternetAvailable = viewModel.isInternetAvailable()
-
 
         binding.backArrow.setOnClickListener {
             findNavController().popBackStack()
         }
         binding.startButton.setOnClickListener {
-            viewModel.startTask()
+            if (!mainViewModel.isServiceRunning())
+                viewModel.startTask()
+            else
+                requireContext().showToast("You can run only 1 task at a time.")
         }
         binding.pauseButton.setOnClickListener {
             viewModel.pauseTask(ServiceUtil.timeLeft.value ?: 0)

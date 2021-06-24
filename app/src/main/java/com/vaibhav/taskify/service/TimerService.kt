@@ -54,6 +54,7 @@ class TimerService : LifecycleService() {
                     pendingIntent
                 )
                 finishTask(task)
+                ServiceUtil.timerState.postValue(TimerState.STOP)
                 ServiceUtil.timeLeft.postValue(duration)
             }
         }
