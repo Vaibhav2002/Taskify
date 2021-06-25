@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_homeFragment_to_addTaskActivity"
             app:destination="@id/addTaskActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -48,7 +51,11 @@
         android:id="@+id/statsFragment"
         android:name="com.vaibhav.taskify.ui.mainScreen.stats.StatsFragment"
         android:label="fragment_stats"
-        tools:layout="@layout/fragment_stats" />
+        tools:layout="@layout/fragment_stats">
+        <action
+            android:id="@+id/action_statsFragment_to_taskDetailFragment2"
+            app:destination="@id/taskDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/timerFragment"
         android:name="com.vaibhav.taskify.ui.mainScreen.timer.TimerFragment"
@@ -66,4 +73,12 @@
         android:name="com.vaibhav.taskify.ui.addTaskScreen.AddTaskActivity"
         android:label="activity_add_task"
         tools:layout="@layout/activity_add_task" />
+    <dialog
+        android:id="@+id/taskDetailFragment"
+        android:name="com.vaibhav.taskify.ui.mainScreen.taskDetail.TaskDetailFragment"
+        android:label="TaskDetailFragment">
+        <argument
+            android:name="task"
+            app:argType="com.vaibhav.taskify.data.models.entity.TaskEntity" />
+    </dialog>
 </navigation>

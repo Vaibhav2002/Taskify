@@ -64,7 +64,7 @@ class TaskRepo @Inject constructor(
             )
         val resource = harperDbTaskDataSource.getAllTasksOfUser(email)
         if (resource is Resource.Success) {
-            saveAllNewDataInDb(resource.data!!)
+            saveAllNewDataInDb(resource.data ?: emptyList())
             Resource.Success(message = "Tasks fetched successfully")
         } else Resource.Error(message = resource.message, errorType = ErrorTYpe.UNKNOWN)
     }

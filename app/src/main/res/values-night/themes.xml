@@ -18,12 +18,23 @@
         <item name="colorSecondary">@color/dt_yellow</item>
         <item name="colorOnSecondary">@color/dt_darkpblue</item>
 
+        <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
 
         <item name="colorBackgroundFloating">@color/dt_blue</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
     </style>
+
+
+    <style name="CustomBottomSheetDialog" parent="@style/Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomBottomSheet</item>
+    </style>
+
+    <style name="CustomBottomSheet" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_bg</item>
+    </style>
+
 
     <style name="add_task_top">
         <item name="android:background">@color/dt_deepblue</item>

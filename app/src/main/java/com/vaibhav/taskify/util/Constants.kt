@@ -9,6 +9,7 @@ const val TASK = "TASK"
 const val FROM_NOTIFICATION = 32
 const val GO_TO_TIMER = "FROM_NOTIFICATION"
 const val SHOW_ERROR_DIALOG = "ERROR_DIALOG"
+const val TASK_DETAIL_DIALOG = "TASK_DETAIL"
 
 enum class TaskType(val imageId: Int, val tagBackground: Int, val color: Int) {
     HOME(R.drawable.home_task, R.drawable.home_task_background, R.color.home_task_color1),

@@ -10,7 +10,7 @@ Clone the repository on your machine. Open the project on your IDE and connect i
 
 ## About
 
- It uses firrebase and HarperDB as it's backend. It uses Firebase Authentication for email based auth and Google auth, Firebase Crashlytics for crash reporting and HarperDB as its database.
+ It uses firebase and HarperDB as it's backend. It uses Firebase Authentication for email based auth and Google auth, Firebase Crashlytics for crash reporting and HarperDB as its database.
 
 - Fully functionable. 
 - Clean and Simple Material UI.

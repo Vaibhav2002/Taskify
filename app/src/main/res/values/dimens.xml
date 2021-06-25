@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="auth_bg_corner_radius">30dp</dimen>
+    <dimen name="bottom_sheet_corner_radius">30dp</dimen>
     <dimen name="loadingAnimSize">120dp</dimen>
     <dimen name="bar_height">80dp</dimen>
     <dimen name="bar_width">20dp</dimen>

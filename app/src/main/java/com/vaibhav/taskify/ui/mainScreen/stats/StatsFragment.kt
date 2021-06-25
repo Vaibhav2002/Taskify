@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.db.williamchart.ExperimentalFeature
 import com.db.williamchart.data.AxisType
@@ -36,7 +37,7 @@ class StatsFragment : Fragment(R.layout.fragment_stats) {
         super.onViewCreated(view, savedInstanceState)
 
         taskAdapter = TaskAdapter {
-
+            showTaskDetail(it)
         }
         binding.allTaskRecycler.apply {
             adapter = taskAdapter
@@ -135,5 +136,10 @@ class StatsFragment : Fragment(R.layout.fragment_stats) {
         }
         binding.errorLayout.errorTitle.text = getString(ErrorTYpe.NO_TASKS_LAST_WEEK.title)
         binding.errorLayout.errorDescription.text = getString(ErrorTYpe.NO_TASKS_LAST_WEEK.message)
+    }
+
+    private fun showTaskDetail(taskEntity: TaskEntity) {
+        val action = StatsFragmentDirections.actionStatsFragmentToTaskDetailFragment2(taskEntity)
+        findNavController().navigate(action)
     }
 }

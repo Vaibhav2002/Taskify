@@ -118,3 +118,8 @@ fun ImageView.setErrorImage(uri: Int) {
 fun LinearLayout.setTaskTypeBg(taskType: TaskType) {
     background = resources.getDrawable(taskType.tagBackground)
 }
+
+@BindingAdapter("setTaskTypeBg")
+fun TextView.setTaskTypeBg(taskType: TaskType) {
+    background = resources.getDrawable(taskType.tagBackground)
+}
