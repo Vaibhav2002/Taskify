@@ -4,6 +4,9 @@
 
 **Taskify** is an app to manage your daily tasks and boost your productivity
 
+# Video Introduction 📹
+
+This is a small introduction video about Taskify  https://youtu.be/MEuoxix5SGY.
 
 ## Setup
 Clone the repository on your machine. Open the project on your IDE and connect it to firebase and harperDB and everything will be setup
