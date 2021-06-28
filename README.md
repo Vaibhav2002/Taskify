@@ -8,6 +8,12 @@
 
 This is a small introduction video about Taskify  https://youtu.be/MEuoxix5SGY.
 
+# Application Install
+
+***You can Install and test latest Taskify app from below 👇***
+
+[![Taskify](https://img.shields.io/badge/Taskify✅-APK-red.svg?style=for-the-badge&logo=android)](https://github.com/Vaibhav2002/Taskify/releases/tag/1.0.0)
+
 ## Setup
 Clone the repository on your machine. Open the project on your IDE and connect it to firebase and harperDB and everything will be setup
 
