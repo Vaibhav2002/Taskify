@@ -80,7 +80,7 @@ Taskify lets you start a timer ⌚ to track the time you take completing a task.
 - [GSON](https://github.com/google/gson) - A modern JSON library for Kotlin and Java.
 - [Timber](https://github.com/JakeWharton/timber) - A simple logging library for android.
 - [GSON Converter](https://github.com/square/retrofit/tree/master/retrofit-converters/gson) - A Converter which uses Moshi for serialization to and from JSON.
-- [Glide](https://github.com/bumptech/glide) - An image loading library for Android backed by Kotlin Coroutines.
+- [Glide](https://github.com/bumptech/glide) - An image loading and caching library for Android focused on smooth scrolling
 - [Coil](https://github.com/coil-kt/coil) - An image loading library for Android backed by Kotlin Coroutines.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
 
