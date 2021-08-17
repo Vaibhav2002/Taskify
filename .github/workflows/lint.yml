@@ -1,0 +1,22 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Lint
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    name: Lint Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Lint Code Base
+        uses: docker://github/super-linter:v2.2.0
+        env:
+          VALIDATE_ALL_CODEBASE: true
+          VALIDATE_MD: false
+          VALIDATE_XML: false
+          VALIDATE_KOTLIN: true
