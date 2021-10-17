@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.vaibhav.taskify.util.makeStatusBarTransparent
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.ui.auth.AuthActivity
 import com.vaibhav.taskify.ui.mainScreen.MainActivity
 import com.vaibhav.taskify.ui.onBoardingScreen.OnBoardingActivity
+import com.vaibhav.taskify.util.makeStatusBarTransparent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

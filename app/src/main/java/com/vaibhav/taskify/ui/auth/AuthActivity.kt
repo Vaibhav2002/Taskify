@@ -6,14 +6,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.vaibhav.taskify.util.makeStatusBarTransparent
-import com.vaibhav.taskify.util.viewBinding
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.ActivityAuthBinding
 import com.vaibhav.taskify.ui.ErrorDialogFragment
 import com.vaibhav.taskify.ui.mainScreen.MainActivity
 import com.vaibhav.taskify.util.ErrorTYpe
 import com.vaibhav.taskify.util.SHOW_ERROR_DIALOG
+import com.vaibhav.taskify.util.makeStatusBarTransparent
+import com.vaibhav.taskify.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

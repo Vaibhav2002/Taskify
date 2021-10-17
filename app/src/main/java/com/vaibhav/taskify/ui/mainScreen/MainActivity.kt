@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.vaibhav.taskify.util.viewBinding
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.data.models.entity.TaskEntity
 import com.vaibhav.taskify.databinding.ActivityMainBinding
@@ -16,6 +15,7 @@ import com.vaibhav.taskify.service.TimerService
 import com.vaibhav.taskify.ui.ErrorDialogFragment
 import com.vaibhav.taskify.ui.auth.AuthActivity
 import com.vaibhav.taskify.util.*
+import com.vaibhav.taskify.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber

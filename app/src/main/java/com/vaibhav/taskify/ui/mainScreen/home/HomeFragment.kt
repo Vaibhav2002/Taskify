@@ -3,12 +3,10 @@ package com.vaibhav.taskify.ui.mainScreen.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.FragmentHomeBinding
-import com.vaibhav.taskify.ui.mainScreen.MainViewModel
 import com.vaibhav.taskify.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber

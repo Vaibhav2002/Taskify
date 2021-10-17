@@ -5,13 +5,13 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.vaibhav.taskify.util.makeStatusBarTransparent
-import com.vaibhav.taskify.util.viewBinding
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.data.models.OnBoarding
 import com.vaibhav.taskify.databinding.ActivityOnBoardingBinding
 import com.vaibhav.taskify.ui.adapters.OnBoardingAdapter
 import com.vaibhav.taskify.ui.auth.AuthActivity
+import com.vaibhav.taskify.util.makeStatusBarTransparent
+import com.vaibhav.taskify.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 

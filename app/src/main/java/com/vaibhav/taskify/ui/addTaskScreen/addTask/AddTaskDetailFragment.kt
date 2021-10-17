@@ -11,12 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.vaibhav.taskify.util.setMarginTop
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.FragmentAddTaskDetailBinding
 import com.vaibhav.taskify.ui.addTaskScreen.AddTaskActivity
 import com.vaibhav.taskify.ui.addTaskScreen.AddTaskViewModel
 import com.vaibhav.taskify.util.*
+import com.vaibhav.taskify.util.setMarginTop
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
