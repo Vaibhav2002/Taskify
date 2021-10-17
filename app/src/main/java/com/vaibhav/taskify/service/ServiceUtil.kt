@@ -10,7 +10,5 @@ object ServiceUtil {
 
     val timeLeft = MutableLiveData<Long>(0)
 
-
     val timerState = MutableLiveData<TimerState?>(null)
 }
-

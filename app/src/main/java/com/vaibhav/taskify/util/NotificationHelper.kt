@@ -13,7 +13,6 @@ class NotificationHelper @Inject constructor(private val context: Context) {
     companion object {
         const val CHANNEL_ID = "TASKIFY_ID"
         const val CHANNEL_NAME = "TASKIFY"
-
     }
 
     private fun getNotificationId() = 0
@@ -29,7 +28,6 @@ class NotificationHelper @Inject constructor(private val context: Context) {
         val channel =
             NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_LOW)
         notificationManager.createNotificationChannel(channel)
-
     }
 
     fun showSilentNotification(title: String, description: String, pendingIntent: PendingIntent) {
@@ -43,7 +41,6 @@ class NotificationHelper @Inject constructor(private val context: Context) {
                 .setSound(null)
                 .build()
         notificationManager.notify(getNotificationId(), notification)
-
     }
 
     fun showCompletedNotification(
@@ -60,8 +57,5 @@ class NotificationHelper @Inject constructor(private val context: Context) {
                 .setSmallIcon(R.mipmap.taskify_logo_round)
                 .build()
         notificationManager.notify(getNotificationId(), notification)
-
     }
-
-
 }

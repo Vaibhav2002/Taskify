@@ -27,9 +27,8 @@ data class AddTaskScreenState(
 @HiltViewModel
 class AddTaskViewModel @Inject constructor(
     private val taskRepo: TaskRepo,
-    private val authRepo: AuthRepo
+    authRepo: AuthRepo
 ) : ViewModel() {
-
 
     private val user = authRepo.getUserData()
 
@@ -77,7 +76,6 @@ class AddTaskViewModel @Inject constructor(
         return isValid
     }
 
-
     fun onSaveClicked() = viewModelScope.launch {
         if (verify()) {
             _addTaskState.emit(Resource.Loading())
@@ -95,6 +93,4 @@ class AddTaskViewModel @Inject constructor(
         task_category = screenState.value.category,
         duration = screenState.value.duration
     )
-
-
 }

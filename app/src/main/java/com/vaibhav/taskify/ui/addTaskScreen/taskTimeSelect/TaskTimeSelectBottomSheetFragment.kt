@@ -68,7 +68,6 @@ class TaskTimeSelectBottomSheetFragment :
 
     private fun setUpRecyclerViews() {
 
-
         hourAdapter = TimerAdapter(viewModel.hoursList)
         minAdapter = TimerAdapter(viewModel.minutesList)
         secAdapter = TimerAdapter(viewModel.secondsList)
@@ -104,7 +103,6 @@ class TaskTimeSelectBottomSheetFragment :
                     (binding.rvHours.layoutManager as LoopingLayoutManager).getPosition(centerView!!)
                 if (newState == RecyclerView.SCROLL_STATE_IDLE || (pos == 0 && newState == RecyclerView.SCROLL_STATE_DRAGGING))
                     viewModel.hours = pos
-
             }
         })
         binding.rvMinutes.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -126,11 +124,7 @@ class TaskTimeSelectBottomSheetFragment :
                     (binding.rvSeconds.layoutManager as LoopingLayoutManager).getPosition(centerView!!)
                 if (newState == RecyclerView.SCROLL_STATE_IDLE || (pos == 0 && newState == RecyclerView.SCROLL_STATE_DRAGGING))
                     viewModel.seconds = pos
-
             }
         })
-
     }
-
-
 }

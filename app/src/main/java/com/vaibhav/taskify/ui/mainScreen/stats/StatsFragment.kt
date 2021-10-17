@@ -32,7 +32,6 @@ class StatsFragment : Fragment(R.layout.fragment_stats) {
     private val viewModel: StatsViewModel by viewModels()
     private lateinit var taskAdapter: TaskAdapter
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -64,9 +63,7 @@ class StatsFragment : Fragment(R.layout.fragment_stats) {
                 taskAdapter.submitList(it)
             }
         }
-
     }
-
 
     private fun configureBarChart(data: List<Bar>) {
         val barList = data.map {

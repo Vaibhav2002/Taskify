@@ -5,8 +5,7 @@ import javax.inject.Inject
 import javax.inject.Named
 
 class PreferencesRepo @Inject constructor(
-    @Named("sharedPref") private val preferencesDataSource: PreferencesDataSource,
-    @Named("prefDataStore") private val dataStorePreferencesDataSource: PreferencesDataSource
+    @Named("sharedPref") private val preferencesDataSource: PreferencesDataSource
 ) {
 
     fun isServiceRunning() = preferencesDataSource.isServiceRunning()
@@ -17,5 +16,4 @@ class PreferencesRepo @Inject constructor(
         preferencesDataSource.setServiceRunning(running)
 
     suspend fun setOnBoardingComplete() = preferencesDataSource.setOnBoardingComplete()
-
 }

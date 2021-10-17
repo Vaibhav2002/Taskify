@@ -22,6 +22,4 @@ interface PreferencesDataSource {
     fun isOnBoardingComplete(): Boolean
 
     suspend fun setOnBoardingComplete()
-
-
 }

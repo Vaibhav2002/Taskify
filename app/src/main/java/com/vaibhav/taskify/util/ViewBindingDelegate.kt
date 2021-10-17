@@ -1,4 +1,4 @@
-package com.vaibhav.chatofy.util
+package com.vaibhav.taskify.util
 
 import android.os.Looper
 import android.view.LayoutInflater

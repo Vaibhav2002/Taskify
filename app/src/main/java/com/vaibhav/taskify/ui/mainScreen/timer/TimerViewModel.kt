@@ -78,7 +78,6 @@ class TimerViewModel @Inject constructor(
             "Failed to $taskOperation task"
     }
 
-
     private suspend fun checkInternetBeforeCall(): Boolean {
         return if (networkUtils.checkInternetConnection())
             true

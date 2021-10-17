@@ -16,20 +16,17 @@ class DataStorePreferencesDataSource @Inject constructor(private val dataStore: 
     companion object {
         val USER_SAVE_KEY = stringPreferencesKey("user")
         val SERVICE_KEY = booleanPreferencesKey("Service")
-        val ON_BOARDING_KEY = booleanPreferencesKey("OnBoarding")
     }
 
     /**
      * To be implemented
      */
-    override fun getUserData() = null
-
+    override fun getUserData(): UserEntity? = null
 
     override fun getUserDataFlow() = dataStore.data.map {
         val user = it[USER_SAVE_KEY]
         Gson().fromJson(user, UserEntity::class.java)
     }
-
 
     override suspend fun saveUserData(userEntity: UserEntity) {
         val serializedUser = Gson().toJson(userEntity)
@@ -48,7 +45,6 @@ class DataStorePreferencesDataSource @Inject constructor(private val dataStore: 
         val isRunning = it[SERVICE_KEY]
         isRunning != null
     }
-
 
     override suspend fun setServiceRunning(running: Boolean) {
         dataStore.edit {

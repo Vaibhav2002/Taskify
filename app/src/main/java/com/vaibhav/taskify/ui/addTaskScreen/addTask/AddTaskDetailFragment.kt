@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.vaibhav.chatofy.util.setMarginTop
+import com.vaibhav.taskify.util.setMarginTop
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.FragmentAddTaskDetailBinding
 import com.vaibhav.taskify.ui.addTaskScreen.AddTaskActivity
@@ -34,7 +34,6 @@ class AddTaskDetailFragment : Fragment(R.layout.fragment_add_task_detail) {
             insets.consumeSystemWindowInsets()
         }
         binding.taskImage.setLargeImage(R.drawable.task_illustration)
-
 
         binding.taskTitle.setText(viewModel.screenState.value.title)
         binding.taskDescription.setText(viewModel.screenState.value.description)
@@ -86,7 +85,6 @@ class AddTaskDetailFragment : Fragment(R.layout.fragment_add_task_detail) {
                 }
             }
         }
-
 
         val arrayAdapter = ArrayAdapter.createFromResource(
             requireContext(), R.array.spinner_item, R.layout.custom_spinner_item

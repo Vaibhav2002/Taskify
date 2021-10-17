@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class UpComingViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewModel() {
+class UpComingViewModel @Inject constructor(taskRepo: TaskRepo) : ViewModel() {
 
     val upComingTasks =
         taskRepo.getAllUpComingTasksOfToday()

@@ -13,15 +13,13 @@ import javax.inject.Inject
 class OnBoardingViewModel @Inject constructor(private val preferencesRepo: PreferencesRepo) :
     ViewModel() {
 
-
-    private val _navigateToAuth = MutableStateFlow<Boolean>(false)
+    private val _navigateToAuth = MutableStateFlow(false)
     val navigateToAuth: StateFlow<Boolean> = _navigateToAuth
 
     fun onContinuePressed() = viewModelScope.launch {
         setOnBoardingComplete()
         _navigateToAuth.emit(true)
     }
-
 
     private suspend fun setOnBoardingComplete() = preferencesRepo.setOnBoardingComplete()
 }

@@ -27,12 +27,7 @@ sealed class Resource<T>(
             result = 31 * result + (errorType?.hashCode() ?: 0)
             return result
         }
-
     }
 
-    class Empty<T>() : Resource<T>()
-
-
+    class Empty<T> : Resource<T>()
 }
-
-

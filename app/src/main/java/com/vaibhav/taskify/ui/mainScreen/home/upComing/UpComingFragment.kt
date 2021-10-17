@@ -29,9 +29,7 @@ class UpComingFragment : Fragment(R.layout.fragment_up_coming) {
 
     private val binding by viewBinding(FragmentUpComingBinding::bind)
     private val viewModel: UpComingViewModel by viewModels()
-    private val activityViewModel by activityViewModels<MainViewModel>()
     private lateinit var upComingTaskAdapter: TaskAdapter
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,6 +63,4 @@ class UpComingFragment : Fragment(R.layout.fragment_up_coming) {
         binding.errorLayout.errorTitle.text = getString(ErrorTYpe.NO_TASKS.title)
         binding.errorLayout.errorDescription.text = getString(ErrorTYpe.NO_TASKS.message)
     }
-
-
 }

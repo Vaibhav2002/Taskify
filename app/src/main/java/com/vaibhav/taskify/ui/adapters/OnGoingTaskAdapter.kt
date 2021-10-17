@@ -33,6 +33,5 @@ class OnGoingTaskAdapter(private val onTaskClicked: (TaskEntity) -> Unit) :
         fun bind(task: TaskEntity) {
             binding.task = task
         }
-
     }
 }

@@ -1,15 +1,13 @@
 package com.vaibhav.taskify.util
 
 import com.vaibhav.taskify.R
-import java.util.*
+import java.util.Locale
 
-const val GOOGLE_SIGN_IN = 1001
 const val DURATION = "Duration"
 const val TASK = "TASK"
 const val FROM_NOTIFICATION = 32
 const val GO_TO_TIMER = "FROM_NOTIFICATION"
 const val SHOW_ERROR_DIALOG = "ERROR_DIALOG"
-const val TASK_DETAIL_DIALOG = "TASK_DETAIL"
 
 enum class TaskType(val imageId: Int, val tagBackground: Int, val color: Int) {
     HOME(R.drawable.home_task, R.drawable.home_task_background, R.color.home_task_color1),
@@ -37,7 +35,6 @@ data class TaskStateCount(
 enum class StopWatchFor {
     UPCOMING, RUNNING, PAUSED
 }
-
 
 enum class ErrorTYpe(val title: Int, val message: Int, val image: Int) {
     NO_INTERNET(R.string.no_internet_title, R.string.no_internet_message, R.drawable.no_internet),
@@ -82,12 +79,11 @@ enum class DAYS(index: Int) {
         else -> getTwoChars()
     }
 
-    fun getFullName() = this.name.lowercase().capitalize()
-
+    fun getFullName() = this.name.lowercase()
+        .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
     private fun getFirstChars() = this.name.substring(0, 1)
 
     private fun getTwoChars() = this.name.substring(0, 2).lowercase()
         .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-
 }

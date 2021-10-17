@@ -48,6 +48,7 @@ android {
 dependencies {
 
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
+    testImplementation 'junit:junit:4.12'
     def lifecycle_version = "2.3.1"
 
     implementation "androidx.datastore:datastore-preferences:1.0.0"

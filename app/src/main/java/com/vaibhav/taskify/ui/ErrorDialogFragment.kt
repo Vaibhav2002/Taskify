@@ -12,7 +12,6 @@ import com.vaibhav.taskify.databinding.FragmentErrorDialogBinding
 import com.vaibhav.taskify.util.ErrorTYpe
 import com.vaibhav.taskify.util.setErrorImage
 
-
 class ErrorDialogFragment(private val errorTYpe: ErrorTYpe? = null) :
     DialogFragment(R.layout.fragment_error_dialog) {
 
@@ -45,9 +44,5 @@ class ErrorDialogFragment(private val errorTYpe: ErrorTYpe? = null) :
                 }
             }
         } ?: dismiss()
-
-
     }
-
-
 }

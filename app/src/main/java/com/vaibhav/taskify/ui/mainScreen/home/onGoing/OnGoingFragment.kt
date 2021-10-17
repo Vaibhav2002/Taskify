@@ -34,7 +34,6 @@ class OnGoingFragment : Fragment(R.layout.fragment_on_going) {
     private val activityViewModel: MainViewModel by activityViewModels()
     private lateinit var pausedTasksAdapter: TaskAdapter
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -84,11 +83,9 @@ class OnGoingFragment : Fragment(R.layout.fragment_on_going) {
                 binding.noRunningTask.isVisible = it.isEmpty()
             }
         }
-
     }
 
     private fun navigateToStopWatchActivity(stopWatchFor: StopWatchFor, task: TaskEntity) {
         (requireActivity() as MainActivity).showTimer(stopWatchFor, task)
     }
-
 }

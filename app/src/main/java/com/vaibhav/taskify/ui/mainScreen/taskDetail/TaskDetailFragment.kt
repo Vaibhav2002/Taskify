@@ -11,13 +11,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.vaibhav.taskify.databinding.FragmentTaskDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class TaskDetailFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentTaskDetailBinding
     private val args by navArgs<TaskDetailFragmentArgs>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +27,4 @@ class TaskDetailFragment : BottomSheetDialogFragment() {
         binding.task = args.task
         return binding.root
     }
-
-
 }

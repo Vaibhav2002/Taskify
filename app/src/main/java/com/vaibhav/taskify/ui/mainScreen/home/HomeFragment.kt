@@ -16,11 +16,8 @@ import timber.log.Timber
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-
     private val binding by viewBinding(FragmentHomeBinding::bind)
-    private val sharedViewModel: MainViewModel by activityViewModels()
     private lateinit var homePagerAdapter: HomePagerAdapter
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,7 +44,5 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
         }.attach()
-
     }
-
 }

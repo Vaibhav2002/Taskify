@@ -8,7 +8,6 @@ import com.vaibhav.taskify.databinding.TimerRecyclerItemBinding
 class TimerAdapter(private val timeData: List<Int>) :
     RecyclerView.Adapter<TimerAdapter.TimerViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimerViewHolder {
         val binding =
             TimerRecyclerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -23,7 +22,6 @@ class TimerAdapter(private val timeData: List<Int>) :
         holder.bind(timeData[position])
     }
 
-
     inner class TimerViewHolder(private val binding: TimerRecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -31,5 +29,4 @@ class TimerAdapter(private val timeData: List<Int>) :
             binding.tvTime.text = if (timeData <= 9) "0$timeData" else "$timeData"
         }
     }
-
 }

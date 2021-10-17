@@ -32,7 +32,6 @@ class MainViewModel @Inject constructor(
     val taskFetchState: StateFlow<Resource<Unit>> = _taskFetchState
 
     private val _currentFragment = MutableStateFlow(TopLevelScreens.HOME)
-    val currentFragment: StateFlow<TopLevelScreens> = _currentFragment
 
     private val _runningTask = taskRepo.getRunningTask()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
@@ -43,12 +42,8 @@ class MainViewModel @Inject constructor(
     var stopWatchFor: StopWatchFor? = null
     var task: TaskEntity? = null
 
-
     private val _logout = MutableStateFlow(false)
     val shouldLogout: StateFlow<Boolean> = _logout
-
-
-    fun getUserData() = authRepo.getUserData()
 
     fun fetchAllTasks() = viewModelScope.launch {
         Timber.d("fetching all tasks")
@@ -57,18 +52,6 @@ class MainViewModel @Inject constructor(
             val resource = taskRepo.fetchAllTasks(it.email)
             _taskFetchState.emit(resource)
         } ?: _taskFetchState.emit(Resource.Error(message = "Failed to get user information"))
-
-    }
-
-
-    fun setTaskAsCompleted() = viewModelScope.launch {
-        Timber.d("Stopping task")
-        if (runningTask.value.isNotEmpty()) {
-            val task = runningTask.value[0]
-            task.state = TaskState.COMPLETED
-            task.timeLeft = 0
-            taskRepo.updateTask(task)
-        }
     }
 
     fun saveServiceStarted() = saveServiceState(true)
@@ -79,11 +62,8 @@ class MainViewModel @Inject constructor(
         preferencesRepo.setServiceRunning(running)
     }
 
-
     fun onLogoutPressed() = viewModelScope.launch {
         authRepo.logoutUser()
         _logout.emit(true)
     }
-
-
 }

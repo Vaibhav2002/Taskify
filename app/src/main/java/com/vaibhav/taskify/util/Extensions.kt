@@ -30,5 +30,3 @@ fun Long.formatDuration(format: String = "%dhrs %02dmin %02dsec"): String {
         (seconds % 60)
     )
 }
-
-

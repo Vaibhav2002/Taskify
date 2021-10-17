@@ -6,7 +6,6 @@ import javax.inject.Inject
 
 class NetworkUtils @Inject constructor(private val context: Context) {
 
-
     fun checkInternetConnection(): Boolean {
         val connectionManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -14,5 +13,3 @@ class NetworkUtils @Inject constructor(private val context: Context) {
         return networkInfo != null && networkInfo.isConnected
     }
 }
-
-

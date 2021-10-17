@@ -26,7 +26,4 @@ class TaskDataSource @Inject constructor(private val taskDAO: TaskDAO) {
     suspend fun deleteTask(taskEntity: TaskEntity) = taskDAO.deleteTask(taskEntity)
 
     suspend fun deleteAllTasks() = taskDAO.deleteAllTasks()
-
-
-
 }

@@ -76,7 +76,7 @@
     <color name="versionColor">@color/lt_deepblue</color>
 
     <color name="taskify_name_color">@color/lt_darkpblue</color>
-    <color name="splashSceenBgColor">@color/lt_darkpblue</color>
-    <color name="splashSceenTextColor">@color/white</color>
+    <color name="splashScreenBgColor">@color/lt_darkpblue</color>
+    <color name="splashScreenTextColor">@color/white</color>
 
 </resources>

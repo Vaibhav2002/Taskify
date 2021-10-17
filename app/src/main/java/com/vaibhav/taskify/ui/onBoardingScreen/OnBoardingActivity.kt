@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.vaibhav.chatofy.util.makeStatusBarTransparent
-import com.vaibhav.chatofy.util.viewBinding
+import com.vaibhav.taskify.util.makeStatusBarTransparent
+import com.vaibhav.taskify.util.viewBinding
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.data.models.OnBoarding
 import com.vaibhav.taskify.databinding.ActivityOnBoardingBinding
@@ -50,7 +50,6 @@ class OnBoardingActivity : AppCompatActivity() {
         }
         binding.onboardingViewpager.adapter = onBoardingAdapter
         binding.wormDotsIndicator.setViewPager2(binding.onboardingViewpager)
-
 
         lifecycleScope.launchWhenStarted {
             viewModel.navigateToAuth.collect {

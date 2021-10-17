@@ -238,14 +238,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="40dp"
-        android:drawableStart="@drawable/logout_icon"
         android:drawablePadding="16dp"
         android:gravity="center_vertical"
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp"
-        android:text="Logout from your account"
+        android:text="@string/logout_from_your_account"
         android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body2"
-        android:textColor="?attr/colorOnSurface" />
+        android:textColor="?attr/colorOnSurface"
+        app:drawableStartCompat="@drawable/logout_icon" />
 
 
 </RelativeLayout>

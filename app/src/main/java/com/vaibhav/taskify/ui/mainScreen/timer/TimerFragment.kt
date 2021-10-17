@@ -22,7 +22,6 @@ import timber.log.Timber
 @AndroidEntryPoint
 class TimerFragment : Fragment(R.layout.fragment_timer) {
 
-
     private val binding by viewBinding(FragmentTimerBinding::bind)
     private val viewModel: TimerViewModel by viewModels()
     private val mainViewModel: MainViewModel by activityViewModels()
@@ -86,7 +85,6 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
                     TaskState.COMPLETED -> findNavController().popBackStack()
                 }
             }
-
         }
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.taskState.collect {
@@ -103,10 +101,8 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
                     is Resource.Success -> {
                     }
                 }
-
             }
         }
-
     }
 
     private fun setViewsForNotStartedTask() {
@@ -123,7 +119,6 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
         binding.timerBar.progressMax = viewModel.task!!.duration.toFloat()
         binding.timerBar.progress = viewModel.task!!.timeLeft.toFloat()
         binding.timerBarLayout.isVisible = true
-
     }
 
     private fun setViewsForRunningTask() {
@@ -132,7 +127,6 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
         binding.stopButton.isVisible = true
         setUpProgressBar()
     }
-
 
     private fun setUpProgressBar() {
         binding.timerBar.progressMax = viewModel.task!!.duration.toFloat()
@@ -146,6 +140,4 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
             }
         }
     }
-
-
 }

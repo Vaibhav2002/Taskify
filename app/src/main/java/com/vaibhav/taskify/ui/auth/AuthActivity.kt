@@ -6,8 +6,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.vaibhav.chatofy.util.makeStatusBarTransparent
-import com.vaibhav.chatofy.util.viewBinding
+import com.vaibhav.taskify.util.makeStatusBarTransparent
+import com.vaibhav.taskify.util.viewBinding
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.databinding.ActivityAuthBinding
 import com.vaibhav.taskify.ui.ErrorDialogFragment
@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class AuthActivity : AppCompatActivity() {
 
     private val binding by viewBinding(ActivityAuthBinding::inflate)
-    private val viewModel:AuthViewModel by viewModels()
+    private val viewModel: AuthViewModel by viewModels()
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,10 +38,7 @@ class AuthActivity : AppCompatActivity() {
         }
     }
 
-
     fun showErrorDialog(errorTYpe: ErrorTYpe) {
         ErrorDialogFragment(errorTYpe).show(supportFragmentManager, SHOW_ERROR_DIALOG)
     }
-
-
 }

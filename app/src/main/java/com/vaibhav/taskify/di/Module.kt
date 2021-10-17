@@ -98,7 +98,7 @@ object Module {
     @Singleton
     fun providesRetrofit(
         callFactory: Call.Factory
-    ) = Retrofit.Builder()
+    ): Retrofit = Retrofit.Builder()
         .baseUrl(BuildConfig.BASE_URL)
         .callFactory(callFactory)
         .addConverterFactory(GsonConverterFactory.create())
@@ -106,7 +106,7 @@ object Module {
 
     @Provides
     @Singleton
-    fun providesApi(retrofit: Retrofit) = retrofit.create(Api::class.java)
+    fun providesApi(retrofit: Retrofit): Api = retrofit.create(Api::class.java)
 
     @Provides
     @Singleton

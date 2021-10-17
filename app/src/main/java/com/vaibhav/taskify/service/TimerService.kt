@@ -22,7 +22,6 @@ class TimerService : LifecycleService() {
 
     lateinit var timer: CountDownTimer
 
-
     @Inject
     lateinit var taskRepo: TaskRepo
 
@@ -30,7 +29,6 @@ class TimerService : LifecycleService() {
     lateinit var preferencesRepo: PreferencesRepo
 
     lateinit var task: TaskEntity
-
 
     override fun onStart(intent: Intent?, startId: Int) {
         super.onStart(intent, startId)
@@ -68,7 +66,6 @@ class TimerService : LifecycleService() {
 //        return super.onStartCommand(intent, flags, startId)
 //    }
 
-
     private fun getPendingIntent(task: TaskEntity): PendingIntent {
         val intent = Intent(this@TimerService, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -76,7 +73,6 @@ class TimerService : LifecycleService() {
         intent.putExtra(TASK, task)
         return PendingIntent.getActivity(applicationContext, FROM_NOTIFICATION, intent, 0)
     }
-
 
     private fun finishTask(task: TaskEntity) = lifecycleScope.launchWhenStarted {
         task.timeLeft = 0
@@ -86,15 +82,10 @@ class TimerService : LifecycleService() {
         stopSelf()
     }
 
-
     override fun onDestroy() {
         Timber.d("OnDestroy called ${this.hashCode()}")
         if (::timer.isInitialized)
             timer.cancel()
         super.onDestroy()
     }
-
-
-
-
 }

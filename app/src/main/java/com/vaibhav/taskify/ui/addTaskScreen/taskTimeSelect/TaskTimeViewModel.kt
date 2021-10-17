@@ -15,7 +15,6 @@ class TaskTimeViewModel @Inject constructor() : ViewModel() {
     val minutesList = (0..60).toList()
     val secondsList = (0..60).toList()
 
-
     fun onSubmitPressed(): Long {
         return calculateMillis()
     }
@@ -26,5 +25,4 @@ class TaskTimeViewModel @Inject constructor() : ViewModel() {
         ans += hours * 60 * 60 * 1000
         return ans
     }
-
 }

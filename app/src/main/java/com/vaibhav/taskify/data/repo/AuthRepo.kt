@@ -1,6 +1,5 @@
 package com.vaibhav.taskify.data.repo
 
-
 import android.content.Intent
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -30,7 +29,6 @@ class AuthRepo @Inject constructor(
     fun isUserLoggedIn() =
         authDataSource.isUserLoggedIn() && preferencesDataSource.getUserData() != null
 
-
     suspend fun loginUser(email: String, password: String): Resource<Unit> =
         withContext(Dispatchers.IO) {
             if (!networkUtils.checkInternetConnection())
@@ -55,7 +53,6 @@ class AuthRepo @Inject constructor(
             return@withContext storeUserDataAfterRegister(resource, userDTO)
         }
 
-
     suspend fun registerUsingGoogle(data: Intent): Resource<Unit> =
         withContext(Dispatchers.IO) {
             if (!networkUtils.checkInternetConnection())
@@ -74,7 +71,6 @@ class AuthRepo @Inject constructor(
             return@withContext storeUserDataAfterRegister(resource, userDTO)
         }
 
-
     suspend fun loginUsingGoogle(data: Intent): Resource<Unit> =
         withContext(Dispatchers.IO) {
             if (!networkUtils.checkInternetConnection())
@@ -89,7 +85,6 @@ class AuthRepo @Inject constructor(
             val resource = authDataSource.signInUsingCredential(credential)
             return@withContext getUserDataAfterLogin(resource, resource.data!!.email!!)
         }
-
 
 //    suspend fun registerUsingFacebook(token: AccessToken): Resource<Unit> =
 //        withContext(Dispatchers.IO) {
@@ -108,10 +103,10 @@ class AuthRepo @Inject constructor(
 //            return@withContext getUserDataAfterLogin(resource, resource.data!!.email!!)
 //        }
 
-     suspend fun logoutUser() {
-         authDataSource.logoutUser()
-         preferencesDataSource.removeUserData()
-     }
+    suspend fun logoutUser() {
+        authDataSource.logoutUser()
+        preferencesDataSource.removeUserData()
+    }
 
     private suspend fun removeUser() {
         authDataSource.removeUser()
@@ -140,7 +135,6 @@ class AuthRepo @Inject constructor(
         return Resource.Success(message = "User logged in successfully")
     }
 
-
     private suspend fun <T> storeUserDataAfterRegister(
         resource: Resource<T>,
         userDTO: UserDTO,
@@ -155,6 +149,4 @@ class AuthRepo @Inject constructor(
         preferencesDataSource.saveUserData(userMapper.toDomainModel(userDTO))
         return Resource.Success(message = "User registered successfully")
     }
-
-
 }
