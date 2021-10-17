@@ -8,6 +8,7 @@ import androidx.room.Room
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.vaibhav.taskify.BuildConfig
 import com.vaibhav.taskify.data.local.dataSource.DataStorePreferencesDataSource
 import com.vaibhav.taskify.data.local.dataSource.PreferencesDataSource
 import com.vaibhav.taskify.data.local.dataSource.SharedPreferencesDataSource
@@ -16,22 +17,25 @@ import com.vaibhav.taskify.data.local.room.TaskifyDatabase
 import com.vaibhav.taskify.data.models.mappper.TaskMapper
 import com.vaibhav.taskify.data.models.mappper.UserMapper
 import com.vaibhav.taskify.data.remote.harperDb.Api
-import com.vaibhav.taskify.util.BASE_URL
+import com.vaibhav.taskify.data.remote.harperDb.AuthInterceptor
 import com.vaibhav.taskify.util.dataStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Call
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 object Module {
-
 
     @Provides
     @Singleton
@@ -51,7 +55,6 @@ object Module {
     @Singleton
     fun providesFirebaseStorage() = Firebase.storage.reference
 
-
     @Provides
     @Singleton
     @Named("sharedPref")
@@ -66,8 +69,38 @@ object Module {
 
     @Provides
     @Singleton
-    fun providesRetrofit() = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthInterceptor() = AuthInterceptor()
+
+    @Provides
+    @Singleton
+    fun provideOkHttp(
+        loggingInterceptor: HttpLoggingInterceptor,
+        authInterceptor: AuthInterceptor
+    ): Call.Factory {
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor(authInterceptor)
+            .callTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(1, TimeUnit.MINUTES)
+            .writeTimeout(1, TimeUnit.MINUTES)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun providesRetrofit(
+        callFactory: Call.Factory
+    ) = Retrofit.Builder()
+        .baseUrl(BuildConfig.BASE_URL)
+        .callFactory(callFactory)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
@@ -83,7 +116,6 @@ object Module {
     @Singleton
     fun providesTaskMapper(): TaskMapper = TaskMapper()
 
-
     @Provides
     @Singleton
     fun providesTaskifyDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
@@ -92,14 +124,10 @@ object Module {
         .fallbackToDestructiveMigration()
         .build()
 
-
     @Provides
     @Singleton
     fun providesTaskDao(taskifyDatabase: TaskifyDatabase): TaskDAO = taskifyDatabase.getTaskDao()
 
-
     @Provides
     fun providesContext(@ApplicationContext context: Context): Context = context
-
-
 }
