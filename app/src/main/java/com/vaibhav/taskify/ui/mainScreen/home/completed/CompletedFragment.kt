@@ -53,6 +53,4 @@ class CompletedFragment : Fragment(R.layout.fragment_completed) {
         binding.errorLayout.errorTitle.text = getString(ErrorTYpe.NO_COMPLETED_TASKS.title)
         binding.errorLayout.errorDescription.text = getString(ErrorTYpe.NO_COMPLETED_TASKS.message)
     }
-
-
 }

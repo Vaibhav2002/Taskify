@@ -12,7 +12,6 @@ class SplashViewModel @Inject constructor(
     private val preferencesRepo: PreferencesRepo
 ) : ViewModel() {
 
-
     fun isOnBoardingComplete() = preferencesRepo.isOnBoardingComplete()
 
     fun isUserLogged() = authRepo.isUserLoggedIn()

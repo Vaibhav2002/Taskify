@@ -26,5 +26,4 @@ class GettingStartedFragment : Fragment(R.layout.fragment_getting_started) {
             findNavController().navigate(R.id.action_gettingStartedFragment_to_registerFragment)
         }
     }
-
 }

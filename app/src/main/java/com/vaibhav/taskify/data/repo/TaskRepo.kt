@@ -55,7 +55,6 @@ class TaskRepo @Inject constructor(
 
     fun getTaskStates() = taskDataSource.getTaskStates().flowOn(IO)
 
-
     suspend fun fetchAllTasks(email: String): Resource<Unit> = withContext(IO) {
         if (!networkUtils.checkInternetConnection())
             return@withContext Resource.Error(
@@ -122,5 +121,4 @@ class TaskRepo @Inject constructor(
 
     private suspend fun deleteTaskFromDb(taskEntity: TaskEntity) =
         taskDataSource.deleteTask(taskEntity)
-
 }

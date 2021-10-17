@@ -23,7 +23,6 @@ class LoginViewModel @Inject constructor(private val authRepo: AuthRepo) : ViewM
     private val _loginState = MutableStateFlow<Resource<Unit>>(Resource.Empty())
     val loginState: StateFlow<Resource<Unit>> = _loginState
 
-
     fun onEmailTextChange(email: String) {
         _email.value = email
     }
@@ -49,6 +48,4 @@ class LoginViewModel @Inject constructor(private val authRepo: AuthRepo) : ViewM
         _loginState.emit(Resource.Loading())
         _loginState.emit(authRepo.loginUsingGoogle(data))
     }
-
-
 }

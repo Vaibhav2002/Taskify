@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/splashSceenBgColor"
+    android:background="@color/splashScreenBgColor"
     tools:context=".ui.splashScreen.SplashActivity">
 
 
@@ -13,6 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:src="@drawable/taskify"
-        app:tint="@color/splashSceenTextColor" />
+        app:tint="@color/splashScreenTextColor" />
 
 </FrameLayout>

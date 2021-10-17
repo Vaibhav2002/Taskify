@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class CompletedViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewModel() {
+class CompletedViewModel @Inject constructor(taskRepo: TaskRepo) : ViewModel() {
 
     val completedTasks =
         taskRepo.getAllCompletedTasksOfToday()

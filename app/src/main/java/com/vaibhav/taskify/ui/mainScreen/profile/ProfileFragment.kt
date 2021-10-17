@@ -61,7 +61,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 setTaskStateCounts(it)
             }
         }
-
     }
 
     private fun setTaskStateCounts(data: TaskStateCount) {
@@ -78,6 +77,4 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             requireActivity().finish()
         }
     }
-
-
 }

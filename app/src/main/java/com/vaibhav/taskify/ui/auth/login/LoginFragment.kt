@@ -32,7 +32,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var googleLoginLauncher: ActivityResultLauncher<Intent>
     private lateinit var googleSignInClient: GoogleSignInClient
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -52,7 +51,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK)
                     handleGoogleLogin(it.data)
-
             }
 
         binding.goToRegister.setOnClickListener {
@@ -85,8 +83,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 }
             }
         }
-
-
     }
 
     private fun initializeSocialMediaSignIn() {
@@ -96,7 +92,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
-
     }
 
     private fun navigateToHomeScreen() {

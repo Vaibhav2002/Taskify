@@ -2,17 +2,14 @@ package com.vaibhav.taskify.data.remote.dataSource
 
 import com.vaibhav.taskify.data.models.remote.TaskDTO
 import com.vaibhav.taskify.util.Resource
-import org.junit.Test
-
 import org.junit.Assert.*
+import org.junit.Test
 import javax.inject.Inject
-
 
 class HarperDbTaskDataSourceTest {
 
     @Inject
     lateinit var harperDbDataSource: HarperDbTaskDataSource
-
 
     @Test
     suspend fun insertTask() {

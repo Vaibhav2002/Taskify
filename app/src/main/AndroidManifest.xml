@@ -35,7 +35,7 @@
         <activity
             android:name=".ui.auth.AuthActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Taskify.NoStatusBarTheme"></activity>
+            android:theme="@style/Theme.Taskify.NoStatusBarTheme" />
         <activity
             android:name=".ui.mainScreen.MainActivity"
             android:screenOrientation="portrait"

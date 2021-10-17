@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.vaibhav.chatofy.util.viewBinding
 import com.vaibhav.taskify.R
 import com.vaibhav.taskify.data.models.entity.TaskEntity
 import com.vaibhav.taskify.databinding.ActivityMainBinding
@@ -16,6 +15,7 @@ import com.vaibhav.taskify.service.TimerService
 import com.vaibhav.taskify.ui.ErrorDialogFragment
 import com.vaibhav.taskify.ui.auth.AuthActivity
 import com.vaibhav.taskify.util.*
+import com.vaibhav.taskify.util.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity() {
             setNavButtons()
         }
 
-
         lifecycleScope.launchWhenStarted {
             viewModel.runningTask.collect {
                 Timber.d("Running task $it")
@@ -64,7 +63,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
         lifecycleScope.launchWhenStarted {
             viewModel.taskFetchState.collect {
                 binding.root.isEnabled = it !is Resource.Loading
@@ -81,7 +79,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
 //        ServiceUtil.timerState.observe(this) {
 //            if (it == TimerState.STOP) {
 //                viewModel.setTaskAsCompleted()
@@ -95,7 +92,6 @@ class MainActivity : AppCompatActivity() {
             else
                 supportActionBar?.show()
         }
-
     }
 
     private fun initializeDrawerLayout() {
@@ -121,7 +117,6 @@ class MainActivity : AppCompatActivity() {
                 viewModel.onLogoutPressed()
             }
         }
-
     }
 
     private fun handleNavigation(screen: TopLevelScreens) {
@@ -191,8 +186,4 @@ class MainActivity : AppCompatActivity() {
     fun showErrorDialog(errorTYpe: ErrorTYpe) {
         ErrorDialogFragment(errorTYpe).show(supportFragmentManager, SHOW_ERROR_DIALOG)
     }
-
-
 }
-
-

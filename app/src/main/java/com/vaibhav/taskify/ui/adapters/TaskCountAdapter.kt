@@ -37,6 +37,5 @@ class TaskCountAdapter :
         override fun areContentsTheSame(oldItem: TaskCount, newItem: TaskCount): Boolean {
             return oldItem == newItem
         }
-
     }
 }

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import coil.load
@@ -13,7 +12,6 @@ import com.vaibhav.taskify.data.models.entity.TaskEntity
 import com.vaibhav.taskify.databinding.FragmentUpComingBinding
 import com.vaibhav.taskify.ui.adapters.TaskAdapter
 import com.vaibhav.taskify.ui.mainScreen.MainActivity
-import com.vaibhav.taskify.ui.mainScreen.MainViewModel
 import com.vaibhav.taskify.util.ErrorTYpe
 import com.vaibhav.taskify.util.StopWatchFor
 import com.vaibhav.taskify.util.viewBinding
@@ -29,9 +27,7 @@ class UpComingFragment : Fragment(R.layout.fragment_up_coming) {
 
     private val binding by viewBinding(FragmentUpComingBinding::bind)
     private val viewModel: UpComingViewModel by viewModels()
-    private val activityViewModel by activityViewModels<MainViewModel>()
     private lateinit var upComingTaskAdapter: TaskAdapter
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,6 +61,4 @@ class UpComingFragment : Fragment(R.layout.fragment_up_coming) {
         binding.errorLayout.errorTitle.text = getString(ErrorTYpe.NO_TASKS.title)
         binding.errorLayout.errorDescription.text = getString(ErrorTYpe.NO_TASKS.message)
     }
-
-
 }

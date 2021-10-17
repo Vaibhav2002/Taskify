@@ -37,8 +37,5 @@ class OnBoardingAdapter(
             binding.continueButton.isVisible = onBoarding.isLastPage
             binding.onBoarding = onBoarding
         }
-
-
     }
-
 }

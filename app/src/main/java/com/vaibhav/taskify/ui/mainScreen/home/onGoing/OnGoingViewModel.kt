@@ -8,13 +8,10 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
-
 @HiltViewModel
-class OnGoingViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewModel() {
+class OnGoingViewModel @Inject constructor(taskRepo: TaskRepo) : ViewModel() {
 
     val pausedTasks =
         taskRepo.getAllPausedTasks()
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
-
-
 }

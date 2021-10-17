@@ -17,7 +17,6 @@ import java.util.*
 fun TextView.setTaskDuration(task: TaskEntity) {
     val timeLeft = if (task.state == TaskState.COMPLETED) task.duration else task.timeLeft
     text = timeLeft.formatDuration()
-
 }
 
 @BindingAdapter("setTaskDuration")
@@ -25,14 +24,12 @@ fun TextView.setDuration(timeLeft: Long) {
     text = timeLeft.formatDuration()
 }
 
-
 @BindingAdapter("setLargeImage")
 fun ImageView.setLargeImage(image: Int) {
     this.load(image) {
         crossfade(true)
     }
 }
-
 
 @BindingAdapter("setTaskDuration")
 fun EditText.setTaskDuration(timeLeft: Long) {
@@ -43,9 +40,8 @@ fun EditText.setTaskDuration(timeLeft: Long) {
 fun TextView.setTimeLeft(timeLeft: Long) {
     val duration = Duration.ofMillis(timeLeft)
     val seconds = duration.seconds
-    text = String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60));
+    text = String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60))
 }
-
 
 @BindingAdapter("setBackground")
 fun TextView.setBackground(taskType: TaskType) {
@@ -68,7 +64,6 @@ fun TextView.setTaskStateVisibility(taskState: TaskState) {
     isVisible = taskState == TaskState.COMPLETED || taskState == TaskState.PAUSED
 }
 
-
 @BindingAdapter("setBarHeight")
 fun FrameLayout.setBarHeight(height: Int) {
     val percent = (height.toDouble() / 15.0 * 100).toInt()
@@ -86,15 +81,12 @@ fun FrameLayout.setBarBackground(isPressed: Boolean) {
     backgroundTintList = ColorStateList.valueOf(
         if (isPressed) resources.getColor(R.color.barChartClickColor) else resources.getColor(R.color.barChartColor)
     )
-
 }
-
 
 @BindingAdapter("setBarCount")
 fun TextView.setBarCount(count: Int) {
     text = "$count"
 }
-
 
 @BindingAdapter("setUserProfileImage")
 fun ImageView.setProfileImage(url: String) {
@@ -105,7 +97,6 @@ fun ImageView.setProfileImage(url: String) {
         .centerCrop()
         .into(this)
 }
-
 
 @BindingAdapter("setErrorImage")
 fun ImageView.setErrorImage(uri: Int) {

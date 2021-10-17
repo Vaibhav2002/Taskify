@@ -1,12 +1,10 @@
-package com.vaibhav.chatofy.util
+package com.vaibhav.taskify.util
 
 import android.app.Activity
 import android.graphics.Color
-import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-
 
 fun Activity.makeStatusBarTransparent() {
     window.apply {

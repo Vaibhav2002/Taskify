@@ -8,6 +8,5 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(private val authRepo: AuthRepo) : ViewModel() {
 
-
     fun isUserLoggedIn() = authRepo.isUserLoggedIn()
 }

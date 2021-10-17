@@ -6,7 +6,4 @@ import dagger.hilt.android.components.ServiceComponent
 
 @Module
 @InstallIn(ServiceComponent::class)
-object ServiceModule {
-
-
-}
+object ServiceModule

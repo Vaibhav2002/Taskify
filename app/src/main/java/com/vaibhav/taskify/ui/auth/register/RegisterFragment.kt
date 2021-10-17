@@ -54,7 +54,6 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         binding.passwordInput.setText(viewModel.password.value)
         binding.usernameInput.setText(viewModel.username.value)
 
-
         googleSignUpLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK)
@@ -72,7 +71,6 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             val signUpIntent = googleSignInClient.signInIntent
             googleSignUpLauncher.launch(signUpIntent)
         }
-
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.registerState.collect {
@@ -92,8 +90,6 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                 }
             }
         }
-
-
     }
 
     private fun initializeSocialMediaSignIn() {
@@ -113,6 +109,4 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     private fun handleGoogleSignUp(data: Intent?) {
         data?.let { viewModel.onGoogleRegisterPressed(it) }
     }
-
-
 }

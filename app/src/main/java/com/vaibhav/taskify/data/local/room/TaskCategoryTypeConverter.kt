@@ -6,7 +6,6 @@ import com.vaibhav.taskify.util.TaskType
 
 class TaskCategoryTypeConverter {
 
-
     @TypeConverter
     fun fromTaskType(taskType: TaskType?): String? {
         return taskType?.name
@@ -19,7 +18,6 @@ class TaskCategoryTypeConverter {
 }
 
 class TaskStateTypeConverter {
-
 
     @TypeConverter
     fun fromTaskState(state: TaskState?): String? {

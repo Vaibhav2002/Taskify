@@ -9,7 +9,7 @@ import javax.inject.Inject
 class HarperDbAuthDataSource @Inject constructor(private val api: Api) {
 
     private fun getSQLModelForGettingUserByEmail(email: String): SQLModel {
-        return SQLModel("SELECT * FROM edufy.user WHERE email = '${email}' LIMIT 1")
+        return SQLModel("SELECT * FROM edufy.user WHERE email = '$email' LIMIT 1")
     }
 
     private fun getSQLModelForStoringUser(userDTO: UserDTO): SQLModel {
@@ -27,7 +27,6 @@ class HarperDbAuthDataSource @Inject constructor(private val api: Api) {
         Resource.Error(message = e.message.toString())
     }
 
-
     suspend fun getUserData(email: String): Resource<UserDTO> = try {
         val sqlModel = getSQLModelForGettingUserByEmail(email)
         val response = api.getUserInfo(sqlModel)
@@ -42,5 +41,4 @@ class HarperDbAuthDataSource @Inject constructor(private val api: Api) {
     } catch (e: Exception) {
         Resource.Error(message = e.message.toString())
     }
-
 }

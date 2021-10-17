@@ -16,14 +16,11 @@ import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
-
 @HiltViewModel
-class StatsViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewModel() {
-
+class StatsViewModel @Inject constructor(taskRepo: TaskRepo) : ViewModel() {
 
     val lastWeekTasks = taskRepo.getAllTasksSinceLastWeek()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
-
 
     private val _barData = MutableStateFlow<List<Bar>>(emptyList())
     val barData: StateFlow<List<Bar>> = _barData
@@ -33,7 +30,6 @@ class StatsViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewM
 
     private val days = mutableListOf<Calendar>()
 
-
     val millisInADay = 24 * 60 * 60 * 1000
 
     init {
@@ -41,7 +37,6 @@ class StatsViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewM
             initializeAllDays()
             listenAndFormatData()
         }
-
     }
 
     private suspend fun initializeAllDays() = withContext(Dispatchers.IO) {
@@ -88,7 +83,6 @@ class StatsViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewM
             return@withContext cal
         }
 
-
     private suspend fun prepareBarData(map: Map<Calendar, List<TaskEntity>>) {
         var id = 0
         val barList = mutableListOf<Bar>()
@@ -107,7 +101,6 @@ class StatsViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewM
         _barData.emit(barList)
     }
 
-
     private suspend fun prepareDonutData(data: List<TaskEntity>) =
         viewModelScope.launch(Dispatchers.IO) {
             Timber.d(data.toString())
@@ -116,6 +109,4 @@ class StatsViewModel @Inject constructor(private val taskRepo: TaskRepo) : ViewM
             }
             _donutData.emit(map)
         }
-
-
 }

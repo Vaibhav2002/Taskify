@@ -14,7 +14,6 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(private val authRepo: AuthRepo) : ViewModel() {
 
-
     private val _email = MutableStateFlow("")
     val email: StateFlow<String> = _email
 
@@ -26,7 +25,6 @@ class RegisterViewModel @Inject constructor(private val authRepo: AuthRepo) : Vi
 
     private val _registerState = MutableStateFlow<Resource<Unit>>(Resource.Empty())
     val registerState: StateFlow<Resource<Unit>> = _registerState
-
 
     fun onEmailTextChange(email: String) {
         _email.value = email
@@ -63,5 +61,4 @@ class RegisterViewModel @Inject constructor(private val authRepo: AuthRepo) : Vi
         _registerState.emit(Resource.Loading())
         _registerState.emit(authRepo.registerUsingGoogle(data))
     }
-
 }

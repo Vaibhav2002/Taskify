@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val authRepo: AuthRepo,
@@ -41,11 +40,8 @@ class ProfileViewModel @Inject constructor(
 
     fun getUserData() = authRepo.getUserData()
 
-
     fun onLogoutPressed() = viewModelScope.launch {
         authRepo.logoutUser()
         _logout.emit(true)
     }
-
-
 }

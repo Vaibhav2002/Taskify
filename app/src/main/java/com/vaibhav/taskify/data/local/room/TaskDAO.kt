@@ -35,5 +35,4 @@ interface TaskDAO {
 
     @Query("DELETE FROM task_table")
     suspend fun deleteAllTasks()
-
 }

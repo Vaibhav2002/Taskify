@@ -17,7 +17,6 @@ class SharedPreferencesDataSource @Inject constructor(private val sharedPreferen
         const val ON_BOARDING_KEY = "OnBoarding"
     }
 
-
     override suspend fun saveUserData(userEntity: UserEntity) = withContext(Dispatchers.IO) {
         val serializedUser = Gson().toJson(userEntity)
         sharedPreferences.edit().putString(USER_SAVE_KEY, serializedUser).apply()
@@ -30,9 +29,7 @@ class SharedPreferencesDataSource @Inject constructor(private val sharedPreferen
 
     override suspend fun removeUserData() = sharedPreferences.edit().remove(USER_SAVE_KEY).apply()
 
-
     override fun isServiceRunning() = sharedPreferences.getBoolean(SERVICE_KEY, false)
-
 
     override suspend fun setServiceRunning(running: Boolean) {
         sharedPreferences.edit().putBoolean(SERVICE_KEY, running).apply()
