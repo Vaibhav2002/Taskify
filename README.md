@@ -8,6 +8,10 @@
 
 This is a small introduction video about Taskify  https://youtu.be/MEuoxix5SGY.
 
+# Article ✍
+
+To know more about how I build this project, read my [Article](https://vaibhav2002.hashnode.dev/taskify-an-app-to-manage-your-daily-tasks-and-boost-your-productivity-harperdb-hackathon)
+
 # Application Install
 
 ***You can Install and test latest Taskify app from below 👇***
