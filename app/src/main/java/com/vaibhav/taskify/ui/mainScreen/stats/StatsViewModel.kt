@@ -55,7 +55,7 @@ class StatsViewModel @Inject constructor(taskRepo: TaskRepo) : ViewModel() {
             }
         }
 
-    private suspend fun listenAndFormatData() = withContext(Dispatchers.IO) {
+    private suspend fun listenAndFormatData(): Nothing = withContext(Dispatchers.IO) {
         val map = mutableMapOf<Calendar, MutableList<TaskEntity>>()
         initDays(map)
         lastWeekTasks.collect { tasks ->

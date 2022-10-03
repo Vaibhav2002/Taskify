@@ -83,6 +83,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer) {
                         setViewsForRunningTask()
                     }
                     TaskState.COMPLETED -> findNavController().popBackStack()
+                    else -> {}
                 }
             }
         }
