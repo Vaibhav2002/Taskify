@@ -15,10 +15,12 @@
         <activity
             android:name=".ui.onBoardingScreen.OnBoardingActivity"
             android:screenOrientation="portrait"
+            android:exported="false"
             android:theme="@style/Theme.Taskify.NoStatusBarTheme" />
         <activity
             android:name=".ui.splashScreen.SplashActivity"
             android:screenOrientation="portrait"
+            android:exported="true"
             android:theme="@style/Theme.Taskify.NoStatusBarTheme">
 
             <intent-filter>
@@ -31,14 +33,17 @@
         <activity
             android:name=".ui.addTaskScreen.AddTaskActivity"
             android:screenOrientation="portrait"
+            android:exported="false"
             android:theme="@style/Theme.Taskify.NoStatusBarTheme" />
         <activity
             android:name=".ui.auth.AuthActivity"
             android:screenOrientation="portrait"
+            android:exported="false"
             android:theme="@style/Theme.Taskify.NoStatusBarTheme" />
         <activity
             android:name=".ui.mainScreen.MainActivity"
             android:screenOrientation="portrait"
+            android:exported="false"
             android:theme="@style/Theme.Taskify" />
 
         <service android:name=".service.TimerService" />
